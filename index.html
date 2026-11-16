@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inglês da Família</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: uma coluna de leitura no celular, barra de abas fixa embaixo, uma tarefa por tela. */
+  --bg:#f2f5f6; --surface:#ffffff; --soft:#e3edef; --ink:#13272e; --muted:#536a71; --line:#d2dde0;
+  --primary:#0a6770; --primary-ink:#ffffff; --accent:#b8740a;
+  --good:#1c7446; --good-bg:#e0f2e7; --bad:#ad322b; --bad-bg:#fbe5e3; --mid:#8a5a00; --mid-bg:#fbf0d6;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0e1a1f; --surface:#17272d; --soft:#1f343b; --ink:#e7eff1; --muted:#9db2b8; --line:#2c4047;
+    --primary:#55c5cb; --primary-ink:#04262a; --accent:#f0b24a;
+    --good:#74d6a0; --good-bg:#15382a; --bad:#ff9d93; --bad-bg:#45211e; --mid:#f2c56b; --mid-bg:#3d3016;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0e1a1f; --surface:#17272d; --soft:#1f343b; --ink:#e7eff1; --muted:#9db2b8; --line:#2c4047;
+  --primary:#55c5cb; --primary-ink:#04262a; --accent:#f0b24a;
+  --good:#74d6a0; --good-bg:#15382a; --bad:#ff9d93; --bad-bg:#45211e; --mid:#f2c56b; --mid-bg:#3d3016;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.5}
+button,input,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:1.75rem} h2{font-size:1.35rem} h3{font-size:1.1rem;font-family:var(--body);font-weight:700}
+p{margin:0}
+a{color:var(--primary)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.topin{max-width:640px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:600;font-size:1.15rem;flex:1;min-width:0}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-size:.9rem;min-height:44px;cursor:pointer}
+.chip.on{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+#main{max-width:640px;margin:0 auto;padding:18px 16px 120px;display:flex;flex-direction:column;gap:16px}
+body.flow #main{padding-bottom:40px}
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0)}
+.navin{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
+#nav button{background:none;border:0;padding:8px 0 7px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.66rem;color:var(--muted);cursor:pointer;min-height:58px;border-top:3px solid transparent}
+#nav button.on{color:var(--primary);border-top-color:var(--primary);font-weight:700}
+#nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body.flow #nav, body.bare #nav{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px}
+.card.soft{background:var(--soft);border-color:transparent}
+.muted{color:var(--muted)} .small{font-size:.88rem} .center{text-align:center}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:58px;padding:12px 18px;border-radius:var(--r);border:2px solid var(--primary);background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:1.08rem;cursor:pointer;text-align:center}
+.btn.sec{background:var(--surface);color:var(--primary)}
+.btn.quiet{background:none;border-color:var(--line);color:var(--ink);font-weight:400}
+.btn.huge{min-height:76px;font-size:1.3rem}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.danger{border-color:var(--bad);background:none;color:var(--bad)}
+.row{display:flex;gap:10px;flex-wrap:wrap} .row>*{flex:1;min-width:120px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.opt{display:block;width:100%;text-align:left;min-height:58px;padding:14px 16px;border-radius:var(--r);border:2px solid var(--line);background:var(--surface);cursor:pointer;font-size:1.05rem}
+.opt.right{border-color:var(--good);background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.listbtn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 16px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);cursor:pointer;min-height:64px}
+.listbtn .grow{flex:1;min-width:0}
+.listbtn .tag{font-size:.78rem;border-radius:999px;padding:3px 10px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.listbtn .tag.done{background:var(--good-bg);color:var(--good)}
+.listbtn .tag.next{background:var(--primary);color:var(--primary-ink)}
+.listbtn:disabled{opacity:.55;cursor:default}
+.en{font-size:1.25rem;font-weight:700}
+.pt{color:var(--muted)}
+.ins{font-weight:700}
+.prompt{font-size:1.3rem;font-weight:700;text-wrap:balance}
+.count{font-size:.85rem;color:var(--muted)}
+.fhead{max-width:640px;margin:0 auto;padding:10px 16px 12px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center}
+.fhead .exit{border:1px solid var(--line);background:var(--surface);border-radius:999px;min-height:44px;padding:6px 14px;cursor:pointer;font-size:.9rem}
+.fhead .ft{display:flex;flex-direction:column;line-height:1.2;text-align:right}
+.fhead .ft b{font-size:1rem} .fhead .ft small{color:var(--muted);font-size:.8rem}
+.bar{grid-column:1/-1;height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+.step{display:flex;flex-direction:column;gap:16px}
+.ex{display:flex;flex-direction:column;gap:14px}
+.fb{border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:6px;border-left:6px solid}
+.fb.good{background:var(--good-bg);border-color:var(--good)} .fb.good strong{color:var(--good)}
+.fb.bad{background:var(--bad-bg);border-color:var(--bad)} .fb.bad strong{color:var(--bad)}
+.fb.mid{background:var(--mid-bg);border-color:var(--mid)} .fb.mid strong{color:var(--mid)}
+.fb .why{font-size:.95rem}
+.audio{display:flex;gap:8px;flex-wrap:wrap}
+.abtn{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:8px 16px;border-radius:999px;border:2px solid var(--primary);background:var(--surface);color:var(--primary);font-weight:700;cursor:pointer}
+.abtn.slow{border-color:var(--line);color:var(--ink);font-weight:400}
+.abtn.big{min-height:64px;padding:12px 26px;font-size:1.15rem;background:var(--primary);color:var(--primary-ink)}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:60px;padding:10px;border-radius:var(--r)}
+.tiles.answer{border:2px dashed var(--line);background:var(--surface)}
+.tiles.bank{background:var(--soft)}
+.tile{min-height:48px;padding:8px 14px;border-radius:10px;border:2px solid var(--line);background:var(--surface);font-size:1.1rem;cursor:pointer}
+.inp{width:100%;min-height:58px;padding:12px 14px;border-radius:var(--r);border:2px solid var(--line);background:var(--surface);font-size:1.15rem}
+textarea.inp{min-height:130px;font-size:.85rem;word-break:break-all}
+.linkbtn{background:none;border:0;color:var(--primary);text-decoration:underline;cursor:pointer;padding:10px 0;min-height:44px;text-align:left;font-size:.95rem}
+.line{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:4px;cursor:pointer}
+.line.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.line .who{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.line .l-en{font-size:1.12rem}
+.line .l-pt{color:var(--muted);font-size:.98rem}
+.line .l-pt.hid{filter:blur(6px);user-select:none}
+.hideen .l-en{filter:blur(7px)}
+.speak{display:flex;flex-direction:column;gap:10px}
+.mic{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .mic{color:#201400}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .mic{color:#201400}}
+.mic.live{animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.6}}
+@media (prefers-reduced-motion: reduce){.mic.live{animation:none}.bar i{transition:none}}
+.heard{display:flex;flex-direction:column;gap:4px}
+.heard .w{font-size:1.2rem;font-weight:700}
+.heard .w span{margin-right:.3em}
+.heard .w .ok{color:var(--good)} .heard .w .no{color:var(--muted);text-decoration:underline dotted}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.stat b{display:block;font-family:var(--display);font-size:1.8rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.85rem;color:var(--muted)}
+.stages{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.stages li{display:flex;gap:12px;align-items:baseline}
+.stages .n{font-family:var(--display);font-weight:600;color:var(--accent);min-width:1.2em}
+.week{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:12px 14px;display:flex;gap:12px;align-items:baseline}
+.week.cur{border:2px solid var(--accent)}
+.week.off{opacity:.6}
+.week .n{font-family:var(--display);font-weight:600;min-width:2em;color:var(--accent)}
+.scale{position:relative;height:16px;border-radius:99px;background:var(--soft);margin:26px 0 30px}
+.scale i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);min-width:6px}
+.scale em{position:absolute;top:-24px;font-style:normal;font-size:.75rem;color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.scale em::after{content:"";position:absolute;left:50%;top:22px;height:20px;border-left:2px solid var(--muted)}
+.scale em.b{top:22px}.scale em.b::after{display:none}
+.bubble{max-width:88%;padding:12px 14px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.bubble.me{align-self:flex-end;background:var(--soft);border-color:transparent}
+.chat{display:flex;flex-direction:column;gap:10px}
+.timer{font-family:var(--display);font-size:2.2rem;font-variant-numeric:tabular-nums;text-align:center}
+details{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:12px 14px}
+summary{cursor:pointer;font-weight:700;min-height:32px}
+details>*+*{margin-top:8px}
+ul.plain{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.note{border-left:4px solid var(--accent);padding:4px 0 4px 12px;color:var(--muted);font-size:.95rem}
+.pairrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bubble .l-pt{color:var(--muted);font-size:.98rem}
+.bubble .l-pt.hid{display:none}
+
+</style>
+</head>
+<body>
+<header id="top"></header>
+<main id="main"></main>
+<nav id="nav" aria-label="Abas"></nav>
+<noscript><p style="padding:16px">Este site precisa de JavaScript ligado no navegador.</p></noscript>
+<script>
+/* ============================================================
+   CONTEÚDO FIXO DO CURSO (separado do motor)
+   Para acrescentar semanas: crie um bloco COURSE.weeks[N] = {...}
+   no mesmo formato de content-w01-04.js. O motor não muda.
+   ============================================================ */
+window.COURSE = {
+weeks: {},
+
+/* Plano de 24 semanas: [título da trilha natural, ponto da trilha gramática, o que a pessoa passa a conseguir] */
+plan: [
+["Primeiros contatos","Verbo to be: am, is, are","cumprimentar, se apresentar e pedir para repetir"],
+["Família, trabalho e rotina","Presente simples e perguntas com do/does","falar da família, do trabalho e do seu dia"],
+["Comida e compras","There is, have, can, posse","pedir comida e bebida, perguntar preços e comprar"],
+["Pela cidade","Present continuous, in/on/at, want to","pedir informações na rua, pegar transporte e combinar um encontro"],
+["Em casa e na vizinhança","Passado do to be: was, were","descrever sua casa e dizer como as coisas eram"],
+["O que aconteceu ontem","Passado simples: verbos regulares","contar o que você fez ontem"],
+["O fim de semana","Passado simples: verbos irregulares","contar o fim de semana com os verbos mais comuns"],
+["Saúde: médico e farmácia","Perguntas e negativas com did","explicar o que está sentindo e entender instruções simples"],
+["Telefone e mensagens","Futuro com going to","marcar, confirmar e cancelar compromissos"],
+["No trabalho","Will: decisões e promessas","falar de tarefas, oferecer ajuda e combinar prazos"],
+["Viagem: aeroporto e hotel","Can, could, would: pedidos educados","fazer check-in, pedir coisas e resolver problemas simples"],
+["Restaurante e convites","Should, have to, must","convidar, aceitar, recusar e dar conselhos"],
+["Contar uma história","Passado contínuo: was doing","contar uma história com começo, meio e fim"],
+["Opiniões","Comparativos e superlativos","dar opinião, concordar e discordar com educação"],
+["Planos e sonhos","Present perfect: experiências","falar do que já fez na vida e do que quer fazer"],
+["Problemas e reclamações","Present perfect ou passado simples","reclamar com educação e pedir solução"],
+["Novidades","For, since, already, yet","contar novidades e perguntar pelas dos outros"],
+["E se…?","Primeira condicional","falar de possibilidades reais e combinar alternativas"],
+["Imaginando","Segunda condicional","falar de situações imaginárias"],
+["Fala real","Verbos frasais mais comuns","entender a fala rápida com ligações: gonna, wanna, gotta"],
+["Sua vida em inglês","Revisão dos tempos verbais","falar por alguns minutos sobre sua vida"],
+["Conversas longas","Perguntas indiretas e educadas","manter uma conversa de dez minutos"],
+["Mais rápido","Conectores: so, because, although","dizer com rapidez o que você já sabe"],
+["Reta final","Revisão geral","conversar sobre o cotidiano com confiança e seguir sozinho"]
+],
+phases: [[1,4,"Sons do inglês, sobrevivência e apresentações"],[5,12,"Dia a dia, presente e passado, primeiras conversas completas"],[13,20,"Histórias, opiniões, planos e hipóteses, fala real"],[21,24,"Consolidação, fluência e conversas longas"]],
+
+/* Teste de nivelamento. t = nível (1 a 4). tipo l = ouvir, r = ler, g = lacuna. A primeira opção é a correta. */
+placement: [
+{t:1,k:"l",en:"Good morning! How are you?",q:"O que você ouviu?",o:["Bom dia! Como vai?","Boa noite! Quem é você?","Bom dia! Onde você está?"]},
+{t:1,k:"l",en:"What's your name?",q:"O que a pessoa quer saber?",o:["Seu nome","Sua idade","Onde você mora"]},
+{t:1,k:"r",en:"I'm from Brazil.",q:"O que quer dizer?",o:["Eu sou do Brasil.","Eu vou para o Brasil.","Eu gosto do Brasil."]},
+{t:1,k:"g",en:"She ___ my sister.",q:"Qual palavra completa a frase?",o:["is","am","are"]},
+{t:2,k:"l",en:"Where do you work?",q:"O que a pessoa quer saber?",o:["Onde você trabalha","Quando você trabalha","Se você gosta do trabalho"]},
+{t:2,k:"l",en:"How much is this jacket?",q:"O que a pessoa quer saber?",o:["O preço da jaqueta","O tamanho da jaqueta","A cor da jaqueta"]},
+{t:2,k:"g",en:"He ___ in a bank.",q:"Qual palavra completa a frase?",o:["works","work","working"]},
+{t:2,k:"g",en:"I ___ like coffee.",q:"Como dizer “eu não gosto de café”?",o:["don't","not","am not"]},
+{t:3,k:"l",en:"I went to the supermarket yesterday, but it was closed.",q:"O que aconteceu?",o:["A pessoa foi ao supermercado ontem e estava fechado.","A pessoa vai ao supermercado amanhã.","A pessoa trabalha em um supermercado."]},
+{t:3,k:"g",en:"We ___ a movie last night.",q:"Qual palavra completa a frase?",o:["watched","watch","are watching"]},
+{t:3,k:"l",en:"Excuse me, can you tell me where the train station is?",q:"O que a pessoa quer?",o:["Saber onde fica a estação de trem","Saber a que horas o trem sai","Comprar uma passagem de trem"]},
+{t:3,k:"g",en:"There ___ two cars in front of the house.",q:"Qual palavra completa a frase?",o:["are","is","have"]},
+{t:4,k:"l",en:"I've lived here for ten years, but I'm thinking about moving next year.",q:"O que é verdade?",o:["A pessoa mora lá há dez anos e pensa em se mudar.","A pessoa se mudou há dez anos para outra cidade.","A pessoa vai morar lá por dez anos."]},
+{t:4,k:"g",en:"If I ___ time tomorrow, I'll call you.",q:"Qual palavra completa a frase?",o:["have","will have","had"]},
+{t:4,k:"l",en:"You should have told me earlier.",q:"O que quer dizer?",o:["Você devia ter me contado antes.","Você deve me contar depois.","Você me contou cedo."]},
+{t:4,k:"g",en:"She has ___ finished the report.",q:"Como dizer “ela já terminou o relatório”?",o:["already","yet","still"]}
+],
+
+/* Sons difíceis. type pair = pares mínimos; type cat = classificar o som. */
+sounds: [
+{id:"th1",name:"TH de “think”",ipa:"/θ/ contra /s/ e /t/",
+ how:"Ponha a ponta da língua entre os dentes, de leve, e sopre. Não é “s”, não é “f” e não é “t”. A língua aparece um pouquinho.",
+ approx:"think soa perto de “tfink” com a língua entre os dentes, nunca “sink” nem “tink”.",
+ type:"pair",pairs:[["think","sink"],["thank","tank"],["three","tree"],["thin","tin"],["thick","sick"],["mouth","mouse"],["path","pass"],["thought","taught"]]},
+{id:"th2",name:"TH de “this”",ipa:"/ð/ contra /d/",
+ how:"Mesma posição: ponta da língua entre os dentes. Agora ligue a voz, como um zumbido. Não é “d”.",
+ approx:"this soa perto de “dis”, mas com a língua entre os dentes vibrando.",
+ type:"pair",pairs:[["they","day"],["then","den"],["those","doze"],["there","dare"],["than","Dan"],["breathe","breeze"]]},
+{id:"hr",name:"H e R no começo",ipa:"/h/ contra /r/",
+ how:"O H inglês é o nosso “r” de “rato”: só um sopro. O R inglês é outro som: a língua se enrola para trás sem tocar em nada, como o “r” caipira de “porta”.",
+ approx:"hat soa “rét”. red soa “uréd”, com biquinho. Se você disser red com o nosso “r”, o americano ouve head.",
+ type:"pair",pairs:[["hat","rat"],["head","red"],["hide","ride"],["home","Rome"],["hope","rope"],["hate","rate"],["hole","role"],["hug","rug"]]},
+{id:"iee",name:"Vogais curtas e longas",ipa:"/ɪ/ contra /iː/ e /ʊ/ contra /uː/",
+ how:"O som longo (sheep) é o nosso “i”, esticado e sorrindo. O curto (ship) é rápido e relaxado, entre “i” e “ê”. O mesmo vale para fool (longo, com biquinho) e full (curto e relaxado).",
+ approx:"sheep = “xiip”. ship = “xêp” bem curto. fool = “fuul”. full = “fôl” bem curto.",
+ type:"pair",pairs:[["ship","sheep"],["it","eat"],["live","leave"],["sit","seat"],["fill","feel"],["chip","cheap"],["hit","heat"],["full","fool"],["pull","pool"]]},
+{id:"ae",name:"A aberto de “bad”",ipa:"/æ/ contra /ɛ/",
+ how:"Para bad, abra bem a boca, como quem vai dizer “a”, mas diga “é”. Para bed, a boca abre menos: é o nosso “é” normal.",
+ approx:"bad = “béa-d” com a boca bem aberta. bed = “béd”.",
+ type:"pair",pairs:[["bad","bed"],["man","men"],["sad","said"],["pan","pen"],["bag","beg"],["had","head"],["sat","set"],["land","lend"]]},
+{id:"mnl",name:"M, N e L no fim",ipa:"/m/ /n/ /l/ finais",
+ how:"Em português, “m” e “n” no fim só deixam a vogal nasal, e o “l” vira “u”. Em inglês você fecha de verdade: lábios juntos no M, língua no céu da boca atrás dos dentes no N e no L.",
+ approx:"some termina com os lábios fechados. sun termina com a língua em cima. goal não é “gou”: a língua sobe no fim.",
+ type:"pair",pairs:[["some","sun"],["them","then"],["came","cane"],["gum","gun"],["team","teen"],["goal","go"],["bowl","bow"],["tool","two"],["feel","fee"],["mile","my"]]},
+{id:"ed",name:"As três pronúncias do -ED",ipa:"/t/ /d/ /ɪd/",
+ how:"O -ed quase nunca é uma sílaba a mais. Depois de som sem voz (k, p, s, sh, ch, f) soa T: worked = “uôrkt”. Depois de som com voz soa D: played = “plêid”. Só depois de T ou D ele vira uma sílaba: wanted = “uón-tid”.",
+ approx:"worked tem uma sílaba só. Nunca “uôr-ked”.",
+ type:"cat",q:"Como termina?",cats:{"T (worked)":["worked","watched","stopped","liked","helped","asked","cooked","washed"],"D (played)":["played","called","lived","opened","cleaned","loved","stayed","used"],"ID (wanted)":["wanted","needed","started","waited","decided","visited","invited","ended"]}},
+{id:"s",name:"O -S do fim",ipa:"/s/ /z/ finais",
+ how:"O S final muda o sentido: é plural (books) ou é “ele/ela” (she works). Brasileiros costumam engolir esse som. Diga com clareza, sem colocar vogal depois.",
+ approx:"books = “buks”. works = “uôrks”. Sem “i” no fim.",
+ type:"pair",pairs:[["book","books"],["car","cars"],["friend","friends"],["work","works"],["like","likes"],["want","wants"],["day","days"],["need","needs"]]},
+{id:"fi",name:"Sem “i” no fim",ipa:"consoante final sem vogal",
+ how:"Em português quase toda palavra termina em vogal, então a gente põe um “i” sem perceber: “buki”, “uôrki”. Em inglês a palavra termina seca, na consoante. Corte o som de repente.",
+ approx:"luck termina no “k”. lucky é outra palavra (sortudo). Aqui você treina o ouvido para notar a diferença.",
+ type:"pair",pairs:[["luck","lucky"],["sleep","sleepy"],["rain","rainy"],["fun","funny"],["salt","salty"],["mess","messy"],["wind","windy"],["dirt","dirty"],["hand","handy"],["part","party"]]}
+],
+
+/* Ritmo e melodia. Cada item do quiz: [texto falado, pergunta, correta, errada, errada?] */
+rhythm: [
+{id:"stress",title:"Sílaba forte",
+ text:"Toda palavra inglesa tem uma sílaba forte, dita mais alta e mais longa. As outras ficam fracas e rápidas. Errar a sílaba forte atrapalha mais do que errar um som.",
+ items:[["hotel","ho-TEL"],["computer","com-PU-ter"],["breakfast","BREAK-fast"],["tomorrow","to-MOR-row"],["important","im-POR-tant"],["vegetable","VEJ-ta-ble (três sílabas)"],["comfortable","COMF-ter-ble (três sílabas)"],["interesting","IN-tres-ting (três sílabas)"]],
+ quiz:[["hotel","Qual é a sílaba forte?","ho-TEL","HO-tel"],["computer","Qual é a sílaba forte?","com-PU-ter","COM-pu-ter","com-pu-TER"],["breakfast","Qual é a sílaba forte?","BREAK-fast","break-FAST"],["tomorrow","Qual é a sílaba forte?","to-MOR-row","TO-mor-row","to-mor-ROW"],["important","Qual é a sílaba forte?","im-POR-tant","IM-por-tant","im-por-TANT"],["understand","Qual é a sílaba forte?","un-der-STAND","UN-der-stand","un-DER-stand"],["family","Qual é a sílaba forte?","FAM-i-ly","fam-I-ly","fam-i-LY"],["because","Qual é a sílaba forte?","be-CAUSE","BE-cause"]]},
+{id:"weak",title:"Palavras fracas",
+ text:"Na frase, as palavras de conteúdo (nomes, verbos, adjetivos) são fortes. As pequenas (to, and, of, for, can, a) quase somem. É por isso que o inglês falado parece rápido. “Can” fraco soa “kn”; “can't” é forte e claro.",
+ items:[["I want to go.","to soa “tâ”"],["A cup of coffee.","of soa “â”"],["Bread and butter.","and soa “n”"],["I can help you.","can soa “kn”"],["I can't help you.","can't é forte: “ként”"],["This is for you.","for soa “fâr”"]],
+ quiz:[["I can help you.","A pessoa pode ajudar?","Pode (can)","Não pode (can't)"],["I can't help you.","A pessoa pode ajudar?","Não pode (can't)","Pode (can)"],["She can swim.","Ela sabe nadar?","Sabe (can)","Não sabe (can't)"],["He can't come today.","Ele vem hoje?","Não pode vir (can't)","Pode vir (can)"],["We can't see it.","Eles conseguem ver?","Não (can't)","Sim (can)"],["You can sit here.","Pode sentar?","Pode (can)","Não pode (can't)"]]},
+{id:"inton",title:"Melodia das perguntas",
+ text:"Pergunta de sim ou não sobe no fim: Are you okay? ↗ Pergunta com what, where, when, how desce no fim: Where do you live? ↘ Se você subir em tudo, parece inseguro; se descer numa pergunta de sim ou não, parece uma afirmação.",
+ items:[["Are you okay?","sobe ↗"],["Do you like coffee?","sobe ↗"],["Where do you live?","desce ↘"],["What time is it?","desce ↘"],["Is this your bag?","sobe ↗"],["How much is it?","desce ↘"]],
+ quiz:[["Are you ready?","A voz sobe ou desce no fim?","Sobe ↗","Desce ↘"],["Where are you from?","A voz sobe ou desce no fim?","Desce ↘","Sobe ↗"],["Do you work here?","A voz sobe ou desce no fim?","Sobe ↗","Desce ↘"],["What do you do?","A voz sobe ou desce no fim?","Desce ↘","Sobe ↗"],["Can I help you?","A voz sobe ou desce no fim?","Sobe ↗","Desce ↘"],["How old is he?","A voz sobe ou desce no fim?","Desce ↘","Sobe ↗"]]},
+{id:"link",title:"Ligações da fala real",
+ text:"Na fala rápida, palavras se juntam. Você não precisa falar assim, mas precisa entender. Estas são as mais comuns.",
+ items:[["I wanna go home.","wanna = want to"],["I'm gonna call you.","gonna = going to"],["I gotta go.","gotta = have got to (tenho que)"],["Whaddaya want?","whaddaya = what do you"],["Lemme see.","lemme = let me"],["Gimme a second.","gimme = give me"],["I dunno.","dunno = don't know"],["It's kinda cold.","kinda = kind of (meio)"]],
+ quiz:[["I wanna go home.","Qual é a frase completa?","I want to go home.","I won't go home.","I went to go home."],["I'm gonna call you.","Qual é a frase completa?","I'm going to call you.","I'm gone to call you.","I'm not calling you."],["I gotta go.","O que quer dizer?","Tenho que ir.","Eu fui.","Eu não vou."],["Whaddaya want?","Qual é a frase completa?","What do you want?","What did he want?","Why do you want?"],["Lemme see.","Qual é a frase completa?","Let me see.","Let's see me.","Leave me, see."],["I dunno.","Qual é a frase completa?","I don't know.","I do know.","I don't go."],["It's kinda cold.","O que quer dizer?","Está meio frio.","Está muito frio.","Não está frio."]]}
+],
+
+/* Frases de sobrevivência */
+survival: [
+"Sorry, I don't understand.|Desculpa, eu não entendo.",
+"Can you repeat that, please?|Pode repetir, por favor?",
+"Can you speak more slowly, please?|Pode falar mais devagar, por favor?",
+"Sorry, what was that?|Desculpa, o que você disse?",
+"What does that mean?|O que isso quer dizer?",
+"What do you mean?|O que você quer dizer?",
+"How do you say this in English?|Como se diz isso em inglês?",
+"Can you write that down for me?|Pode escrever isso pra mim?",
+"Just a second, please.|Só um segundo, por favor.",
+"Let me think.|Deixa eu pensar.",
+"How can I say this?|Como eu posso dizer isso?",
+"I'm learning English.|Estou aprendendo inglês.",
+"Sorry, my English is not very good.|Desculpa, meu inglês não é muito bom.",
+"Did you say Tuesday or Thursday?|Você disse terça ou quinta?",
+"Okay, got it.|Certo, entendi."
+],
+
+/* Simulador de conversas. Nó: ["fala em inglês|tradução", ["resposta|tradução|palavras-chave|próximo nó", ...]] */
+scenarios: [
+{id:"rest",title:"No restaurante",intro:"Você entra no Rosie's, a lanchonete do bairro. O garçom é o Luke, simpático e esquecido.",start:"a",nodes:{
+a:["Hi, welcome to Rosie's! Table for one?|Oi, bem-vindo ao Rosie's! Mesa para um?",["Yes, please.|Sim, por favor.|yes|b","No, for two, please.|Não, para dois, por favor.|two|b"]],
+b:["Here's the menu. Can I get you something to drink?|Aqui está o cardápio. Quer algo para beber?",["Water, please.|Água, por favor.|water|c","Can I have a coffee?|Pode me ver um café?|coffee|c","I'd like an orange juice.|Eu queria um suco de laranja.|juice|c"]],
+c:["Sure. Are you ready to order?|Claro. Já quer pedir?",["Yes. I'd like the chicken sandwich.|Sim. Eu queria o sanduíche de frango.|chicken,sandwich|d","Not yet. What do you recommend?|Ainda não. O que você recomenda?|recommend,not yet|c2"]],
+c2:["The cheeseburger is really good. And the soup is great today.|O cheeseburger é muito bom. E a sopa está ótima hoje.",["I'll have the cheeseburger.|Vou querer o cheeseburger.|cheeseburger,burger|d","The soup, please.|A sopa, por favor.|soup|d"]],
+d:["Great choice. Anything else?|Ótima escolha. Mais alguma coisa?",["No, thanks. That's all.|Não, obrigado. É só isso.|all,no|e","Can I have some fries, too?|Pode trazer batata frita também?|fries|e"]],
+e:["Here you go. Oh no, I'm sorry! I forgot your drink. One second!|Aqui está. Ah, não, desculpa! Esqueci sua bebida. Um segundo!",["No problem.|Sem problema.|problem|f","That's okay. Thank you.|Tudo bem. Obrigado.|okay,thank|f"]],
+f:["Here's your drink. How is everything?|Aqui está sua bebida. Como está tudo?",["It's really good, thank you.|Está muito bom, obrigado.|good|g","Excuse me, this is cold.|Com licença, isto está frio.|cold|f2"]],
+f2:["Oh, I'm so sorry! I'll get you a new one right away.|Ai, mil desculpas! Já trago outro.",["Thank you.|Obrigado.|thank|g","No problem. Thanks.|Sem problema. Valeu.|problem|g"]],
+g:["Can I get you anything else? Dessert?|Quer mais alguma coisa? Sobremesa?",["No, thanks. Can I have the check, please?|Não, obrigado. Pode trazer a conta, por favor?|check|h","What do you have for dessert?|O que tem de sobremesa?|what,dessert|g2"]],
+g2:["We have apple pie and ice cream.|Temos torta de maçã e sorvete.",["I'll have the apple pie.|Vou querer a torta de maçã.|pie,apple|h0","Just the check, please.|Só a conta, por favor.|check|h"]],
+h0:["Good choice. Here you go. And here's your check.|Boa escolha. Aqui está. E aqui está a conta.",["Thank you.|Obrigado.|thank|h"]],
+h:["Sure. Cash or card?|Claro. Dinheiro ou cartão?",["Card, please.|Cartão, por favor.|card|i","Cash.|Dinheiro.|cash|i"]],
+i:["Thank you! Have a great day!|Obrigado! Tenha um ótimo dia!",["Thanks. You too!|Obrigado. Você também!|you too,thanks|end"]]}},
+{id:"air",title:"No aeroporto",intro:"Você está no balcão da companhia aérea para despachar a mala.",start:"a",nodes:{
+a:["Good morning. Where are you flying today?|Bom dia. Para onde você vai hoje?",["I'm flying to Chicago.|Vou para Chicago.|chicago|b","To New York.|Para Nova York.|new york|b"]],
+b:["Can I see your passport, please?|Posso ver seu passaporte, por favor?",["Sure. Here you go.|Claro. Aqui está.|sure,here|c","Yes, here it is.|Sim, aqui está.|yes,here|c"]],
+c:["Thank you. Are you checking any bags?|Obrigado. Vai despachar alguma mala?",["Yes, one bag.|Sim, uma mala.|one,yes|d","No, just a carry-on.|Não, só bagagem de mão.|carry,no|e"]],
+d:["Please put it on the scale. Okay, it's fine. Did you pack your bag yourself?|Coloque na balança, por favor. Certo, está ok. Foi você mesmo que fez a mala?",["Yes, I did.|Sim, fui eu.|yes|e"]],
+e:["Would you like a window seat or an aisle seat?|Prefere janela ou corredor?",["A window seat, please.|Janela, por favor.|window|f","An aisle seat, please.|Corredor, por favor.|aisle|f"]],
+f:["Here's your boarding pass. Your gate is B12. Boarding starts at ten thirty.|Aqui está seu cartão de embarque. Seu portão é o B12. O embarque começa às dez e meia.",["Thank you. Where is the gate?|Obrigado. Onde fica o portão?|where,gate|g","Sorry, can you repeat that, please?|Desculpa, pode repetir, por favor?|repeat,sorry|f2"]],
+f2:["Of course. Gate B12. Boarding at ten thirty.|Claro. Portão B12. Embarque às dez e meia.",["Thank you. Where is the gate?|Obrigado. Onde fica o portão?|where|g","Got it. Thanks!|Entendi. Obrigado!|got,thanks|h"]],
+g:["Go straight and turn left after security.|Siga em frente e vire à esquerda depois da segurança.",["Thank you very much.|Muito obrigado.|thank|h"]],
+h:["You're welcome. Have a nice flight!|De nada. Bom voo!",["Thanks! Bye.|Obrigado! Tchau.|thanks,bye|end"]]}},
+{id:"job",title:"Entrevista de emprego",intro:"Uma entrevista simples para um trabalho de atendimento.",start:"a",nodes:{
+a:["Hi, thanks for coming in. Please, have a seat. How are you today?|Oi, obrigada por vir. Sente-se, por favor. Como você está hoje?",["I'm good, thank you. And you?|Estou bem, obrigado. E você?|good,fine|b","A little nervous, but I'm fine.|Um pouco nervoso, mas estou bem.|nervous|b"]],
+b:["I'm great. So, tell me a little about yourself.|Estou ótima. Então, me fale um pouco sobre você.",["I'm from Brazil, and I live here now.|Sou do Brasil e moro aqui agora.|brazil|c","I'm a hard worker, and I like to learn.|Sou trabalhador e gosto de aprender.|worker,learn|c"]],
+c:["Nice. What do you do right now?|Legal. O que você faz no momento?",["I work in an office.|Trabalho em um escritório.|office|d","I work at a store.|Trabalho em uma loja.|store|d","I'm looking for a job.|Estou procurando emprego.|looking|d"]],
+d:["Do you have experience with customers?|Você tem experiência com clientes?",["Yes, I do. I like working with people.|Tenho, sim. Gosto de trabalhar com gente.|yes,people|e","Not much, but I learn fast.|Não muita, mas aprendo rápido.|not much,fast|e"]],
+e:["Good. Can you work on weekends?|Bom. Você pode trabalhar nos fins de semana?",["Yes, I can.|Posso, sim.|yes|f","I can work on Saturdays, but not on Sundays.|Posso trabalhar aos sábados, mas não aos domingos.|saturday|f"]],
+f:["Great. Do you have any questions for me?|Ótimo. Você tem alguma pergunta para mim?",["Yes. What time does the job start?|Tenho. A que horas o trabalho começa?|what time|g","When can I start?|Quando eu posso começar?|when|g2"]],
+g:["It starts at eight in the morning.|Começa às oito da manhã.",["That's fine for me.|Para mim está bom.|fine|h"]],
+g2:["You can start next Monday.|Você pode começar na próxima segunda.",["Perfect. Thank you!|Perfeito. Obrigado!|perfect|h"]],
+h:["Great. We'll call you this week. Thanks for coming!|Ótimo. A gente te liga esta semana. Obrigada por vir!",["Thank you for your time.|Obrigado pelo seu tempo.|thank|end"]]}},
+{id:"chat",title:"Conversa informal",intro:"Você encontra o Ben, seu vizinho, no elevador.",start:"a",nodes:{
+a:["Hey! How's it going?|E aí! Como vai?",["Good, thanks. How about you?|Bem, obrigado. E você?|good|b","Not bad. And you?|Nada mal. E você?|not bad|b"]],
+b:["Pretty good. Nice weather today, huh?|Tudo certo. Tempo bom hoje, né?",["Yeah, it's beautiful.|É, está lindo.|beautiful|c","Yes, but it's a little cold for me.|Sim, mas está meio frio para mim.|cold|c"]],
+c:["So, what do you do?|E aí, o que você faz?",["I work at a bank.|Trabalho em um banco.|bank|d","I'm a teacher.|Sou professor.|teacher|d","I'm retired.|Sou aposentado.|retired|d"]],
+d:["Oh, cool. Do you like it?|Ah, legal. Você gosta?",["Yes, I love it.|Sim, adoro.|love|e","It's okay. I work a lot.|É ok. Trabalho muito.|okay,a lot|e"]],
+e:["Any plans for the weekend?|Algum plano para o fim de semana?",["I'm going to visit my family.|Vou visitar minha família.|family,visit|f","Not really. I want to rest.|Na verdade, não. Quero descansar.|rest,not really|f"]],
+f:["Nice. I'm going to cook for my friends. Wish me luck.|Legal. Eu vou cozinhar para os meus amigos. Me deseje sorte.",["Good luck!|Boa sorte!|luck|g","Really? What are you going to cook?|Sério? O que você vai cozinhar?|what,cook|f2"]],
+f2:["Pasta. It's the only thing I can't burn. Well, usually.|Macarrão. É a única coisa que eu não consigo queimar. Bom, normalmente.",["Good luck!|Boa sorte!|luck|g","That sounds good.|Parece bom.|sounds|g"]],
+g:["Thanks! Well, this is my floor. See you later!|Valeu! Bom, este é o meu andar. Até mais!",["See you! Have a good one.|Até! Tenha um bom dia.|see you|end"]]}},
+{id:"phone",title:"No telefone",intro:"Você liga para o consultório da Dra. Miller para marcar uma consulta.",start:"a",nodes:{
+a:["Good afternoon, Dr. Miller's office. How can I help you?|Boa tarde, consultório da Dra. Miller. Em que posso ajudar?",["Hi. I'd like to make an appointment.|Oi. Eu queria marcar uma consulta.|appointment|b","Hello. Can I speak to Dr. Miller, please?|Alô. Posso falar com a Dra. Miller, por favor?|speak|a2"]],
+a2:["I'm sorry, she's with a patient. Would you like to make an appointment?|Sinto muito, ela está com um paciente. Gostaria de marcar uma consulta?",["Yes, please.|Sim, por favor.|yes|b"]],
+b:["Sure. Is tomorrow at ten okay?|Claro. Amanhã às dez está bom?",["Yes, that's perfect.|Sim, está perfeito.|perfect,yes|e","Sorry, I can't tomorrow. How about Friday?|Desculpa, amanhã eu não posso. Que tal sexta?|friday|d"]],
+d:["Friday. Yes, we have two thirty in the afternoon.|Sexta. Sim, temos às duas e meia da tarde.",["That works. Thank you.|Pode ser. Obrigado.|works|e","Sorry, can you speak more slowly, please?|Desculpa, pode falar mais devagar, por favor?|slowly|d2"]],
+d2:["Of course. Friday. At two thirty. In the afternoon.|Claro. Sexta. Às duas e meia. Da tarde.",["Okay, Friday at two thirty.|Certo, sexta às duas e meia.|friday,okay|e"]],
+e:["Great. Is this your first visit?|Ótimo. É sua primeira consulta aqui?",["Yes, it is.|É, sim.|yes|f","No, I was there last year.|Não, estive aí no ano passado.|last year,no|f"]],
+f:["Okay. Please come ten minutes early and bring your ID.|Certo. Por favor, chegue dez minutos antes e traga seu documento.",["Okay, I will. Thank you.|Certo, pode deixar. Obrigado.|i will,okay|g","Sorry, what do I need to bring?|Desculpa, o que eu preciso levar?|what,bring|f2"]],
+f2:["Your ID. A document with your photo.|Seu documento. Um documento com foto.",["Oh, I see. Thank you.|Ah, entendi. Obrigado.|i see,thank|g"]],
+g:["You're welcome. See you then. Bye!|De nada. Até lá. Tchau!",["Bye! Have a nice day.|Tchau! Tenha um bom dia.|bye|end"]]}}
+],
+
+/* Página "Por que este método funciona": [título, fonte, explicação, como o site aplica] */
+method: [
+["Lembrar é melhor que reler","Roediger e Karpicke, 2006; Dunlosky e colegas, 2013","Quando você se esforça para puxar uma resposta da memória, ela fica mais forte do que se você só lesse de novo.","Aqui você sempre responde antes de ver o gabarito: fala, monta ou escreve a frase, e a correção vem na hora."],
+["Um pouco todo dia, com intervalos","Ebbinghaus, 1885; Cepeda e colegas, 2006","A memória esquece em curva. Rever logo antes de esquecer, com intervalos cada vez maiores, segura o que você aprendeu por muito mais tempo.","Cada frase volta em 1, 3, 7, 14, 30, 60 e 120 dias. Acertou, o intervalo cresce. Errou, ela volta para perto."],
+["Misturar os assuntos","Rohrer e Taylor, 2007; Nakata e Suzuki, 2019","Praticar temas misturados parece mais difícil, mas faz você aprender a escolher a resposta certa, como na vida real.","As revisões misturam frases de lições diferentes e tipos de exercício diferentes."],
+["Dificuldade na medida certa","Bjork, 1994","Exercício fácil demais não fixa; difícil demais desanima. O melhor é um esforço que você quase sempre vence.","O site observa seus acertos. Se você acerta quase tudo, os exercícios ficam mais exigentes; se erra muito, ficam mais simples."],
+["Quatro partes iguais","Paul Nation, 2007","Um bom curso divide o tempo entre ouvir e ler entendendo, falar e escrever, estudar a língua de propósito e ganhar velocidade com o que já sabe.","A sessão diária passa pelas quatro: história com áudio, produção, exercícios de vocabulário e pronúncia, e rodadas rápidas."],
+["As palavras mais usadas primeiro","West, 1953; Nation, 2001; Browne, Culligan e Phillips, 2013","Cerca de duas mil palavras cobrem a maior parte das conversas do dia a dia. Faz sentido aprender essas antes de qualquer palavra rara.","O curso segue as palavras e combinações mais frequentes da fala, sempre dentro de frases, nunca em listas soltas."],
+["Entender muito, com poucas novidades","Krashen, 1982; Nation e Waring, 2020","Aprendemos quando entendemos mensagens um pouco acima do nosso nível, em grande quantidade.","Cada lição traz um diálogo curto em que você entende quase tudo, com áudio e tradução escondida que aparece ao toque."],
+["Falar e ser corrigido","Swain, 1985; Long, 1996","Só entender não basta. Ao tentar falar, você percebe o que ainda não sabe, e a correção ajusta.","Toda sessão termina com você falando sobre a sua vida, e o simulador de conversas responde ao que você diz."],
+["Frases prontas","Lewis, 1993; Wray, 2002","Quem fala rápido não monta palavra por palavra: usa blocos inteiros já decorados, como “Can I have…?”.","Você aprende blocos e troca só um pedaço para criar frases novas."],
+["Explicar a regra ajuda","Norris e Ortega, 2000; Spada e Tomita, 2010","Estudos que juntam dezenas de pesquisas mostram que uma explicação curta e clara acelera o aprendizado em comparação com só exposição.","A trilha Gramática explica cada ponto e compara com o português. A trilha Natural oferece a nota opcional “Quer saber por quê?”."],
+["Treinar o ouvido com variedade","Logan, Lively e Pisoni, 1991; Thomson, 2018","Para aprender um som que não existe na sua língua, você precisa ouvi-lo em muitas palavras e vozes, com correção imediata.","Na aba Falar, você ouve pares como ship e sheep em várias palavras, vozes e velocidades e escolhe o que ouviu."],
+["Repetir junto com o áudio","Hamada, 2016; Foote e McDonough, 2017","Ouvir e repetir imitando o modelo melhora a percepção dos sons, o ritmo e a melodia.","Toda sessão tem de três a cinco frases para repetir, em velocidade lenta e normal."],
+["Dormir faz parte do estudo","Diekelmann e Born, 2010","O cérebro consolida a memória durante o sono, entre uma sessão e outra.","O site pede de 20 a 30 minutos por dia, todos os dias, em vez de maratonas no fim de semana."],
+["Motivação e escolha","Deci e Ryan, 2000; Dörnyei, 2001","A gente continua quando vê progresso real, sente que escolhe e não é punido por falhar.","Você vê o que já consegue fazer, escolhe trilha e lições, e nunca perde progresso por faltar um dia."]
+],
+polyglots: [
+["Luca Lampariello","Tradução nos dois sentidos","Você entende o diálogo em português e, dias depois, tenta voltar do português para o inglês. No site isso aparece como “Tradução de volta”, três dias depois de cada lição."],
+["Benny Lewis","Falar desde o primeiro dia","Não espere estar pronto. Já na primeira lição você fala em voz alta."],
+["Steve Kaufmann e Kató Lomb","Muito contato com conteúdo de que você gosta","Fora do site, ouça e leia coisas do seu interesse. Veja as sugestões na página de prática."],
+["Gabriel Wyner","Pronúncia primeiro e frases pessoais","Os sons vêm desde a primeira semana, e toda sessão termina com frases sobre a sua vida."],
+["Paul Pimsleur","Recordar em intervalos graduados","Dentro da própria sessão, uma frase errada volta alguns minutos depois; depois, em dias."],
+["Lýdia Machová","Gostar do método, quantidade, sistema e paciência","Escolha a trilha de que você gosta, faça todo dia, confie na fila de revisão e dê tempo ao tempo."]
+],
+outside: [
+["Séries e filmes","Reveja um episódio que você já conhece, com áudio e legenda em inglês. Dez minutos por dia já contam. Comece por séries de comédia do cotidiano, que usam frases curtas."],
+["Podcasts para iniciantes","Procure por podcasts de inglês lento para estudantes, como o “6 Minute English” da BBC (sotaque britânico) e os programas do site ESL Lab. Ouça o mesmo episódio duas ou três vezes."],
+["Leitura graduada","Livros e notícias reescritos com poucas palavras. Procure por “graded readers”, pelo site News in Levels (a mesma notícia em três níveis) e pela Wikipédia em inglês simples."],
+["Vídeos curtos","No YouTube, procure por “English listening practice for beginners” e canais de entrevistas de rua com legenda. Escolha assuntos de que você gosta: culinária, futebol, viagens."],
+["Fale sozinho","No banho ou no trânsito, descreva em inglês o que você está fazendo, com as frases que já conhece. Não custa nada e funciona."],
+["Mude um aparelho","Coloque o celular ou um aplicativo que você usa todo dia em inglês. Você já sabe onde ficam os botões, então aprende as palavras sem esforço."]
+]
+};
+
+</script>
+<script>
+/* ============================================================
+   TRILHA NATURAL — SEMANAS 1 A 4
+   Formato de cada lição:
+   id, t (título), sit (situação), can (o que a pessoa passa a conseguir),
+   d: diálogo  "Quem|inglês|português"
+   c: blocos que entram na revisão  "inglês|português"
+   s: troca de uma parte  ["molde em inglês com ___|molde em português com ___", "opção|tradução", ...] (a 1ª opção é o modelo)
+   q: perguntas para responder em voz alta  "pergunta|tradução|começo de resposta"
+   k: compreensão  ["pergunta", "certa", "errada", "errada"]
+   w: nota opcional "Quer saber por quê?" (até duas linhas)
+   ============================================================ */
+(function(){
+var W=window.COURSE.weeks; function put(n,l){(W[n]=W[n]||{}).natural=l;}
+
+put(1,[
+{id:"n1-1",t:"Oi, eu sou a Ana",sit:"Apresentar-se",can:"cumprimentar alguém e dizer seu nome",
+d:["Ben|Hi! Are you new here?|Oi! Você é nova aqui?",
+"Ana|Hi! Yes, I am. I'm Ana.|Oi! Sou, sim. Eu sou a Ana.",
+"Ben|Nice to meet you, Ana. I'm Ben.|Prazer, Ana. Eu sou o Ben.",
+"Ana|Nice to meet you too, Ben.|Prazer também, Ben.",
+"Ben|I live right next to you. I'm your neighbor.|Eu moro bem do seu lado. Sou seu vizinho.",
+"Ana|Oh, great! And who is this?|Ah, que bom! E quem é este?",
+"Ben|This is Biscuit. He's not my cat, but he lives here.|Este é o Biscuit. Ele não é meu gato, mas mora aqui.",
+"Ana|Hi, Biscuit! Nice to meet you too.|Oi, Biscuit! Prazer também."],
+c:["Hi! I'm Ana.|Oi! Eu sou a Ana.","Nice to meet you.|Prazer em te conhecer.","Nice to meet you too.|Prazer também.","What's your name?|Qual é o seu nome?","My name is Ana.|Meu nome é Ana.","Are you new here?|Você é novo aqui?","Yes, I am.|Sou, sim.","I'm your neighbor.|Eu sou seu vizinho."],
+s:[["I'm ___.|Eu sou ___.","Ana|a Ana","Ben|o Ben","your neighbor|seu vizinho","new here|novo aqui"],["This is ___.|Este é ___.","Biscuit|o Biscuit","my friend|meu amigo","my neighbor|meu vizinho"]],
+q:["What's your name?|Qual é o seu nome?|My name is ___.","Are you new here?|Você é novo aqui?|Yes, I am. / No, I'm not.","Nice to meet you!|Prazer em te conhecer!|Nice to meet you too."],
+k:[["Quem é o Ben?","O vizinho da Ana","O irmão da Ana","O dono do prédio"],["De quem é o gato Biscuit?","Não é do Ben, mas mora no prédio","É do Ben","É da Ana"]],
+w:"I'm é a forma curta de I am. Na conversa, quase todo mundo usa a forma curta."},
+
+{id:"n1-2",t:"De onde você é?",sit:"Apresentar-se",can:"dizer de onde você é e onde mora",
+d:["Ben|So, Ana, where are you from?|Então, Ana, de onde você é?",
+"Ana|I'm from Brazil. I'm from Belo Horizonte.|Eu sou do Brasil. Sou de Belo Horizonte.",
+"Ben|Wow, Brazil! I love Brazilian music.|Nossa, Brasil! Eu adoro música brasileira.",
+"Ana|Really? And you? Where are you from?|Sério? E você? De onde você é?",
+"Ben|I'm from Texas. But I live here in Chicago now.|Eu sou do Texas. Mas moro aqui em Chicago agora.",
+"Ana|Do you like Chicago?|Você gosta de Chicago?",
+"Ben|I love it. But it's very cold in the winter.|Adoro. Mas é muito frio no inverno.",
+"Ana|Oh no. I'm from Brazil. I don't have a coat!|Ai, não. Eu sou do Brasil. Eu não tenho casaco!"],
+c:["Where are you from?|De onde você é?","I'm from Brazil.|Eu sou do Brasil.","And you?|E você?","I live here now.|Eu moro aqui agora.","Do you like Chicago?|Você gosta de Chicago?","I love it.|Eu adoro.","It's very cold.|É muito frio.","Really?|Sério?"],
+s:[["I'm from ___.|Eu sou ___.","Brazil|do Brasil","Texas|do Texas","São Paulo|de São Paulo","a small city|de uma cidade pequena"],["I live in ___.|Eu moro ___.","Chicago|em Chicago","Brazil|no Brasil","a big city|em uma cidade grande"]],
+q:["Where are you from?|De onde você é?|I'm from ___.","Where do you live?|Onde você mora?|I live in ___.","Do you like your city?|Você gosta da sua cidade?|Yes, I love it. / It's okay."],
+k:[["De onde é o Ben?","Do Texas","De Chicago","Do Brasil"],["Qual é o problema da Ana?","Ela não tem casaco","Ela não gosta de música","Ela não mora em Chicago"]],
+w:"Em inglês, o país vem sem artigo: from Brazil, e não “from the Brazil”."},
+
+{id:"n1-3",t:"Não entendi nada",sit:"Sobrevivência",can:"dizer que não entendeu e pedir para repetir",
+d:["Mrs. Parker|Good morning! You must be the new tenant from apartment 2A!|Bom dia! Você deve ser a nova inquilina do apartamento 2A!",
+"Ana|Sorry, I don't understand. Can you repeat that, please?|Desculpa, eu não entendo. Pode repetir, por favor?",
+"Mrs. Parker|Oh! Of course. Are you the new tenant?|Ah! Claro. Você é a nova inquilina?",
+"Ana|Sorry. Can you speak more slowly, please?|Desculpa. Pode falar mais devagar, por favor?",
+"Mrs. Parker|Yes. Do… you… live… here?|Sim. Você… mora… aqui?",
+"Ana|Oh! Yes, I live here. I'm learning English.|Ah! Sim, eu moro aqui. Estou aprendendo inglês.",
+"Mrs. Parker|Your English is very good, dear.|Seu inglês é muito bom, querida.",
+"Ana|Thank you! What does “dear” mean?|Obrigada! O que quer dizer “dear”?"],
+c:["Sorry, I don't understand.|Desculpa, eu não entendo.","Can you repeat that, please?|Pode repetir, por favor?","Can you speak more slowly, please?|Pode falar mais devagar, por favor?","I'm learning English.|Estou aprendendo inglês.","What does that mean?|O que isso quer dizer?","Of course.|Claro.","Good morning!|Bom dia!","Thank you!|Obrigado!"],
+s:[["Can you ___, please?|Pode ___, por favor?","repeat that|repetir","speak more slowly|falar mais devagar","help me|me ajudar","say that again|dizer isso de novo"],["I'm learning ___.|Estou aprendendo ___.","English|inglês","Spanish|espanhol","a new language|uma língua nova"]],
+q:["Do you understand me?|Você me entende?|Yes, I understand. / Sorry, I don't understand.","Are you learning English?|Você está aprendendo inglês?|Yes, I'm learning English.","Can I speak fast?|Posso falar rápido?|No. Can you speak more slowly, please?"],
+k:[["O que a Ana pede primeiro?","Para a Sra. Parker repetir","Para a Sra. Parker ir embora","Para a Sra. Parker falar português"],["O que a Sra. Parker acha do inglês da Ana?","Muito bom","Muito ruim","Muito rápido"]],
+w:"Can you…? é o jeito mais comum de pedir um favor. O please no fim deixa o pedido educado."},
+
+{id:"n1-4",t:"Esta é a minha vizinha",sit:"Apresentar alguém",can:"apresentar uma pessoa a outra",
+d:["Ben|Ana, this is Mrs. Parker. She's the owner of the building.|Ana, esta é a Sra. Parker. Ela é a dona do prédio.",
+"Ana|We met this morning. Hello again, Mrs. Parker.|A gente se conheceu hoje de manhã. Olá de novo, Sra. Parker.",
+"Mrs. Parker|Hello, dear. I see you know Biscuit.|Olá, querida. Vejo que você conhece o Biscuit.",
+"Ana|Yes! Is he your cat?|Sim! Ele é seu gato?",
+"Mrs. Parker|He is. He's twelve years old, and he's always hungry.|É. Ele tem doze anos e está sempre com fome.",
+"Ben|That's true. He eats my breakfast every day.|É verdade. Ele come o meu café da manhã todo dia.",
+"Mrs. Parker|That's because your breakfast is on the floor, Ben.|Isso é porque o seu café da manhã fica no chão, Ben.",
+"Ana|He's a very smart cat.|Ele é um gato muito esperto."],
+c:["This is Mrs. Parker.|Esta é a Sra. Parker.","She's the owner.|Ela é a dona.","Hello again.|Olá de novo.","Is he your cat?|Ele é seu gato?","He's always hungry.|Ele está sempre com fome.","That's true.|É verdade.","Every day.|Todo dia.","He's very smart.|Ele é muito esperto."],
+s:[["This is ___.|Este é ___.","my friend Ben|meu amigo Ben","my husband|meu marido","my son|meu filho","my boss|meu chefe"],["He's very ___.|Ele é muito ___.","smart|esperto","nice|legal","funny|engraçado","tall|alto"]],
+q:["Who is Mrs. Parker?|Quem é a Sra. Parker?|She's the owner of the building.","Is Biscuit a dog?|O Biscuit é um cachorro?|No, he's a cat.","Do you have a cat or a dog?|Você tem gato ou cachorro?|Yes, I have a ___. / No, I don't."],
+k:[["Quem é a dona do gato?","A Sra. Parker","O Ben","A Ana"],["Por que o Biscuit come o café da manhã do Ben?","Porque fica no chão","Porque o Ben dá para ele","Porque a Ana pede"]],
+w:"He's e she's são as formas curtas de he is e she is. He é para homem, she é para mulher."},
+
+{id:"n1-5",t:"Até amanhã",sit:"Cumprimentos e despedidas",can:"perguntar como alguém está, agradecer e se despedir",
+d:["Ben|Good morning, Ana! How are you?|Bom dia, Ana! Como você está?",
+"Ana|I'm good, thanks. And you?|Estou bem, obrigada. E você?",
+"Ben|I'm great. Do you want some coffee? I just made it.|Estou ótimo. Quer café? Acabei de fazer.",
+"Ana|Yes, please. Thank you.|Sim, por favor. Obrigada.",
+"Ben|You're welcome. How is it?|De nada. Como está?",
+"Ana|It's… very strong. Is this coffee or soup?|Está… muito forte. Isto é café ou sopa?",
+"Ben|Ha! Everybody says that. See you tomorrow!|Ha! Todo mundo fala isso. Até amanhã!",
+"Ana|See you tomorrow, Ben. Have a nice day!|Até amanhã, Ben. Tenha um bom dia!"],
+c:["How are you?|Como você está?","I'm good, thanks.|Estou bem, obrigado.","Yes, please.|Sim, por favor.","No, thanks.|Não, obrigado.","You're welcome.|De nada.","See you tomorrow!|Até amanhã!","Have a nice day!|Tenha um bom dia!","Do you want some coffee?|Você quer café?"],
+s:[["Do you want some ___?|Você quer ___?","coffee|café","water|água","tea|chá","help|ajuda"],["See you ___!|Até ___!","tomorrow|amanhã","later|mais tarde","soon|logo","on Monday|segunda"]],
+q:["How are you?|Como você está?|I'm good, thanks. And you?","Do you want some coffee?|Você quer café?|Yes, please. / No, thanks.","See you tomorrow!|Até amanhã!|See you tomorrow! Have a nice day!"],
+k:[["Como está o café do Ben?","Muito forte","Muito fraco","Muito doce"],["O que a Ana deseja no fim?","Um bom dia","Boa noite","Boa sorte"]],
+w:"A resposta normal para How are you? é curta: I'm good, thanks. Ninguém espera uma explicação longa."}
+]);
+
+put(2,[
+{id:"n2-1",t:"Esta é a minha família",sit:"Família",can:"falar de quem é a sua família",
+d:["Ben|Is this your family in the picture?|É a sua família na foto?",
+"Ana|Yes. This is my mother, and this is my father.|É. Esta é a minha mãe, e este é o meu pai.",
+"Ben|Do you have any brothers or sisters?|Você tem irmãos ou irmãs?",
+"Ana|I have two brothers and one sister. I'm the youngest.|Tenho dois irmãos e uma irmã. Eu sou a caçula.",
+"Ben|That's a big family! I have one brother. We're twins.|Que família grande! Eu tenho um irmão. Somos gêmeos.",
+"Ana|Really? Is he just like you?|Sério? Ele é igualzinho a você?",
+"Ben|Yes, but he can cook.|Sim, mas ele sabe cozinhar.",
+"Ana|I miss my family a lot.|Eu sinto muita falta da minha família."],
+c:["This is my mother.|Esta é a minha mãe.","Do you have any brothers or sisters?|Você tem irmãos ou irmãs?","I have two brothers.|Eu tenho dois irmãos.","I have one sister.|Eu tenho uma irmã.","That's a big family!|Que família grande!","I miss my family.|Eu sinto falta da minha família.","Are you married?|Você é casado?","I have two kids.|Eu tenho dois filhos."],
+s:[["This is my ___.|Este é meu ___.","father|pai","brother|irmão","husband|marido","son|filho"],["I have ___.|Eu tenho ___.","two brothers|dois irmãos","one sister|uma irmã","three kids|três filhos","a big family|uma família grande"]],
+q:["Do you have any brothers or sisters?|Você tem irmãos ou irmãs?|I have ___. / No, I don't.","Are you married?|Você é casado?|Yes, I am. / No, I'm not.","Do you have kids?|Você tem filhos?|Yes, I have ___. / No, I don't."],
+k:[["Quantos irmãos homens a Ana tem?","Dois","Um","Três"],["Qual é a diferença entre o Ben e o irmão gêmeo?","O irmão sabe cozinhar","O irmão é mais alto","O irmão mora no Brasil"]],
+w:"Kids é o jeito do dia a dia de dizer filhos ou crianças. Children é mais formal."},
+
+{id:"n2-2",t:"O que você faz?",sit:"Trabalho",can:"dizer qual é o seu trabalho e perguntar o do outro",
+d:["Ana|So, Ben, what do you do?|Então, Ben, o que você faz?",
+"Ben|I work with computers. I work from home.|Trabalho com computadores. Trabalho de casa.",
+"Ana|That's nice. Do you like your job?|Que legal. Você gosta do seu trabalho?",
+"Ben|Most days. What about you?|Na maioria dos dias. E você?",
+"Ana|I'm a nurse. I work at a hospital downtown.|Sou enfermeira. Trabalho em um hospital no centro.",
+"Ben|Wow. That's a hard job.|Nossa. É um trabalho difícil.",
+"Ana|It is, but I love it. And Mrs. Parker?|É, mas eu adoro. E a Sra. Parker?",
+"Ben|She's retired. Now her job is to watch everybody.|Ela é aposentada. Agora o trabalho dela é vigiar todo mundo."],
+c:["What do you do?|O que você faz?","I work with computers.|Eu trabalho com computadores.","I work from home.|Eu trabalho de casa.","I'm a nurse.|Eu sou enfermeira.","I work at a hospital.|Eu trabalho em um hospital.","Do you like your job?|Você gosta do seu trabalho?","What about you?|E você?","I'm retired.|Eu sou aposentado."],
+s:[["I'm a ___.|Eu sou ___.","nurse|enfermeiro","teacher|professor","driver|motorista","student|estudante"],["I work at ___.|Eu trabalho em ___.","a hospital|um hospital","a school|uma escola","a store|uma loja","a bank|um banco"]],
+q:["What do you do?|O que você faz?|I'm a ___. / I work at ___. / I'm retired.","Do you like your job?|Você gosta do seu trabalho?|Yes, I love it. / It's okay.","Where do you work?|Onde você trabalha?|I work at ___. / I work from home."],
+k:[["Qual é o trabalho da Ana?","Enfermeira","Professora","Programadora"],["O que a Sra. Parker faz hoje?","É aposentada e vigia todo mundo","Trabalha no hospital","Trabalha com computadores"]],
+w:"Profissão leva a ou an em inglês: I'm a nurse. Em português a gente diz só “sou enfermeira”."},
+
+{id:"n2-3",t:"Qual é o seu número?",sit:"Números e contato",can:"dizer idade, telefone e números até cem",
+d:["Mrs. Parker|Ana, dear, what's your phone number?|Ana, querida, qual é o seu telefone?",
+"Ana|It's five five five, two one three, four eight nine zero.|É cinco cinco cinco, dois um três, quatro oito nove zero.",
+"Mrs. Parker|Sorry, can you say that again? I'm seventy-eight.|Desculpa, pode dizer de novo? Eu tenho setenta e oito anos.",
+"Ana|Sure. Five five five, two one three, four eight nine zero.|Claro. Cinco cinco cinco, dois um três, quatro oito nove zero.",
+"Mrs. Parker|Got it. And how old are you, dear?|Anotei. E quantos anos você tem, querida?",
+"Ana|I'm thirty-four.|Tenho trinta e quatro.",
+"Mrs. Parker|So young! My cat is twelve. In cat years, he's older than me.|Tão nova! Meu gato tem doze. Em anos de gato, ele é mais velho que eu.",
+"Ana|He looks great for his age.|Ele está ótimo para a idade."],
+c:["What's your phone number?|Qual é o seu telefone?","Can you say that again?|Pode dizer de novo?","How old are you?|Quantos anos você tem?","I'm thirty-four.|Eu tenho trinta e quatro anos.","Got it.|Entendi.","Sure.|Claro.","What's your address?|Qual é o seu endereço?","What's your email?|Qual é o seu e-mail?"],
+s:[["I'm ___.|Eu tenho ___ anos.","thirty-four|trinta e quatro","twenty|vinte","fifty-two|cinquenta e dois","sixty-five|sessenta e cinco"],["What's your ___?|Qual é o seu ___?","phone number|telefone","address|endereço","last name|sobrenome","email|e-mail"]],
+q:["How old are you?|Quantos anos você tem?|I'm ___.","What's your phone number?|Qual é o seu telefone?|It's ___.","What's your last name?|Qual é o seu sobrenome?|It's ___."],
+k:[["Quantos anos tem a Sra. Parker?","Setenta e oito","Sessenta e oito","Oitenta e sete"],["Por que a Ana repete o número?","Porque a Sra. Parker pediu","Porque errou o número","Porque o telefone tocou"]],
+w:"Para idade, o inglês usa “ser”, não “ter”: I'm thirty-four. Telefone se diz número por número."},
+
+{id:"n2-4",t:"O meu dia",sit:"Rotina",can:"contar a sua rotina e dizer as horas",
+d:["Ben|You look tired, Ana. What time do you get up?|Você parece cansada, Ana. A que horas você acorda?",
+"Ana|I get up at five. I start work at six thirty.|Eu acordo às cinco. Começo a trabalhar às seis e meia.",
+"Ben|Five? In the morning? That's not a time, that's a punishment.|Cinco? Da manhã? Isso não é hora, é castigo.",
+"Ana|I know. And you? What time do you get up?|Eu sei. E você? A que horas você acorda?",
+"Ben|Around nine. Then I have breakfast and start work.|Lá pelas nove. Aí tomo café da manhã e começo a trabalhar.",
+"Ana|Lucky you. I finish work at three and go to bed early.|Sorte sua. Eu saio do trabalho às três e vou dormir cedo.",
+"Ben|What do you do in the evening?|O que você faz à noite?",
+"Ana|I have dinner, I call my mother, and I fall asleep on the couch.|Eu janto, ligo para a minha mãe e durmo no sofá."],
+c:["What time do you get up?|A que horas você acorda?","I get up at five.|Eu acordo às cinco.","I start work at six thirty.|Eu começo a trabalhar às seis e meia.","I have breakfast.|Eu tomo café da manhã.","I finish work at three.|Eu saio do trabalho às três.","I go to bed early.|Eu vou dormir cedo.","In the morning.|De manhã.","In the evening.|À noite."],
+s:[["I get up at ___.|Eu acordo ___.","five|às cinco","seven thirty|às sete e meia","six o'clock|às seis em ponto","noon|ao meio-dia"],["I have ___ at home.|Eu ___ em casa.","breakfast|tomo café da manhã","lunch|almoço","dinner|janto"]],
+q:["What time do you get up?|A que horas você acorda?|I get up at ___.","What time do you go to bed?|A que horas você vai dormir?|I go to bed at ___.","What do you do in the evening?|O que você faz à noite?|I have dinner. / I watch TV."],
+k:[["A que horas a Ana acorda?","Às cinco","Às nove","Às seis e meia"],["O que a Ana faz à noite?","Janta, liga para a mãe e dorme no sofá","Sai com o Ben","Trabalha no hospital"]],
+w:"Hora leva at: at five, at six thirty. Partes do dia levam in the: in the morning, in the evening."},
+
+{id:"n2-5",t:"Eu gosto, eu não gosto",sit:"Gostos",can:"dizer do que você gosta e do que não gosta",
+d:["Ben|Ana, do you like spicy food?|Ana, você gosta de comida apimentada?",
+"Ana|I love spicy food. Why?|Eu adoro comida apimentada. Por quê?",
+"Ben|I want to cook dinner for you and Mrs. Parker on Saturday.|Quero fazer um jantar para você e a Sra. Parker no sábado.",
+"Ana|That's so nice! But I don't like fish.|Que gentil! Mas eu não gosto de peixe.",
+"Ben|No problem. I don't like fish either. Do you like chicken?|Sem problema. Eu também não gosto de peixe. Você gosta de frango?",
+"Ana|Yes, I like chicken a lot.|Sim, gosto muito de frango.",
+"Ben|Great. Spicy chicken, then. What could go wrong?|Ótimo. Frango apimentado, então. O que pode dar errado?",
+"Ana|With you in the kitchen? Everything.|Com você na cozinha? Tudo."],
+c:["Do you like spicy food?|Você gosta de comida apimentada?","I love spicy food.|Eu adoro comida apimentada.","I don't like fish.|Eu não gosto de peixe.","I like chicken a lot.|Eu gosto muito de frango.","No problem.|Sem problema.","That's so nice!|Que gentil!","I want to cook dinner.|Eu quero fazer o jantar.","Why?|Por quê?"],
+s:[["I like ___.|Eu gosto de ___.","chicken|frango","coffee|café","music|música","my job|meu trabalho"],["I don't like ___.|Eu não gosto de ___.","fish|peixe","cold weather|tempo frio","loud music|música alta","Mondays|segundas-feiras"]],
+q:["Do you like spicy food?|Você gosta de comida apimentada?|Yes, I love it. / No, I don't.","What food do you like?|De que comida você gosta?|I like ___.","What don't you like?|Do que você não gosta?|I don't like ___."],
+k:[["Do que a Ana não gosta?","De peixe","De frango","De comida apimentada"],["O que o Ben vai cozinhar no sábado?","Frango apimentado","Peixe","Macarrão"]],
+w:"Para negar, ponha don't antes da ação: I like fica I don't like. Não se usa “not” sozinho."}
+]);
+
+put(3,[
+{id:"n3-1",t:"Um café, por favor",sit:"Comida e bebida",can:"pedir uma bebida em um café",
+d:["Barista|Hi! What can I get for you?|Oi! O que vai querer?",
+"Ana|Hi. Can I have a coffee, please?|Oi. Pode me ver um café, por favor?",
+"Barista|Sure. Small, medium, or large?|Claro. Pequeno, médio ou grande?",
+"Ana|Medium, please. With milk.|Médio, por favor. Com leite.",
+"Barista|For here or to go?|Para tomar aqui ou para levar?",
+"Ana|To go, please. And can I have a muffin too?|Para levar, por favor. E pode me ver um muffin também?",
+"Barista|Of course. That's six fifty. What's your name?|Claro. São seis e cinquenta. Qual é o seu nome?",
+"Ana|Ana. A-N-A. Not “Anna,” not “Hannah.” Just Ana.|Ana. A-N-A. Não é “Anna”, nem “Hannah”. Só Ana."],
+c:["Can I have a coffee, please?|Pode me ver um café, por favor?","What can I get for you?|O que vai querer?","Small, medium, or large?|Pequeno, médio ou grande?","With milk.|Com leite.","For here or to go?|Para tomar aqui ou para levar?","To go, please.|Para levar, por favor.","That's six fifty.|São seis e cinquenta.","Can I have a muffin too?|Pode me ver um muffin também?"],
+s:[["Can I have ___, please?|Pode me ver ___, por favor?","a coffee|um café","a tea|um chá","a glass of water|um copo d'água","a sandwich|um sanduíche"],["A coffee with ___.|Um café com ___.","milk|leite","sugar|açúcar","no sugar|sem açúcar"]],
+q:["What can I get for you?|O que vai querer?|Can I have ___, please?","Small, medium, or large?|Pequeno, médio ou grande?|Small, please. / Medium, please. / Large, please.","For here or to go?|Para tomar aqui ou para levar?|For here, please. / To go, please."],
+k:[["Como a Ana quer o café?","Médio, com leite, para levar","Grande, sem leite","Pequeno, para tomar no café"],["Quanto custou o pedido?","Seis e cinquenta","Cinco e sessenta","Dezesseis e cinco"]],
+w:"Can I have…? é a frase mais útil para pedir qualquer coisa em loja, café ou restaurante."},
+
+{id:"n3-2",t:"No Rosie's",sit:"Restaurante",can:"fazer um pedido em um restaurante e pedir a conta",
+d:["Luke|Welcome to Rosie's! I'm Luke. Are you ready to order?|Bem-vindos ao Rosie's! Eu sou o Luke. Já querem pedir?",
+"Ana|Yes. I'd like the chicken sandwich, please.|Sim. Eu queria o sanduíche de frango, por favor.",
+"Ben|And I'll have the cheeseburger with fries.|E eu vou querer o cheeseburger com batata frita.",
+"Luke|Great. Anything to drink?|Ótimo. Algo para beber?",
+"Ana|Just water for me, please.|Só água para mim, por favor.",
+"Luke|Okay. One chicken salad, one burger, and two waters.|Certo. Uma salada de frango, um hambúrguer e duas águas.",
+"Ana|No, sorry. A chicken sandwich, not a salad.|Não, desculpa. Um sanduíche de frango, não uma salada.",
+"Ben|He forgets everything. But the food is really good.|Ele esquece tudo. Mas a comida é muito boa."],
+c:["Are you ready to order?|Já quer pedir?","I'd like the chicken sandwich.|Eu queria o sanduíche de frango.","I'll have the cheeseburger.|Eu vou querer o cheeseburger.","Anything to drink?|Algo para beber?","Just water for me.|Só água para mim.","The food is really good.|A comida é muito boa.","Can I have the check, please?|Pode trazer a conta, por favor?","Anything else?|Mais alguma coisa?"],
+s:[["I'd like ___, please.|Eu queria ___, por favor.","the chicken sandwich|o sanduíche de frango","the soup|a sopa","a table for two|uma mesa para dois","the check|a conta"],["I'll have ___.|Eu vou querer ___.","the cheeseburger|o cheeseburger","the same|o mesmo","a salad|uma salada"]],
+q:["Are you ready to order?|Já quer pedir?|Yes. I'd like ___.","Anything to drink?|Algo para beber?|Just water for me. / I'll have ___.","Anything else?|Mais alguma coisa?|No, thanks. Can I have the check, please?"],
+k:[["O que a Ana pediu?","Um sanduíche de frango","Uma salada de frango","Um cheeseburger"],["Qual é o problema do Luke?","Ele esquece tudo","Ele fala rápido demais","Ele não gosta do Ben"]],
+w:"I'd like é o jeito educado de dizer I want. Em restaurante, I want soa seco."},
+
+{id:"n3-3",t:"Quanto custa?",sit:"Compras",can:"perguntar preços e dizer que algo é caro",
+d:["Ana|Excuse me. How much is this coat?|Com licença. Quanto custa este casaco?",
+"Clerk|That one is two hundred dollars.|Esse custa duzentos dólares.",
+"Ana|Two hundred? That's too expensive for me.|Duzentos? É caro demais para mim.",
+"Clerk|We have cheaper ones over there. Those are on sale.|Temos mais baratos ali. Aqueles estão em promoção.",
+"Ana|How much are they?|Quanto custam?",
+"Clerk|Sixty dollars. What size do you need?|Sessenta dólares. De que tamanho você precisa?",
+"Ana|Medium, I think. Can I try it on?|Médio, eu acho. Posso experimentar?",
+"Clerk|Sure. The fitting room is right there. It looks warm, right?|Claro. O provador é logo ali. Parece quente, né?"],
+c:["How much is this?|Quanto custa isto?","How much are they?|Quanto custam?","That's too expensive.|É caro demais.","Do you have a cheaper one?|Você tem um mais barato?","It's on sale.|Está em promoção.","What size do you need?|De que tamanho você precisa?","Can I try it on?|Posso experimentar?","I'll take it.|Vou levar."],
+s:[["How much is this ___?|Quanto custa ___?","coat|este casaco","shirt|esta camisa","bag|esta bolsa","phone|este celular"],["It's too ___.|É ___ demais.","expensive|caro","big|grande","small|pequeno","long|comprido"]],
+q:["Can I help you?|Posso ajudar?|Yes. How much is this?","It's two hundred dollars.|Custa duzentos dólares.|That's too expensive. Do you have a cheaper one?","What size do you need?|De que tamanho você precisa?|Small. / Medium. / Large."],
+k:[["Quanto custa o primeiro casaco?","Duzentos dólares","Sessenta dólares","Vinte dólares"],["O que a Ana pede no fim?","Para experimentar","Um desconto","Outra cor"]],
+w:"Too antes de uma qualidade quer dizer “demais”: too expensive, too big. Very é só “muito”."},
+
+{id:"n3-4",t:"No supermercado",sit:"Compras",can:"perguntar se a loja tem algo e onde fica",
+d:["Ana|Excuse me. Do you have black beans?|Com licença. Vocês têm feijão preto?",
+"Worker|Yes, we do. They're in aisle five, next to the rice.|Temos, sim. Ficam no corredor cinco, ao lado do arroz.",
+"Ana|Thank you. And where can I find coffee?|Obrigada. E onde eu encontro café?",
+"Worker|Aisle two. Are you looking for anything else?|Corredor dois. Está procurando mais alguma coisa?",
+"Ana|Yes. Do you have pão de queijo? Cheese bread?|Sim. Vocês têm pão de queijo?",
+"Worker|Cheese bread? Hmm. I don't think so. Sorry.|Pão de queijo? Hum. Acho que não. Desculpa.",
+"Ana|That's okay. I need eggs and cheese, then. I'll make it.|Tudo bem. Preciso de ovos e queijo, então. Eu mesma faço.",
+"Worker|Now I want to try it. Bring me one!|Agora eu quero provar. Traz um para mim!"],
+c:["Do you have black beans?|Vocês têm feijão preto?","Yes, we do.|Temos, sim.","Where can I find coffee?|Onde eu encontro café?","It's in aisle five.|Fica no corredor cinco.","Next to the rice.|Ao lado do arroz.","I'm looking for eggs.|Estou procurando ovos.","I don't think so.|Acho que não.","That's okay.|Tudo bem."],
+s:[["Do you have ___?|Vocês têm ___?","black beans|feijão preto","fresh bread|pão fresco","orange juice|suco de laranja","a bigger size|um tamanho maior"],["Where can I find ___?|Onde eu encontro ___?","coffee|café","the milk|o leite","the bathroom|o banheiro","a pharmacy|uma farmácia"]],
+q:["Can I help you?|Posso ajudar?|Yes. Do you have ___?","Are you looking for anything else?|Está procurando mais alguma coisa?|Yes. Where can I find ___? / No, that's all.","What do you need from the store today?|O que você precisa do mercado hoje?|I need ___."],
+k:[["Onde fica o feijão preto?","No corredor cinco, ao lado do arroz","No corredor dois","O mercado não tem"],["O que o mercado não tem?","Pão de queijo","Café","Ovos"]],
+w:"Do you have…? serve para perguntar se a loja tem um produto. A resposta curta é Yes, we do ou No, we don't."},
+
+{id:"n3-5",t:"O jantar do Ben",sit:"Em casa",can:"dizer o que você precisa e o que quer",
+d:["Ben|Welcome! Dinner is almost ready. I just need some salt.|Bem-vindas! O jantar está quase pronto. Só preciso de sal.",
+"Mrs. Parker|Ben, I think something is burning.|Ben, acho que tem alguma coisa queimando.",
+"Ben|No, no. That's just the chicken. It's fine.|Não, não. É só o frango. Está tudo bem.",
+"Ana|Ben, I need a glass of water. Now, please.|Ben, preciso de um copo d'água. Agora, por favor.",
+"Ben|Too spicy? I used only ten peppers.|Apimentado demais? Usei só dez pimentas.",
+"Mrs. Parker|Ten? I want to live, Ben.|Dez? Eu quero viver, Ben.",
+"Ana|It's okay. Let's order a pizza. I'm paying.|Tudo bem. Vamos pedir uma pizza. Eu pago.",
+"Ben|Good idea. Biscuit likes the chicken, though.|Boa ideia. Mas o Biscuit gostou do frango."],
+c:["I need some salt.|Eu preciso de sal.","I need a glass of water.|Eu preciso de um copo d'água.","Dinner is almost ready.|O jantar está quase pronto.","It's too spicy.|Está apimentado demais.","Let's order a pizza.|Vamos pedir uma pizza.","Good idea.|Boa ideia.","It's fine.|Está tudo bem.","I'm hungry.|Estou com fome."],
+s:[["I need ___.|Eu preciso de ___.","some salt|sal","a glass of water|um copo d'água","more time|mais tempo","your help|sua ajuda"],["Let's ___.|Vamos ___.","order a pizza|pedir uma pizza","eat|comer","go home|para casa","try again|tentar de novo"]],
+q:["Are you hungry?|Você está com fome?|Yes, I'm hungry. / No, I'm not.","What do you need right now?|Do que você precisa agora?|I need ___.","Do you want pizza or chicken?|Você quer pizza ou frango?|I want ___, please."],
+k:[["Quantas pimentas o Ben usou?","Dez","Duas","Nenhuma"],["Como o jantar termina?","Eles pedem uma pizza","Todos comem o frango","A Sra. Parker cozinha"]],
+w:"Let's é um convite para fazer algo junto: Let's eat, Let's go. É a forma curta de let us."}
+]);
+
+put(4,[
+{id:"n4-1",t:"Onde fica a estação?",sit:"Direções",can:"perguntar o caminho e entender direções simples",
+d:["Ana|Excuse me. Where is the train station?|Com licença. Onde fica a estação de trem?",
+"Man|It's not far. Go straight for two blocks.|Não é longe. Siga em frente por dois quarteirões.",
+"Ana|Okay. Two blocks. And then?|Certo. Dois quarteirões. E depois?",
+"Man|Then turn left at the bank. The station is on your right.|Depois vire à esquerda no banco. A estação fica à sua direita.",
+"Ana|Go straight, turn left at the bank. Is it near the park?|Seguir em frente, virar à esquerda no banco. Fica perto do parque?",
+"Man|Yes, it's across from the park. You can't miss it.|Sim, fica em frente ao parque. Não tem como errar.",
+"Ana|Thank you so much!|Muito obrigada!",
+"Man|No problem. Wait! Your left, not my left!|De nada. Espera! A sua esquerda, não a minha!"],
+c:["Where is the train station?|Onde fica a estação de trem?","Go straight for two blocks.|Siga em frente por dois quarteirões.","Turn left at the bank.|Vire à esquerda no banco.","Turn right.|Vire à direita.","It's on your right.|Fica à sua direita.","It's not far.|Não é longe.","Is it near the park?|Fica perto do parque?","It's across from the park.|Fica em frente ao parque."],
+s:[["Where is ___?|Onde fica ___?","the train station|a estação de trem","the bathroom|o banheiro","the nearest pharmacy|a farmácia mais próxima","the bus stop|o ponto de ônibus"],["It's ___ the park.|Fica ___ parque.","near|perto do","across from|em frente ao","next to|ao lado do","behind|atrás do"]],
+q:["Excuse me, where is the bathroom?|Com licença, onde fica o banheiro?|Go straight and turn left.","Is your home near a park?|Sua casa fica perto de um parque?|Yes, it is. / No, it's far.","What is next to your home?|O que fica ao lado da sua casa?|There's a ___ next to my home."],
+k:[["Onde a Ana deve virar?","À esquerda, no banco","À direita, no parque","À esquerda, na estação"],["Onde fica a estação?","Em frente ao parque","Atrás do banco","Longe dali"]],
+w:"Para dar direções, o inglês usa a ação direto, sem “você”: Go straight. Turn left."},
+
+{id:"n4-2",t:"Este ônibus vai para o centro?",sit:"Transporte",can:"pegar ônibus e trem e comprar passagem",
+d:["Ana|Excuse me. Does this bus go downtown?|Com licença. Este ônibus vai para o centro?",
+"Driver|No, this is the number ten. You need the number six.|Não, este é o dez. Você precisa do seis.",
+"Ana|Where can I take the number six?|Onde eu pego o seis?",
+"Driver|Right here. It comes every fifteen minutes.|Aqui mesmo. Passa a cada quinze minutos.",
+"Ana|Great. How much is a ticket?|Ótimo. Quanto custa a passagem?",
+"Driver|Two fifty. You can pay with your phone.|Dois e cinquenta. Dá para pagar com o celular.",
+"Ana|Thank you. Where do I get off for the hospital?|Obrigada. Onde eu desço para o hospital?",
+"Driver|Lake Street. It's the fifth stop. Just follow the people in white.|Lake Street. É a quinta parada. É só seguir o pessoal de branco."],
+c:["Does this bus go downtown?|Este ônibus vai para o centro?","You need the number six.|Você precisa do número seis.","It comes every fifteen minutes.|Passa a cada quinze minutos.","How much is a ticket?|Quanto custa a passagem?","Where do I get off?|Onde eu desço?","It's the fifth stop.|É a quinta parada.","One ticket, please.|Uma passagem, por favor.","Is this seat taken?|Este lugar está ocupado?"],
+s:[["Does this bus go ___?|Este ônibus vai ___?","downtown|para o centro","to the airport|para o aeroporto","to the hospital|para o hospital","to Lake Street|para a Lake Street"],["One ticket to ___, please.|Uma passagem para ___, por favor.","Chicago|Chicago","the airport|o aeroporto","downtown|o centro"]],
+q:["Where are you going?|Para onde você vai?|I'm going downtown. / I'm going to ___.","How do you go to work?|Como você vai para o trabalho?|By bus. / By car. / I walk.","Is this seat taken?|Este lugar está ocupado?|No, go ahead."],
+k:[["Qual ônibus a Ana precisa pegar?","O número seis","O número dez","O número quinze"],["Onde a Ana desce?","Na quinta parada","Na primeira parada","No ponto final"]],
+w:"Get off é descer do ônibus ou do trem; get on é subir. São blocos que se aprendem inteiros."},
+
+{id:"n4-3",t:"A que horas abre?",sit:"Horários",can:"perguntar horários e marcar um compromisso",
+d:["Ana|Hi. What time does the pharmacy open tomorrow?|Oi. A que horas a farmácia abre amanhã?",
+"Clerk|We open at nine and close at eight.|Abrimos às nove e fechamos às oito.",
+"Ana|Are you open on Sundays?|Vocês abrem aos domingos?",
+"Clerk|Yes, from ten to four.|Sim, das dez às quatro.",
+"Ana|Perfect. And what time is it now?|Perfeito. E que horas são agora?",
+"Clerk|It's a quarter to eight. We close in fifteen minutes.|São quinze para as oito. Fechamos em quinze minutos.",
+"Ana|Oh no, I'm late! I have an appointment at eight.|Ai, não, estou atrasada! Tenho um compromisso às oito.",
+"Clerk|Then run! Or take the number six.|Então corre! Ou pega o seis."],
+c:["What time does it open?|A que horas abre?","We open at nine.|Abrimos às nove.","We close at eight.|Fechamos às oito.","Are you open on Sundays?|Vocês abrem aos domingos?","What time is it?|Que horas são?","It's a quarter to eight.|São quinze para as oito.","I'm late.|Estou atrasado.","I have an appointment at eight.|Tenho um compromisso às oito."],
+s:[["What time does ___ open?|A que horas ___ abre?","the pharmacy|a farmácia","the bank|o banco","the store|a loja","the museum|o museu"],["I have ___ at eight.|Eu tenho ___ às oito.","an appointment|um compromisso","a meeting|uma reunião","a class|uma aula","a flight|um voo"]],
+q:["What time is it now?|Que horas são agora?|It's ___.","What time do stores open in your city?|A que horas as lojas abrem na sua cidade?|They open at ___.","Are you always on time?|Você é sempre pontual?|Yes, I am. / No, I'm always late."],
+k:[["A que horas a farmácia fecha?","Às oito","Às nove","Às quatro"],["Por que a Ana está com pressa?","Tem um compromisso às oito","A farmácia já fechou","Ela perdeu o ônibus"]],
+w:"A quarter é um quarto de hora, quinze minutos. A quarter to eight: faltam quinze para as oito."},
+
+{id:"n4-4",t:"Pode me ajudar?",sit:"Pedir ajuda",can:"pedir ajuda e explicar um problema simples",
+d:["Ana|Excuse me. Can you help me? I can't find my phone.|Com licença. Pode me ajudar? Não estou achando meu celular.",
+"Woman|Oh no. Where did you have it last?|Ai, não. Onde você estava com ele por último?",
+"Ana|On the bus, I think. Can I use your phone?|No ônibus, eu acho. Posso usar o seu celular?",
+"Woman|Sure. Here you go. Call your number.|Claro. Aqui está. Liga para o seu número.",
+"Ana|It's ringing… Hello? Who is this?|Está chamando… Alô? Quem é?",
+"Ben|Ana? It's Ben. Your phone is in my kitchen.|Ana? É o Ben. Seu celular está na minha cozinha.",
+"Ana|In your kitchen? Why?|Na sua cozinha? Por quê?",
+"Ben|Ask Biscuit. He came in with it in his mouth.|Pergunta para o Biscuit. Ele entrou com ele na boca."],
+c:["Can you help me?|Pode me ajudar?","I can't find my phone.|Não estou achando meu celular.","Can I use your phone?|Posso usar o seu celular?","Here you go.|Aqui está.","Who is this?|Quem é?","I think so.|Acho que sim.","I lost my wallet.|Perdi minha carteira.","I have a problem.|Estou com um problema."],
+s:[["I can't find my ___.|Não estou achando ___.","phone|meu celular","keys|minhas chaves","wallet|minha carteira","glasses|meus óculos"],["Can I use your ___?|Posso usar ___?","phone|o seu celular","pen|a sua caneta","bathroom|o seu banheiro","charger|o seu carregador"]],
+q:["Can you help me?|Pode me ajudar?|Sure. What's the problem?","Can I use your phone?|Posso usar o seu celular?|Sure. Here you go.","What do you lose all the time?|O que você vive perdendo?|I always lose my ___."],
+k:[["O que a Ana perdeu?","O celular","A carteira","As chaves"],["Onde estava o celular?","Na cozinha do Ben","No ônibus","No hospital"]],
+w:"Can I…? pede permissão para você fazer algo. Can you…? pede que a outra pessoa faça."},
+
+{id:"n4-5",t:"Vamos ao cinema?",sit:"Convites e planos",can:"convidar alguém, aceitar, recusar e combinar hora e lugar",
+d:["Ben|Ana, do you want to go to the movies on Saturday?|Ana, quer ir ao cinema no sábado?",
+"Ana|I'd love to! What time?|Eu adoraria! A que horas?",
+"Ben|The movie starts at seven thirty. Let's meet at seven.|O filme começa às sete e meia. Vamos nos encontrar às sete.",
+"Ana|Sounds good. Where do you want to meet?|Combinado. Onde você quer se encontrar?",
+"Ben|In front of the building. Mrs. Parker is coming too.|Em frente ao prédio. A Sra. Parker vem também.",
+"Ana|Great! What about dinner after the movie?|Ótimo! E um jantar depois do filme?",
+"Ben|Good idea. I can cook!|Boa ideia. Eu posso cozinhar!",
+"Ana|No! I mean… let's go to Rosie's. I'm paying.|Não! Quer dizer… vamos ao Rosie's. Eu pago."],
+c:["Do you want to go to the movies?|Quer ir ao cinema?","I'd love to!|Eu adoraria!","Sorry, I can't.|Desculpa, não posso.","Let's meet at seven.|Vamos nos encontrar às sete.","Sounds good.|Combinado.","Where do you want to meet?|Onde você quer se encontrar?","What about dinner?|E um jantar?","I'm busy on Saturday.|Estou ocupado no sábado."],
+s:[["Do you want to ___?|Você quer ___?","go to the movies|ir ao cinema","have lunch|almoçar","go for a walk|dar uma caminhada","watch a movie|ver um filme"],["Let's meet ___.|Vamos nos encontrar ___.","at seven|às sete","on Saturday|no sábado","at my place|na minha casa","in front of the building|em frente ao prédio"]],
+q:["Do you want to have lunch tomorrow?|Quer almoçar amanhã?|I'd love to! / Sorry, I can't.","What time do you want to meet?|A que horas você quer se encontrar?|Let's meet at ___.","What do you want to do this weekend?|O que você quer fazer neste fim de semana?|I want to ___."],
+k:[["A que horas eles vão se encontrar?","Às sete","Às sete e meia","Às oito"],["Por que a Ana sugere o Rosie's?","Para o Ben não cozinhar","Porque é mais barato","Porque a Sra. Parker pediu"]],
+w:"Depois de want vem to e a ação: I want to go. Em português não há nada no lugar desse to."}
+]);
+})();
+
+</script>
+<script>
+/* ============================================================
+   TRILHA GRAMÁTICA — SEMANAS 1 A 4
+   Formato de cada lição:
+   id, t (título), ex (explicação curta, com comparação com o português),
+   err: erros típicos de brasileiros
+   e: exemplos que entram na revisão  "inglês|português"
+   d: mini-diálogo  "Quem|inglês|português"
+   x: exercícios
+      "g|frase com ___|resposta|erradas separadas por vírgula|tradução|explicação"   (completar)
+      "b|português|inglês/alternativa"                                              (montar)
+      "t|frase original|instrução|resposta/alternativa|explicação"                  (transformar)
+      "x|português|inglês/alternativa|explicação"                                   (traduzir escrevendo)
+      "s|inglês|português"                                                          (falar)
+   p: frases sobre a própria vida  "pedido em português|começo da frase"
+   ============================================================ */
+(function(){
+var W=window.COURSE.weeks; function put(n,l){(W[n]=W[n]||{}).grammar=l;}
+
+put(1,[
+{id:"g1-1",t:"I am, you are",
+ex:"O português tem <b>ser</b> e <b>estar</b>. O inglês usa um verbo só para os dois: <b>to be</b>. <b>I am</b> é “eu sou” e também “eu estou”. <b>You are</b> é “você é” e “você está”. Na fala, use as formas curtas: <b>I'm</b>, <b>you're</b>.",
+err:["A frase em inglês precisa de sujeito. Em português dizemos “Sou brasileiro”; em inglês é <b>I'm Brazilian</b>, nunca “Am Brazilian”.","Idade usa to be, não “ter”: <b>I'm 40</b>, e não “I have 40 years”."],
+e:["I'm Brazilian.|Eu sou brasileiro.","I'm tired.|Eu estou cansado.","You're my friend.|Você é meu amigo.","You're right.|Você tem razão.","I'm at home.|Eu estou em casa.","I'm 40 years old.|Eu tenho 40 anos."],
+d:["Ben|Hi! You're Ana, right?|Oi! Você é a Ana, né?","Ana|Yes, I am. And you're Ben.|Sou, sim. E você é o Ben.","Ben|I'm your neighbor. And I'm late for work!|Sou seu vizinho. E estou atrasado para o trabalho!","Ana|You work from home, Ben.|Você trabalha de casa, Ben."],
+x:["g|I ___ Brazilian.|am|is,are|Eu sou brasileiro.|Com I, sempre am.",
+"g|You ___ my friend.|are|am,is|Você é meu amigo.|Com you, sempre are.",
+"b|Eu estou cansado.|I'm tired./I am tired.",
+"b|Você tem razão.|You're right./You are right.",
+"t|I am happy.|Passe para a forma curta.|I'm happy.|I am vira I'm na fala.",
+"x|Eu estou em casa.|I'm at home./I am at home./I'm home./I am home.|“Em casa” é at home.",
+"x|Eu tenho 40 anos.|I'm 40 years old./I am 40 years old./I'm 40./I am 40.|Idade usa to be: I'm 40, não “I have 40 years”.",
+"s|I'm Brazilian, and I'm at home.|Eu sou brasileiro e estou em casa."],
+p:["Diga quem você é.|I'm ___.","Diga a sua idade.|I'm ___ years old.","Diga como você está agora: tired, happy, hungry.|I'm ___."]},
+
+{id:"g1-2",t:"He is, she is, we are, they are",
+ex:"<b>He is</b> (ele), <b>she is</b> (ela), <b>it is</b> (coisa, animal, tempo). <b>We are</b> (nós), <b>they are</b> (eles ou elas). Formas curtas: <b>he's, she's, it's, we're, they're</b>. O <b>it</b> não tem tradução em frases como “Está frio”: <b>It's cold</b>.",
+err:["Não dá para pular o sujeito: “Está frio” é <b>It's cold</b>, nunca “Is cold”.","He é só para homem e she só para mulher. Trocar os dois confunde quem ouve."],
+e:["He's my brother.|Ele é meu irmão.","She's a nurse.|Ela é enfermeira.","It's cold today.|Está frio hoje.","We're from Brazil.|Nós somos do Brasil.","They're at work.|Eles estão no trabalho.","It's late.|Está tarde."],
+d:["Ana|Who is she?|Quem é ela?","Ben|She's Mrs. Parker. She's the owner.|É a Sra. Parker. Ela é a dona.","Ana|And the cat?|E o gato?","Ben|He's Biscuit. He's the real owner.|É o Biscuit. Ele é o verdadeiro dono."],
+x:["g|She ___ a nurse.|is|am,are|Ela é enfermeira.|Com he, she e it, sempre is.",
+"g|They ___ at work.|are|is,am|Eles estão no trabalho.|Com we, you e they, sempre are.",
+"g|___ cold today.|It's|Is,He's|Está frio hoje.|Para tempo e clima, o sujeito é it.",
+"b|Ele é meu irmão.|He's my brother./He is my brother.",
+"b|Nós somos do Brasil.|We're from Brazil./We are from Brazil.",
+"x|Está tarde.|It's late./It is late.|Sem o it a frase fica errada.",
+"x|Ela é minha amiga.|She's my friend./She is my friend.|Ela é she.",
+"s|She's a nurse, and he's a teacher.|Ela é enfermeira e ele é professor."],
+p:["Fale de uma pessoa da sua família.|He's ___. / She's ___.","Diga como está o tempo hoje: hot, cold, nice.|It's ___ today.","Diga de onde vocês são.|We're from ___."]},
+
+{id:"g1-3",t:"Não sou, não é: a negativa",
+ex:"Para negar, ponha <b>not</b> depois do verbo to be: <b>I'm not</b>, <b>you're not</b> ou <b>you aren't</b>, <b>he's not</b> ou <b>he isn't</b>. Em português o “não” vem antes do verbo; em inglês o not vem <b>depois</b>.",
+err:["Nunca “I no am” nem “I not am”. A ordem é <b>I am not</b>.","Não existe “amn't”. Com I, só <b>I'm not</b>."],
+e:["I'm not tired.|Eu não estou cansado.","She isn't here.|Ela não está aqui.","It isn't expensive.|Não é caro.","We aren't late.|Nós não estamos atrasados.","He's not my boss.|Ele não é meu chefe.","They aren't at home.|Eles não estão em casa."],
+d:["Ana|Is Biscuit your cat?|O Biscuit é seu gato?","Ben|No, he isn't. He's not my cat.|Não é. Ele não é meu gato.","Ana|But he's in your apartment.|Mas ele está no seu apartamento.","Ben|I know. I'm not happy about it.|Eu sei. Não estou feliz com isso."],
+x:["g|I'm ___ tired.|not|no,don't|Eu não estou cansado.|A negativa do to be usa not.",
+"g|She ___ here.|isn't|aren't,not|Ela não está aqui.|She pede is; a negativa é isn't.",
+"t|It is expensive.|Passe para a negativa.|It isn't expensive./It's not expensive./It is not expensive.|O not vem depois do is.",
+"t|We are late.|Passe para a negativa.|We aren't late./We're not late./We are not late.|O not vem depois do are.",
+"b|Ele não é meu chefe.|He's not my boss./He isn't my boss./He is not my boss.",
+"x|Eles não estão em casa.|They aren't at home./They're not at home./They are not at home./They aren't home./They're not home.|They pede are; a negativa é aren't.",
+"x|Eu não sou americano.|I'm not American./I am not American.|Com I, só I'm not.",
+"s|I'm not tired, and I'm not late.|Não estou cansado e não estou atrasado."],
+p:["Diga uma coisa que você não é.|I'm not ___.","Diga onde uma pessoa da família não está agora.|He isn't ___. / She isn't ___.","Diga como o tempo não está hoje.|It isn't ___ today."]},
+
+{id:"g1-4",t:"Perguntas com to be",
+ex:"Para perguntar, o verbo vai para a frente: <b>You are</b> tired vira <b>Are you</b> tired? Em português só muda a entonação; em inglês muda a <b>ordem</b>. A resposta curta repete o verbo: <b>Yes, I am.</b> <b>No, I'm not.</b>",
+err:["“You are tired?” com voz de pergunta soa estranho. Inverta: <b>Are you tired?</b>","Na resposta curta positiva não se usa a forma curta: <b>Yes, I am</b>, nunca “Yes, I'm”."],
+e:["Are you okay?|Você está bem?","Is she your sister?|Ela é sua irmã?","Is it far?|É longe?","Are they here?|Eles estão aqui?","Where are you from?|De onde você é?","How old is he?|Quantos anos ele tem?"],
+d:["Mrs. Parker|Are you hungry, dear?|Você está com fome, querida?","Ana|Yes, I am. Is that cake?|Estou, sim. Aquilo é bolo?","Mrs. Parker|It is. Is Ben at home?|É. O Ben está em casa?","Ana|No, he isn't. More cake for us.|Não está. Mais bolo para nós."],
+x:["t|You are okay.|Faça a pergunta.|Are you okay?|O are vai para a frente.",
+"t|She is your sister.|Faça a pergunta.|Is she your sister?|O is vai para a frente.",
+"g|___ they here?|Are|Is,Am|Eles estão aqui?|They pede are.",
+"g|Are you tired? Yes, I ___.|am|'m,are|Você está cansado? Estou.|Resposta curta positiva: Yes, I am.",
+"b|É longe?|Is it far?",
+"b|De onde você é?|Where are you from?",
+"x|Quantos anos ele tem?|How old is he?|Idade usa to be: How old is he?",
+"s|Are you okay? Is it far?|Você está bem? É longe?"],
+p:["Pergunte a alguém se está com fome.|Are you ___?","Pergunte de onde a pessoa é.|Where ___?","Responda: Are you Brazilian?|Yes, I am. / No, I'm not."]},
+
+{id:"g1-5",t:"A, an, this, that",
+ex:"<b>A</b> e <b>an</b> são “um, uma”. Use <b>an</b> antes de som de vogal: an apple, an hour. Profissão sempre leva a ou an: <b>I'm a teacher</b>. <b>This</b> é o que está perto (este, isto); <b>that</b> é o que está longe (aquele, aquilo).",
+err:["Em português dizemos “Sou professor”. Em inglês falta o artigo se você disser “I'm teacher”. O certo é <b>I'm a teacher</b>.","O que manda é o som, não a letra: <b>an hour</b> (o h é mudo), <b>a university</b> (começa com som de “iu”)."],
+e:["I'm a teacher.|Eu sou professor.","She's an engineer.|Ela é engenheira.","This is my phone.|Este é o meu celular.","That's my car.|Aquele é o meu carro.","What's this?|O que é isto?","It's an old house.|É uma casa velha."],
+d:["Ana|What's that?|O que é aquilo?","Ben|That's my dinner. It's an omelet.|É o meu jantar. É uma omelete.","Ana|Is this an egg or a rock?|Isto é um ovo ou uma pedra?","Ben|This is a work of art, Ana.|Isto é uma obra de arte, Ana."],
+x:["g|I'm ___ teacher.|a|an,the|Eu sou professor.|Profissão leva a ou an.",
+"g|She's ___ engineer.|an|a,the|Ela é engenheira.|Engineer começa com som de vogal: an.",
+"g|___ is my phone, here in my hand.|This|That,It|Este é o meu celular, aqui na minha mão.|Perto de você: this.",
+"b|Aquele é o meu carro.|That's my car./That is my car.",
+"b|O que é isto?|What's this?/What is this?",
+"x|Eu sou motorista.|I'm a driver./I am a driver.|Não esqueça o a.",
+"x|É uma casa velha.|It's an old house./It is an old house.|Old começa com vogal: an old house.",
+"s|This is my phone, and that's my car.|Este é o meu celular e aquele é o meu carro."],
+p:["Diga a sua profissão, ou a de alguém da família.|I'm a ___. / He's a ___.","Aponte para algo perto e diga o que é.|This is my ___.","Aponte para algo longe e diga o que é.|That's a ___."]}
+]);
+
+put(2,[
+{id:"g2-1",t:"Presente simples: I work, I live",
+ex:"Para falar de rotina e de fatos, use o verbo na forma básica: <b>I work</b>, <b>you live</b>, <b>we like</b>, <b>they have</b>. O verbo não muda com I, you, we e they. Em português cada pessoa tem uma terminação; aqui é uma forma só.",
+err:["Não use to be junto com outro verbo: “I am work” está errado. É <b>I work</b>.","O sujeito é obrigatório: “Moro em São Paulo” é <b>I live in São Paulo</b>."],
+e:["I work every day.|Eu trabalho todo dia.","I live in a small apartment.|Eu moro em um apartamento pequeno.","We have two kids.|Nós temos dois filhos.","They like coffee.|Eles gostam de café.","You speak very well.|Você fala muito bem.","I get up early.|Eu acordo cedo."],
+d:["Ben|I work from home, so I get up late.|Eu trabalho de casa, então acordo tarde.","Ana|I get up at five. We live in different worlds.|Eu acordo às cinco. A gente vive em mundos diferentes.","Ben|But we have the same cat problem.|Mas temos o mesmo problema com o gato.","Ana|True. They like my couch now.|Verdade. Agora eles gostam do meu sofá."],
+x:["g|I ___ in Brazil.|live|am live,lives|Eu moro no Brasil.|Com I, o verbo fica na forma básica.",
+"g|We ___ two kids.|have|has,are have|Nós temos dois filhos.|Com we, o verbo fica na forma básica.",
+"b|Eu trabalho todo dia.|I work every day.",
+"b|Eles gostam de café.|They like coffee.",
+"t|I am work at a bank.|Corrija a frase.|I work at a bank.|Não se junta am com outro verbo.",
+"x|Eu acordo cedo.|I get up early./I wake up early.|Acordar é get up ou wake up.",
+"x|Você fala muito bem.|You speak very well.|Very well vem no fim.",
+"s|I live in Brazil, and I work every day.|Eu moro no Brasil e trabalho todo dia."],
+p:["Diga onde você mora.|I live in ___.","Diga a que horas você acorda.|I get up at ___.","Diga uma coisa de que você e sua família gostam.|We like ___."]},
+
+{id:"g2-2",t:"He works, she lives: o -s",
+ex:"Com <b>he, she, it</b> o verbo ganha <b>-s</b>: he work<b>s</b>, she live<b>s</b>, it open<b>s</b>. Alguns mudam um pouco: have vira <b>has</b>, go vira <b>goes</b>, do vira <b>does</b>, watch vira <b>watches</b>, study vira <b>studies</b>.",
+err:["É o erro mais comum de brasileiros: “She work”. Com he, she e it, sempre <b>works</b>.","“He have” não existe. É <b>he has</b>."],
+e:["She works at a hospital.|Ela trabalha em um hospital.","He lives next door.|Ele mora ao lado.","My mother has a cat.|Minha mãe tem um gato.","He goes to work by bus.|Ele vai para o trabalho de ônibus.","The store opens at nine.|A loja abre às nove.","She watches TV at night.|Ela vê TV à noite."],
+d:["Ana|Does Mrs. Parker live alone?|A Sra. Parker mora sozinha?","Ben|Yes. Well, she has Biscuit.|Mora. Bom, ela tem o Biscuit.","Ana|He eats a lot.|Ele come muito.","Ben|He eats, he sleeps, and he watches us.|Ele come, dorme e fica olhando para a gente."],
+x:["g|She ___ at a hospital.|works|work,working|Ela trabalha em um hospital.|Com she, o verbo ganha -s.",
+"g|My mother ___ a cat.|has|have,haves|Minha mãe tem um gato.|Have vira has com he, she e it.",
+"g|He ___ to work by bus.|goes|go,gos|Ele vai para o trabalho de ônibus.|Go vira goes.",
+"t|I live next door.|Troque I por He.|He lives next door.|Com he, lives.",
+"t|They watch TV at night.|Troque They por She.|She watches TV at night.|Watch vira watches.",
+"b|A loja abre às nove.|The store opens at nine.",
+"x|Meu pai trabalha muito.|My father works a lot./My dad works a lot.|My father é he, então works.",
+"s|She works at a hospital, and he works from home.|Ela trabalha em um hospital e ele trabalha de casa."],
+p:["Diga onde alguém da sua família mora.|My ___ lives in ___.","Diga o que alguém da família faz.|He works at ___. / She works at ___.","Diga uma coisa que essa pessoa tem.|He has ___. / She has ___."]},
+
+{id:"g2-3",t:"Don't e doesn't: a negativa",
+ex:"Para negar no presente, use <b>don't</b> antes do verbo: I <b>don't</b> like fish. Com he, she e it, use <b>doesn't</b>, e o verbo volta para a forma básica, sem -s: she <b>doesn't like</b> fish. O -s já está no doesn't.",
+err:["“I no like” e “I not like” estão errados. É <b>I don't like</b>.","Depois de doesn't o verbo perde o -s: <b>She doesn't work</b>, nunca “She doesn't works”."],
+e:["I don't like fish.|Eu não gosto de peixe.","I don't understand.|Eu não entendo.","She doesn't work on Sundays.|Ela não trabalha aos domingos.","He doesn't have a car.|Ele não tem carro.","We don't live here.|Nós não moramos aqui.","It doesn't matter.|Não importa."],
+d:["Ben|I don't understand. The cake is gone.|Não entendo. O bolo sumiu.","Ana|Mrs. Parker doesn't eat cake at night.|A Sra. Parker não come bolo à noite.","Ben|And you don't have a key.|E você não tem a chave.","Ana|Biscuit doesn't need a key, Ben.|O Biscuit não precisa de chave, Ben."],
+x:["g|I ___ like fish.|don't|doesn't,not|Eu não gosto de peixe.|Com I, a negativa é don't.",
+"g|She ___ work on Sundays.|doesn't|don't,isn't|Ela não trabalha aos domingos.|Com she, a negativa é doesn't.",
+"g|He doesn't ___ a car.|have|has,haves|Ele não tem carro.|Depois de doesn't, forma básica.",
+"t|I understand.|Passe para a negativa.|I don't understand./I do not understand.|Don't vem antes do verbo.",
+"t|He lives here.|Passe para a negativa.|He doesn't live here./He does not live here.|Doesn't, e o verbo perde o -s.",
+"b|Não importa.|It doesn't matter./It does not matter.",
+"x|Nós não moramos aqui.|We don't live here./We do not live here.|Com we, don't.",
+"s|I don't like fish, and she doesn't like coffee.|Eu não gosto de peixe e ela não gosta de café."],
+p:["Diga uma coisa de que você não gosta.|I don't like ___.","Diga algo que você não tem.|I don't have ___.","Diga o que alguém da família não faz.|He doesn't ___. / She doesn't ___."]},
+
+{id:"g2-4",t:"Perguntas com do e does",
+ex:"Para perguntar no presente, comece com <b>Do</b>: <b>Do you</b> like coffee? Com he, she e it, comece com <b>Does</b> e deixe o verbo na forma básica: <b>Does she</b> work here? O português não tem nada parecido: do e does só avisam que vem uma pergunta. Respostas curtas: <b>Yes, I do.</b> <b>No, she doesn't.</b>",
+err:["“You like coffee?” funciona entre amigos, mas o padrão é <b>Do you like coffee?</b>","Não misture com to be: “Are you work here?” está errado. É <b>Do you work here?</b>"],
+e:["Do you like coffee?|Você gosta de café?","Do you work here?|Você trabalha aqui?","Does she live near here?|Ela mora perto daqui?","Does he speak English?|Ele fala inglês?","Do they have kids?|Eles têm filhos?","Do you need help?|Você precisa de ajuda?"],
+d:["Mrs. Parker|Do you like tea, dear?|Você gosta de chá, querida?","Ana|Yes, I do. Thank you.|Gosto, sim. Obrigada.","Mrs. Parker|Does Ben know about the cake?|O Ben sabe do bolo?","Ana|No, he doesn't. Let's keep it that way.|Não sabe. Vamos deixar assim."],
+x:["g|___ you like coffee?|Do|Does,Are|Você gosta de café?|Com you, a pergunta começa com Do.",
+"g|___ she live near here?|Does|Do,Is|Ela mora perto daqui?|Com she, a pergunta começa com Does.",
+"g|Does he ___ English?|speak|speaks,speaking|Ele fala inglês?|Depois de does, forma básica.",
+"t|You work here.|Faça a pergunta.|Do you work here?|Do vem antes do sujeito.",
+"t|She has a car.|Faça a pergunta.|Does she have a car?|Does, e has volta para have.",
+"b|Eles têm filhos?|Do they have kids?/Do they have children?",
+"x|Você precisa de ajuda?|Do you need help?|Need não pede “de” depois.",
+"s|Do you like coffee? Does she like tea?|Você gosta de café? Ela gosta de chá?"],
+p:["Pergunte a alguém se gosta de música.|Do you ___?","Pergunte se a mãe de alguém mora perto.|Does your mother ___?","Responda: Do you speak English?|Yes, I do. A little."]},
+
+{id:"g2-5",t:"What, where, when, how",
+ex:"A palavra de pergunta vem primeiro; depois a ordem é a mesma: <b>Where do you</b> live? <b>What does she</b> do? <b>When do they</b> open? Com to be não há do: <b>Where is</b> the bank? As principais: what (o quê), where (onde), when (quando), who (quem), why (por quê), how (como).",
+err:["Não esqueça o do: “Where you live?” está errado. É <b>Where do you live?</b>","“What do you do?” pergunta a profissão. O segundo do é o verbo “fazer”."],
+e:["Where do you live?|Onde você mora?","What do you do?|O que você faz?","What time do you get up?|A que horas você acorda?","Where does he work?|Onde ele trabalha?","When does the store open?|Quando a loja abre?","Why do you ask?|Por que você pergunta?"],
+d:["Ben|Where do you go every Sunday?|Aonde você vai todo domingo?","Ana|Why do you ask?|Por que você pergunta?","Ben|Mrs. Parker wants to know.|A Sra. Parker quer saber.","Ana|What does she do all day? Watch me?|O que ela faz o dia todo? Fica me vigiando?"],
+x:["g|Where ___ you live?|do|does,are|Onde você mora?|Com you, do.",
+"g|Where ___ he work?|does|do,is|Onde ele trabalha?|Com he, does.",
+"b|O que você faz?|What do you do?",
+"b|A que horas você acorda?|What time do you get up?/What time do you wake up?",
+"t|The store opens at nine.|Pergunte quando.|When does the store open?|Does, e opens volta para open.",
+"t|You live in Chicago.|Pergunte onde.|Where do you live?|Where vem primeiro, depois do you.",
+"x|Por que você pergunta?|Why do you ask?|Why vem primeiro, depois do you.",
+"s|Where do you live, and what do you do?|Onde você mora e o que você faz?"],
+p:["Pergunte onde a pessoa trabalha.|Where ___?","Pergunte a que horas a pessoa acorda.|What time ___?","Responda: What do you do?|I'm a ___. / I work at ___."]}
+]);
+
+put(3,[
+{id:"g3-1",t:"There is e there are",
+ex:"Para dizer que algo existe, o inglês usa <b>there is</b> (uma coisa) e <b>there are</b> (várias). É o nosso “tem” ou “há”: <b>There's a bank</b> near here. <b>There are two parks</b>. Pergunta: <b>Is there…?</b> <b>Are there…?</b> Negativa: <b>There isn't</b>, <b>there aren't</b>.",
+err:["O erro mais típico: “Have a bank near here”. Para “tem” no sentido de existir, é <b>There's a bank near here</b>.","Plural pede are: <b>There are two cars</b>, não “There is two cars”."],
+e:["There's a bank near here.|Tem um banco aqui perto.","There are two parks.|Tem dois parques.","Is there a pharmacy near here?|Tem uma farmácia aqui perto?","There isn't any milk.|Não tem leite.","Are there any eggs?|Tem ovos?","There's a problem.|Tem um problema."],
+d:["Ana|Is there any coffee?|Tem café?","Ben|Yes, there's a little. But there isn't any milk.|Tem um pouco. Mas não tem leite.","Ana|Are there any clean cups?|Tem xícara limpa?","Ben|There's one. Well, there was. Biscuit!|Tem uma. Bom, tinha. Biscuit!"],
+x:["g|___ a bank near here.|There's|Have,It has|Tem um banco aqui perto.|“Tem” de existir é there is.",
+"g|There ___ two parks.|are|is,have|Tem dois parques.|Plural pede there are.",
+"g|___ there a pharmacy near here?|Is|Has,Are|Tem uma farmácia aqui perto?|Na pergunta, o is vai para a frente.",
+"t|There is a problem.|Passe para a negativa.|There isn't a problem./There is not a problem./There's no problem.|Not depois do is.",
+"b|Tem ovos?|Are there any eggs?",
+"x|Tem um problema.|There's a problem./There is a problem.|Não use have aqui.",
+"x|Não tem leite.|There isn't any milk./There is no milk./There's no milk.|Na negativa, any antes da coisa.",
+"s|There's a bank and there are two parks near here.|Tem um banco e dois parques aqui perto."],
+p:["Diga o que tem perto da sua casa.|There's a ___ near my home.","Diga o que tem na sua geladeira.|There's ___. / There are ___.","Diga o que não tem no seu bairro.|There isn't a ___."]},
+
+{id:"g3-2",t:"Have e has: ter, de posse",
+ex:"<b>Have</b> é “ter” quando alguém possui algo: <b>I have</b> a car. Com he, she e it é <b>has</b>. Negativa e pergunta usam do e does: I <b>don't have</b>, <b>Do you have…?</b> Compare: <b>I have</b> a bank account (posse) e <b>there's</b> a bank near here (existência).",
+err:["“I haven't a car” soa antigo. No inglês americano é <b>I don't have a car</b>.","Fome, sede, sono, frio e medo usam to be, não have: <b>I'm hungry, I'm thirsty, I'm sleepy, I'm cold, I'm afraid</b>."],
+e:["I have a question.|Eu tenho uma pergunta.","She has two jobs.|Ela tem dois empregos.","I don't have time.|Eu não tenho tempo.","Do you have a minute?|Você tem um minuto?","He doesn't have a phone.|Ele não tem celular.","I'm hungry.|Estou com fome."],
+d:["Ben|Do you have a minute?|Você tem um minuto?","Ana|I have five. I'm hungry and I have a sandwich.|Tenho cinco. Estou com fome e tenho um sanduíche.","Ben|I have a small problem. I don't have my keys.|Tenho um probleminha. Não estou com as minhas chaves.","Ana|Biscuit has them, right?|Estão com o Biscuit, né?"],
+x:["g|She ___ two jobs.|has|have,is|Ela tem dois empregos.|Com she, has.",
+"g|I ___ have time.|don't|haven't,am not|Eu não tenho tempo.|A negativa de have usa don't.",
+"g|I ___ hungry.|am|have,has|Estou com fome.|Fome usa to be: I'm hungry.",
+"t|You have a minute.|Faça a pergunta.|Do you have a minute?|Pergunta com Do.",
+"t|He has a phone.|Passe para a negativa.|He doesn't have a phone./He does not have a phone.|Doesn't, e has volta para have.",
+"b|Eu tenho uma pergunta.|I have a question.",
+"x|Estou com sede.|I'm thirsty./I am thirsty.|Sede usa to be.",
+"s|I have a question. Do you have a minute?|Tenho uma pergunta. Você tem um minuto?"],
+p:["Diga uma coisa que você tem.|I have ___.","Diga uma coisa que você não tem.|I don't have ___.","Diga como você está: hungry, thirsty, sleepy, cold.|I'm ___."]},
+
+{id:"g3-3",t:"My, your, his, her e o 's",
+ex:"<b>My</b> (meu), <b>your</b> (seu), <b>his</b> (dele), <b>her</b> (dela), <b>our</b> (nosso), <b>their</b> (deles). Não mudam com plural nem com gênero: my friend, my friends. Para dizer de quem é, use <b>'s</b>: <b>Ana's phone</b> é “o celular da Ana”. A ordem é o contrário do português.",
+err:["“The phone of Ana” não se diz. É <b>Ana's phone</b>.","His e her dependem do dono, não da coisa: “a mãe dele” é <b>his mother</b>; “o pai dela” é <b>her father</b>."],
+e:["This is my sister.|Esta é a minha irmã.","What's your name?|Qual é o seu nome?","His mother is a teacher.|A mãe dele é professora.","Her father lives in Brazil.|O pai dela mora no Brasil.","That's Ben's car.|Aquele é o carro do Ben.","Our house is small.|Nossa casa é pequena."],
+d:["Ana|Is this your jacket?|Esta jaqueta é sua?","Ben|No, that's my brother's jacket.|Não, é a jaqueta do meu irmão.","Ana|And his name is…?|E o nome dele é…?","Ben|Bill. Our mother isn't very creative.|Bill. Nossa mãe não é muito criativa."],
+x:["g|___ mother is a teacher. (dele)|His|Her,He|A mãe dele é professora.|O dono é homem: his.",
+"g|___ father lives in Brazil. (dela)|Her|His,She|O pai dela mora no Brasil.|A dona é mulher: her.",
+"g|That's ___ car.|Ben's|Ben,of Ben|Aquele é o carro do Ben.|O dono vem antes, com 's.",
+"b|Esta é a minha irmã.|This is my sister.",
+"b|Nossa casa é pequena.|Our house is small.",
+"x|O celular da Ana é novo.|Ana's phone is new.|O dono vem antes, com 's.",
+"x|Qual é o nome dela?|What's her name?/What is her name?|Dela é her.",
+"s|His mother is a teacher, and her father is a driver.|A mãe dele é professora e o pai dela é motorista."],
+p:["Diga o nome da sua mãe ou do seu pai.|My mother's name is ___.","Fale de um amigo e do trabalho dele ou dela.|His job is ___. / Her job is ___.","Diga como é a casa de vocês.|Our house is ___."]},
+
+{id:"g3-4",t:"Can e can't",
+ex:"<b>Can</b> é “poder”, “conseguir” e “saber fazer”: <b>I can swim</b>. Não muda nunca, nem com he e she, e o verbo depois vem na forma básica, sem to: <b>She can drive</b>. Negativa: <b>can't</b>. Pergunta: <b>Can you…?</b> Também serve para pedir: <b>Can I have…?</b>",
+err:["Sem to depois de can: “I can to swim” está errado. É <b>I can swim</b>.","Sem -s: <b>She can drive</b>, nunca “She cans drive”."],
+e:["I can swim.|Eu sei nadar.","She can drive.|Ela sabe dirigir.","I can't hear you.|Não consigo te ouvir.","Can you help me?|Você pode me ajudar?","Can I sit here?|Posso sentar aqui?","We can't come tomorrow.|Não podemos vir amanhã."],
+d:["Ben|I can cook, you know.|Eu sei cozinhar, sabia?","Ana|Ben, you can't boil water.|Ben, você não consegue ferver água.","Ben|I can learn. Can you teach me?|Eu posso aprender. Você pode me ensinar?","Ana|I can try. But I can't promise anything.|Posso tentar. Mas não posso prometer nada."],
+x:["g|She can ___.|drive|drives,to drive|Ela sabe dirigir.|Depois de can, forma básica.",
+"g|I ___ hear you.|can't|don't can,no can|Não consigo te ouvir.|A negativa de can é can't.",
+"t|You can help me.|Faça a pergunta.|Can you help me?|Can vai para a frente.",
+"t|I can to swim.|Corrija a frase.|I can swim.|Depois de can não vem to.",
+"b|Posso sentar aqui?|Can I sit here?",
+"b|Não podemos vir amanhã.|We can't come tomorrow./We cannot come tomorrow.",
+"x|Ele sabe cozinhar.|He can cook.|Saber fazer algo é can.",
+"s|I can swim, but I can't drive.|Eu sei nadar, mas não sei dirigir."],
+p:["Diga uma coisa que você sabe fazer.|I can ___.","Diga uma coisa que você não sabe fazer.|I can't ___.","Peça um favor a alguém.|Can you ___, please?"]},
+
+{id:"g3-5",t:"A qualidade vem antes",
+ex:"Em inglês o adjetivo vem <b>antes</b> do nome: a <b>red car</b>, a <b>big house</b>. E não tem plural nem gênero: <b>new</b> shoes, nunca “news shoes”. Para reforçar, <b>very</b> antes: a <b>very good</b> idea.",
+err:["“A car red” é a ordem do português. Em inglês é <b>a red car</b>.","O adjetivo nunca leva -s: <b>two big houses</b>, não “two bigs houses”."],
+e:["I have a red car.|Eu tenho um carro vermelho.","It's a big house.|É uma casa grande.","She has long hair.|Ela tem cabelo comprido.","That's a very good idea.|É uma ideia muito boa.","I need new shoes.|Preciso de sapatos novos.","He's a nice guy.|Ele é um cara legal."],
+d:["Mrs. Parker|Ben has a new girlfriend.|O Ben tem uma namorada nova.","Ana|Really? Is she nice?|Sério? Ela é legal?","Mrs. Parker|She has long hair and a very small dog.|Ela tem cabelo comprido e um cachorro bem pequeno.","Ana|A small dog? Poor Biscuit.|Um cachorro pequeno? Coitado do Biscuit."],
+x:["b|Eu tenho um carro vermelho.|I have a red car.",
+"b|É uma casa grande.|It's a big house./It is a big house.",
+"g|I need ___ shoes.|new|news,a new|Preciso de sapatos novos.|O adjetivo não vai para o plural.",
+"t|She has hair long.|Corrija a ordem.|She has long hair.|O adjetivo vem antes do nome.",
+"t|It's a idea very good.|Corrija a frase.|It's a very good idea./It is a very good idea.|Very good vem antes de idea.",
+"x|Ele é um cara legal.|He's a nice guy./He is a nice guy.|Nice antes de guy.",
+"x|Eu tenho dois irmãos mais novos.|I have two younger brothers./I have two little brothers.|O adjetivo vem antes: younger brothers.",
+"s|I have a small house and a very old car.|Eu tenho uma casa pequena e um carro bem velho."],
+p:["Descreva a sua casa.|I have a ___ house.","Descreva uma pessoa da família.|She has ___ hair. / He's a ___ guy.","Diga uma coisa nova de que você precisa.|I need a new ___."]}
+]);
+
+put(4,[
+{id:"g4-1",t:"Agora: I'm working",
+ex:"Para o que está acontecendo <b>neste momento</b>, use to be + verbo com <b>-ing</b>: <b>I'm working</b> (estou trabalhando). É igual ao nosso “estar + -ndo”. Negativa: <b>I'm not working</b>. Pergunta: <b>Are you working?</b>",
+err:["Não esqueça o to be: “I working” está errado. É <b>I'm working</b>.","E não esqueça o -ing: “I'm work now” está errado."],
+e:["I'm working now.|Estou trabalhando agora.","She's sleeping.|Ela está dormindo.","What are you doing?|O que você está fazendo?","It's raining.|Está chovendo.","We're waiting for the bus.|Estamos esperando o ônibus.","I'm not watching TV.|Não estou vendo TV."],
+d:["Ana|Hi, Ben. What are you doing?|Oi, Ben. O que você está fazendo?","Ben|I'm cooking. Don't laugh.|Estou cozinhando. Não ri.","Ana|I'm not laughing. Is something burning?|Não estou rindo. Tem alguma coisa queimando?","Ben|No. Well, yes. I'm calling the pizza place.|Não. Bom, sim. Estou ligando para a pizzaria."],
+x:["g|I'm ___ now.|working|work,works|Estou trabalhando agora.|Para agora: to be + verbo com -ing.",
+"g|She ___ sleeping.|is|does,are|Ela está dormindo.|Falta o to be: she is sleeping.",
+"g|What ___ you doing?|are|do,is|O que você está fazendo?|Pergunta com are antes do sujeito.",
+"t|It is raining.|Passe para a negativa.|It isn't raining./It's not raining./It is not raining.|Not depois do is.",
+"t|You are working.|Faça a pergunta.|Are you working?|Are vai para a frente.",
+"b|Estamos esperando o ônibus.|We're waiting for the bus./We are waiting for the bus.",
+"x|Não estou vendo TV.|I'm not watching TV./I am not watching TV.|I'm not + verbo com -ing.",
+"s|I'm working now, and it's raining.|Estou trabalhando agora, e está chovendo."],
+p:["Diga o que você está fazendo agora.|I'm ___ing.","Diga o que alguém da família está fazendo agora.|He's ___ing. / She's ___ing.","Diga como está o tempo agora.|It's raining. / It isn't raining."]},
+
+{id:"g4-2",t:"Todo dia ou agora?",
+ex:"<b>I work</b> é rotina, o que acontece sempre. <b>I'm working</b> é agora, neste momento. Pistas de rotina: every day, always, usually, on Mondays. Pistas de agora: now, right now, today, at the moment. Alguns verbos quase nunca vão para o -ing: <b>like, want, need, know, understand, have</b> (de posse).",
+err:["Brasileiros dizem “I'm liking” e “I'm wanting” por causa de “estou gostando”. Em inglês é <b>I like it</b>, <b>I want it</b>.","“I'm go to work every day” mistura as duas formas. Rotina é <b>I go to work every day</b>."],
+e:["I work every day.|Eu trabalho todo dia.","I'm working right now.|Estou trabalhando agora mesmo.","She usually takes the bus.|Ela geralmente pega o ônibus.","Today she's driving.|Hoje ela está indo de carro.","I like this song.|Estou gostando desta música.","I don't understand.|Não estou entendendo."],
+d:["Mrs. Parker|Ben usually gets up at nine.|O Ben geralmente acorda às nove.","Ana|But it's six, and he's running in the park.|Mas são seis horas, e ele está correndo no parque.","Mrs. Parker|He wants to impress his new girlfriend.|Ele quer impressionar a namorada nova.","Ana|I understand. Poor Ben.|Entendo. Coitado do Ben."],
+x:["g|I ___ every day.|work|am working,working|Eu trabalho todo dia.|Every day indica rotina.",
+"g|I ___ right now.|am working|work,works|Estou trabalhando agora mesmo.|Right now indica este momento.",
+"g|I ___ this song.|like|am liking,liking|Estou gostando desta música.|Like não vai para o -ing.",
+"g|She usually ___ the bus.|takes|is taking,take|Ela geralmente pega o ônibus.|Usually indica rotina, e she pede -s.",
+"b|Hoje ela está indo de carro.|Today she's driving./Today she is driving.",
+"t|I'm not understanding.|Corrija a frase.|I don't understand./I do not understand.|Understand não vai para o -ing.",
+"x|Eu quero um café agora.|I want a coffee now./I want a coffee right now./I want coffee now.|Want não vai para o -ing.",
+"s|I usually take the bus, but today I'm driving.|Geralmente eu pego o ônibus, mas hoje estou indo de carro."],
+p:["Diga uma coisa que você faz todo dia.|I ___ every day.","Diga o que você está fazendo agora.|Right now I'm ___ing.","Diga de que música ou comida você está gostando ultimamente.|I like ___."]},
+
+{id:"g4-3",t:"In, on, at",
+ex:"Para <b>tempo</b>: <b>at</b> com hora (at seven), <b>on</b> com dia (on Monday, on May 5th), <b>in</b> com mês, ano e parte do dia (in May, in 2020, in the morning). Para <b>lugar</b>: <b>at</b> para um ponto (at home, at work, at the bank), <b>in</b> para dentro (in the kitchen, in Brazil), <b>on</b> para em cima (on the table) e para rua (on Lake Street).",
+err:["O nosso “em” vira três palavras. “In Monday” e “in seven o'clock” estão errados: <b>on Monday</b>, <b>at seven</b>.","À noite é exceção: <b>at night</b>, não “in the night”."],
+e:["I get up at seven.|Eu acordo às sete.","See you on Monday.|Te vejo na segunda.","My birthday is in May.|Meu aniversário é em maio.","I work in the morning.|Eu trabalho de manhã.","She's at work.|Ela está no trabalho.","The keys are on the table.|As chaves estão em cima da mesa."],
+d:["Ben|The movie is on Saturday at seven thirty.|O filme é no sábado às sete e meia.","Ana|Good. I work in the morning, so I'm free at night.|Bom. Eu trabalho de manhã, então estou livre à noite.","Ben|Where are my keys? They were on the table.|Cadê minhas chaves? Estavam em cima da mesa.","Ana|They're in Biscuit's bed. Again.|Estão na cama do Biscuit. De novo."],
+x:["g|I get up ___ seven.|at|in,on|Eu acordo às sete.|Hora usa at.",
+"g|See you ___ Monday.|on|in,at|Te vejo na segunda.|Dia usa on.",
+"g|My birthday is ___ May.|in|on,at|Meu aniversário é em maio.|Mês usa in.",
+"g|The keys are ___ the table.|on|in,at|As chaves estão em cima da mesa.|Em cima de uma superfície: on.",
+"g|She's ___ work.|at|in,on|Ela está no trabalho.|At work e at home são blocos fixos.",
+"b|Eu trabalho de manhã.|I work in the morning.",
+"x|Eu estudo à noite.|I study at night.|À noite é at night.",
+"s|I work in the morning, and I study at night.|Eu trabalho de manhã e estudo à noite."],
+p:["Diga a que horas você acorda.|I get up at ___.","Diga em que mês é o seu aniversário.|My birthday is in ___.","Diga onde você está agora.|I'm at ___. / I'm in ___."]},
+
+{id:"g4-4",t:"Want to, need to, would like to",
+ex:"Depois de <b>want</b>, <b>need</b> e <b>would like</b>, o próximo verbo vem com <b>to</b>: I want <b>to go</b>, I need <b>to work</b>, I'd like <b>to pay</b>. Em português não há nada no lugar desse to (“quero ir”). <b>I'd like</b> é a forma educada de I want.",
+err:["“I want go” é o erro clássico. Sempre <b>I want to go</b>.","Com can é o contrário, sem to: <b>I can go</b>. Não misture os dois."],
+e:["I want to go home.|Eu quero ir para casa.","I need to work tomorrow.|Preciso trabalhar amanhã.","I'd like to pay by card.|Eu gostaria de pagar com cartão.","Do you want to eat?|Você quer comer?","She wants to learn English.|Ela quer aprender inglês.","I don't want to be late.|Não quero me atrasar."],
+d:["Ben|I want to learn Portuguese.|Eu quero aprender português.","Ana|Really? Why do you want to learn it?|Sério? Por que você quer aprender?","Ben|I'd like to visit Brazil. And I need to understand your mom.|Eu gostaria de visitar o Brasil. E preciso entender a sua mãe.","Ana|She says you need to eat more.|Ela diz que você precisa comer mais."],
+x:["g|I want ___ home.|to go|go,going|Eu quero ir para casa.|Depois de want, to + verbo.",
+"g|I need ___ tomorrow.|to work|work,working|Preciso trabalhar amanhã.|Depois de need, to + verbo.",
+"g|I can ___ tomorrow.|work|to work,working|Posso trabalhar amanhã.|Depois de can, sem to.",
+"t|I want eat.|Corrija a frase.|I want to eat.|Falta o to.",
+"t|She wants to learn English.|Faça a pergunta.|Does she want to learn English?|Does, e wants volta para want.",
+"b|Eu gostaria de pagar com cartão.|I'd like to pay by card./I would like to pay by card.",
+"x|Não quero me atrasar.|I don't want to be late./I do not want to be late.|Atrasar-se é be late.",
+"s|I want to go home, but I need to work.|Eu quero ir para casa, mas preciso trabalhar."],
+p:["Diga o que você quer fazer no fim de semana.|I want to ___.","Diga o que você precisa fazer amanhã.|I need to ___.","Diga um lugar que você gostaria de visitar.|I'd like to visit ___."]},
+
+{id:"g4-5",t:"Ordens, pedidos e let's",
+ex:"Para dar instrução, use o verbo direto, sem sujeito: <b>Turn left.</b> <b>Wait here.</b> Com please fica educado: <b>Please sit down.</b> Negativa: <b>Don't</b> + verbo: <b>Don't worry.</b> Para convidar alguém a fazer junto, <b>Let's</b> + verbo: <b>Let's go.</b>",
+err:["Na instrução não se põe you: “You turn left” soa como descrição. Diga <b>Turn left</b>.","Depois de let's não vem to: <b>Let's go</b>, nunca “Let's to go”."],
+e:["Turn left at the bank.|Vire à esquerda no banco.","Wait here, please.|Espere aqui, por favor.","Don't worry.|Não se preocupe.","Don't be late.|Não se atrase.","Let's go.|Vamos.","Let's take a taxi.|Vamos pegar um táxi."],
+d:["Ana|Ben, wait! Don't open that door.|Ben, espera! Não abre essa porta.","Ben|Why? Oh. Biscuit and the small dog.|Por quê? Ah. O Biscuit e o cachorro pequeno.","Ana|Don't worry. Close the door slowly.|Não se preocupe. Fecha a porta devagar.","Ben|Let's go to Rosie's. They need a moment.|Vamos para o Rosie's. Eles precisam de um tempo."],
+x:["g|___ left at the bank.|Turn|You turn,To turn|Vire à esquerda no banco.|Instrução: verbo direto, sem you.",
+"g|___ worry.|Don't|No,Not|Não se preocupe.|A negativa da instrução é Don't + verbo.",
+"g|Let's ___ a taxi.|take|to take,taking|Vamos pegar um táxi.|Depois de let's, sem to.",
+"t|Be late.|Passe para a negativa.|Don't be late./Do not be late.|Don't antes do verbo.",
+"b|Espere aqui, por favor.|Wait here, please./Please wait here.",
+"b|Vamos.|Let's go.",
+"x|Não abra a porta.|Don't open the door./Do not open the door.|Don't + verbo.",
+"s|Turn left at the bank and wait here.|Vire à esquerda no banco e espere aqui."],
+p:["Explique como chegar da sua casa a um lugar perto.|Go straight and turn ___.","Dê um conselho a um amigo.|Don't ___.","Convide alguém para fazer algo hoje.|Let's ___."]}
+]);
+})();
+
+</script>
+<script>
+/* ============================================================
+   MOTOR DO SITE. Não contém conteúdo de ensino: lê tudo de window.COURSE.
+   ============================================================ */
+(function(){
+'use strict';
+var C=window.COURSE;
+
+/* ---------- utilidades ---------- */
+function h(tag,attrs){
+  var e=document.createElement(tag),k;
+  if(attrs)for(k in attrs){var v=attrs[k];if(v==null||v===false)continue;
+    if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;
+    else if(k.slice(0,2)==='on')e.addEventListener(k.slice(2),v);
+    else e.setAttribute(k,v===true?'':v);}
+  add(e,[].slice.call(arguments,2));return e;
+}
+function add(e,kids){kids.forEach(function(k){if(Array.isArray(k))return add(e,k);if(k==null||k===false)return;e.appendChild(k.nodeType?k:document.createTextNode(String(k)));});return e;}
+function rnd(n){return Math.floor(Math.random()*n);}
+function pick(a){return a[rnd(a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function sp(s){return s.split('|');}
+function today(){return Math.floor((Date.now()-new Date().getTimezoneOffset()*6e4)/864e5);}
+function btn(label,fn,cls){return h('button',{class:'btn'+(cls?' '+cls:''),type:'button',onclick:fn},label);}
+function link(label,fn){return h('button',{class:'linkbtn',type:'button',onclick:fn},label);}
+var NUM=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
+function norm(s){
+  s=String(s).toLowerCase().replace(/[’‘`´]/g,"'");
+  s=s.replace(/\bcan't\b/g,'can not').replace(/\bcannot\b/g,'can not').replace(/\bwon't\b/g,'will not').replace(/n't\b/g,' not')
+   .replace(/'m\b/g,' am').replace(/'re\b/g,' are').replace(/'ll\b/g,' will').replace(/'ve\b/g,' have').replace(/'d\b/g,' would').replace(/'s\b/g,' is')
+   .replace(/\bgonna\b/g,'going to').replace(/\bwanna\b/g,'want to').replace(/\bok\b/g,'okay');
+  s=s.replace(/[^a-z0-9à-ú ]/g,' ').replace(/\b(\d|1[0-2])\b/g,function(m){return NUM[+m];});
+  return s.replace(/\s+/g,' ').trim();
+}
+function words(s){var n=norm(s);return n?n.split(' '):[];}
+function clean(w){return w.replace(/[.,!?;:"“”…()]/g,'');}
+function lev(a,b){var m=[],i,j;for(i=0;i<=a.length;i++)m[i]=[i];for(j=0;j<=b.length;j++)m[0][j]=j;
+  for(i=1;i<=a.length;i++)for(j=1;j<=b.length;j++)m[i][j]=Math.min(m[i-1][j]+1,m[i][j-1]+1,m[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return m[a.length][b.length];}
+function checkTyped(val,alts){var v=norm(val),best=99;if(!v)return 0;
+  for(var i=0;i<alts.length;i++){var a=norm(alts[i]);if(a===v)return 1;best=Math.min(best,lev(a,v));}
+  return best<=Math.max(1,Math.floor(v.length/10))?0.5:0;}
+function matchWords(target,heard){
+  var hw=words(heard),marks=[],ok=0,tot=0;
+  target.split(/\s+/).forEach(function(dw){var nw=words(dw);if(!nw.length){marks.push({w:dw,ok:true});return;}
+    var all=true,idx=[];nw.forEach(function(w){var i=hw.indexOf(w);if(i<0)all=false;else idx.push(i);});
+    tot+=nw.length;if(all){ok+=nw.length;idx.forEach(function(i){hw[i]=null;});}
+    marks.push({w:dw,ok:all});});
+  return {score:tot?ok/tot:0,marks:marks};
+}
+
+/* ---------- preparar o conteúdo ---------- */
+var LESS={natural:{},grammar:{}},CARDS={},BYID={},WEEKS=[];
+function parseX(s){var a=sp(s),k=a[0],al;
+  if(k==='g')return{type:'gap',tpl:a[1],ans:a[2],ds:a[3].split(','),pt:a[4],why:a[5],en:a[1].replace('___',a[2]).replace(/\s*\([^)]*\)/,'')};
+  if(k==='b'){al=a[2].split('/');return{type:'build',pt:a[1],en:al[0],alts:al};}
+  if(k==='t'){al=a[3].split('/');return{type:'build',src:a[1],ins:a[2],en:al[0],alts:al,why:a[4],pt:''};}
+  if(k==='x'){al=a[2].split('/');return{type:'type',pt:a[1],en:al[0],alts:al,why:a[3]};}
+  return{type:'speak',en:a[1],pt:a[2]};}
+(function prep(){
+  Object.keys(C.weeks).map(Number).sort(function(a,b){return a-b;}).forEach(function(w){
+    WEEKS.push(w);
+    ['natural','grammar'].forEach(function(tr){
+      LESS[tr][w]=(C.weeks[w][tr]||[]).map(function(r,i){
+        var L={id:r.id,track:tr,week:w,idx:i,title:r.t,sit:r.sit||'',can:r.can||'',why:r.w||'',explain:r.ex||'',err:r.err||[]};
+        var spk=[];
+        L.dialog=(r.d||[]).map(function(s){var a=sp(s);if(spk.indexOf(a[0])<0)spk.push(a[0]);return{s:a[0],en:a[1],pt:a[2],v:spk.indexOf(a[0])};});
+        L.cards=(r.c||r.e||[]).map(function(s,j){var a=sp(s),c={id:r.id+'.'+j,en:a[0],pt:a[1],week:w};CARDS[c.id]=c;return c;});
+        L.subs=(r.s||[]).map(function(f){var fr=sp(f[0]);return{en:fr[0],pt:fr[1],opts:f.slice(1).map(function(o){var a=sp(o);return{en:a[0],pt:a[1]};})};});
+        L.q=(r.q||[]).map(function(s){var a=sp(s);return{ask:a[0],pt:a[1],starter:a[2]};}).concat((r.p||[]).map(function(s){var a=sp(s);return{pt:a[0],starter:a[1]};}));
+        L.k=(r.k||[]).map(function(a){return{q:a[0],opts:a.slice(1)};});
+        L.x=(r.x||[]).map(parseX);
+        BYID[L.id]=L;return L;});
+    });
+  });
+  C.survival.forEach(function(s,i){var a=sp(s);CARDS['sv.'+i]={id:'sv.'+i,en:a[0],pt:a[1],week:0};});
+})();
+var MAXW=WEEKS[WEEKS.length-1]||0;
+var ALLCARDS=Object.keys(CARDS).map(function(k){return CARDS[k];});
+
+/* ---------- armazenamento e perfis ---------- */
+var KEY='ingles-da-familia-v1',storageOK=true,DB=null;
+try{DB=JSON.parse(localStorage.getItem(KEY));}catch(e){storageOK=false;}
+if(!DB||!DB.profiles)DB={v:1,cur:null,theme:'auto',profiles:{}};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(DB));storageOK=true;}catch(e){storageOK=false;}}
+function P(){return (DB.cur&&DB.profiles[DB.cur])||null;}
+function newProfile(name){return{id:'p'+Date.now().toString(36)+rnd(99),name:name,track:null,placed:false,level:1,
+  pos:{natural:{w:1,d:0},grammar:{w:1,d:0}},done:{},cards:{},bt:[],days:{},hist:[],pron:{},conv:{},rhy:{},slow:false,hide:false,best:0,last:0};}
+function dayRec(){var p=P(),t=today();if(!p.days[t])p.days[t]=[0,0,0,0];return p.days[t];}
+function addSpeak(sec){if(P()){dayRec()[1]+=Math.min(30,Math.max(1,Math.round(sec)));save();}}
+function record(ok){var p=P();if(!p)return;p.hist.push(ok===1?1:0);if(p.hist.length>20)p.hist.shift();dayRec()[2]++;save();}
+function adj(){var hh=P().hist;if(hh.length<8)return 0;var a=hh.reduce(function(x,y){return x+y;},0)/hh.length;return a>0.9?1:a<0.65?-1:0;}
+var lastAct=Date.now();
+['pointerdown','keydown'].forEach(function(ev){document.addEventListener(ev,function(){lastAct=Date.now();},true);});
+var tickN=0;
+setInterval(function(){if(P()&&!document.hidden&&Date.now()-lastAct<60000){dayRec()[0]+=5;if(++tickN%6===0)save();}},5000);
+
+var hostTheme=document.documentElement.getAttribute('data-theme');
+function applyTheme(){var r=document.documentElement;
+  if(DB.theme==='auto'){if(hostTheme)r.setAttribute('data-theme',hostTheme);else r.removeAttribute('data-theme');}
+  else r.setAttribute('data-theme',DB.theme);}
+
+/* ---------- repetição espaçada ---------- */
+var IV=[0,1,3,7,14,30,60,120];
+function grade(id,ok){var st=P().cards[id];if(!st)return;var t=today();
+  if(ok===1){st[0]=Math.min(7,st[0]+1);st[1]=t+IV[st[0]];}
+  else if(ok===0.5){st[1]=t+1;}
+  else{st[0]=st[0]>2?1:0;st[1]=t+1;st[3]++;}
+  st[2]++;save();}
+function dueCards(){var p=P(),t=today();return Object.keys(p.cards).filter(function(id){return CARDS[id]&&p.cards[id][1]<=t;}).sort(function(a,b){return p.cards[a][1]-p.cards[b][1];});}
+function learnCards(list){var p=P(),t=today();list.forEach(function(c){if(!p.cards[c.id])p.cards[c.id]=[0,t+1,0,0];});}
+function stats(){var p=P(),t=today(),sec=0,spk=0,daysN=0,k;
+  for(k in p.days){sec+=p.days[k][0];spk+=p.days[k][1];if(p.days[k][2]>0||p.days[k][3]>0)daysN++;}
+  function act(d){return p.days[d]&&(p.days[d][2]>0||p.days[d][3]>0);}
+  var s=0,d=act(t)?t:t-1;while(act(d)){s++;d--;}
+  var ids=Object.keys(p.cards).filter(function(id){return CARDS[id];}),ws={};
+  ids.forEach(function(id){words(CARDS[id].en).forEach(function(w){ws[w]=1;});});
+  return{min:Math.round(sec/60),hours:sec/3600,speak:Math.round(spk/60),days:daysN,streak:s,
+    cards:ids.length,mastered:ids.filter(function(id){return p.cards[id][0]>=4;}).length,words:Object.keys(ws).length,due:dueCards().length};}
+
+/* ---------- áudio: síntese de voz ---------- */
+var TTS={ok:('speechSynthesis' in window)&&(typeof SpeechSynthesisUtterance!=='undefined'),voices:[]};
+var NOVELTY=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|deranged|hysterical|pipe|junior|ralph|fred|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley/i;
+function loadVoices(){try{
+  var v=speechSynthesis.getVoices().filter(function(x){return /^en([-_]|$)/i.test(x.lang)&&!NOVELTY.test(x.name);});
+  function sc(x){return (/en[-_]US/i.test(x.lang)?4:0)+(/google|natural|samantha|enhanced|premium/i.test(x.name)?2:0)+(x.localService?1:0);}
+  v.sort(function(a,b){return sc(b)-sc(a);});TTS.voices=v.slice(0,4);}catch(e){}}
+if(TTS.ok){loadVoices();try{speechSynthesis.addEventListener('voiceschanged',loadVoices);}catch(e){}}
+var lastText='',vTick=0,playTok=0,liveTimer=null;
+function stopAudio(){playTok++;if(liveTimer){clearInterval(liveTimer);liveTimer=null;}try{if(TTS.ok)speechSynthesis.cancel();}catch(e){}}
+function say(text,o){o=o||{};return new Promise(function(res){
+  if(!TTS.ok)return res(false);
+  try{speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text),vs=TTS.voices,v=null,p=P();
+    if(vs.length){if(o.voice==='rand')v=pick(vs);else if(typeof o.voice==='number')v=vs[o.voice%vs.length];
+      else{if(text!==lastText){vTick++;lastText=text;}v=vs[vTick%vs.length];}}
+    u.lang=v?v.lang:'en-US';if(v)u.voice=v;u.rate=o.rate||((p&&p.slow)?0.72:0.95);
+    var done=false,fin=function(ok){if(!done){done=true;res(ok);}};
+    u.onend=function(){fin(true);};u.onerror=function(){fin(false);};
+    speechSynthesis.speak(u);setTimeout(function(){fin(true);},2500+text.length*130);
+  }catch(e){res(false);}});}
+function audioBtns(text,o){o=o||{};
+  if(!TTS.ok)return h('p',{class:'muted small'},'Este navegador não tem voz em inglês. Leia a frase em voz alta.');
+  return h('div',{class:'audio'},
+    h('button',{class:'abtn'+(o.big?' big':''),type:'button',onclick:function(ev){ev.stopPropagation();say(text,{voice:o.voice});}},'▶ Ouvir'),
+    h('button',{class:'abtn slow',type:'button',onclick:function(ev){ev.stopPropagation();say(text,{voice:o.voice,rate:0.62});}},'Devagar'));}
+
+/* ---------- fala do aluno: reconhecimento, gravação ou autoavaliação ---------- */
+var SRC=window.SpeechRecognition||window.webkitSpeechRecognition||null,micBlocked=false;
+var canRec=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder),recBlocked=false;
+function micMode(){return SRC&&!micBlocked?'sr':(canRec&&!recBlocked?'rec':'self');}
+function speakBox(target,o){
+  o=o||{};var box=h('div',{class:'speak'}),out=h('div',{class:'heard'}),note='';
+  function render(){
+    box.textContent='';var mode=micMode();
+    if(mode==='sr'){var b=btn('Falar',function(){startSR(b);},'mic');box.appendChild(b);}
+    else if(mode==='rec'){var r=btn('Gravar minha voz',function(){startRec(r);},'mic');box.appendChild(r);}
+    else box.appendChild(h('p',{class:'note'},'Diga em voz alta, com calma. '+(note||'Aqui o microfone não está disponível, então você mesmo avalia.')));
+    if(note&&mode!=='self')box.appendChild(h('p',{class:'note'},note));
+    box.appendChild(out);
+  }
+  function show(alts){
+    out.textContent='';var best=alts[0],m=null;
+    if(target){alts.forEach(function(a){var r=matchWords(target,a);if(!m||r.score>m.score){m=r;best=a;}});
+      out.appendChild(h('p',{class:'w'},m.marks.map(function(k){return h('span',{class:k.ok?'ok':'no'},k.w);})));
+      out.appendChild(h('p',{class:'small'},m.score>=0.8?'Entendi tudo. Muito bem!':m.score>=0.5?'Entendi quase tudo. As palavras sublinhadas não ficaram claras.':'Entendi pouco. Ouça o modelo e tente de novo.'));}
+    out.appendChild(h('p',{class:'small muted'},'O aparelho ouviu: “'+best+'”'));
+    if(o.onResult)o.onResult(m?m.score:null,best);
+  }
+  function startSR(b){
+    var t0=Date.now(),r;stopAudio();
+    try{r=new SRC();}catch(e){micBlocked=true;return render();}
+    r.lang='en-US';r.interimResults=false;r.maxAlternatives=3;
+    b.textContent='Ouvindo… fale agora';b.classList.add('live');b.disabled=true;out.textContent='';
+    r.onresult=function(e){var alts=[];for(var i=0;i<e.results[0].length;i++)alts.push(e.results[0][i].transcript);show(alts);};
+    r.onerror=function(e){
+      if(e.error==='not-allowed'||e.error==='service-not-allowed'||e.error==='audio-capture'){micBlocked=true;note='O microfone não foi liberado aqui.';render();}
+      else if(e.error==='network'){micBlocked=true;note='Sem internet, este aparelho não reconhece a fala.';render();}
+      else out.textContent='Não ouvi nada. Toque em Falar e tente de novo.';};
+    r.onend=function(){addSpeak((Date.now()-t0)/1000);b.textContent='Falar de novo';b.classList.remove('live');b.disabled=false;};
+    try{r.start();}catch(e){micBlocked=true;render();}
+  }
+  function startRec(b){
+    stopAudio();
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){
+      var mr=new MediaRecorder(st),chunks=[],t0=Date.now(),to;
+      mr.ondataavailable=function(e){chunks.push(e.data);};
+      mr.onstop=function(){clearTimeout(to);st.getTracks().forEach(function(t){t.stop();});addSpeak((Date.now()-t0)/1000);
+        var url=URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));
+        b.textContent='Gravar de novo';b.classList.remove('live');b.onclick=null;
+        out.textContent='';
+        out.appendChild(h('div',{class:'audio'},
+          h('button',{class:'abtn',type:'button',onclick:function(){try{new Audio(url).play();}catch(e){}}},'▶ Minha voz'),
+          target&&h('button',{class:'abtn slow',type:'button',onclick:function(){say(target);}},'▶ Modelo')));
+        out.appendChild(h('p',{class:'small muted'},'Compare as duas e repita até ficar parecido.'));
+        if(o.onResult)o.onResult(null,null);};
+      mr.start();b.textContent='Parar a gravação';b.classList.add('live');
+      var stop=function(){if(mr.state!=='inactive')mr.stop();};
+      b.onclick=stop;to=setTimeout(stop,12000);
+    }).catch(function(){recBlocked=true;note='O microfone não foi liberado aqui.';render();});
+  }
+  render();return box;
+}
+
+/* ---------- exercícios ---------- */
+var FILL=['is','are','do','does','the','a','not','to','am','have','in','at','it','he','my'];
+function feedback(box,ok,card,why,next){
+  var fb=h('div',{class:'fb '+(ok===1?'good':ok?'mid':'bad')},
+    h('strong',null,ok===1?pick(['Isso!','Muito bem!','Certo!','Perfeito!']):ok?'Quase! Olhe a escrita.':'Ainda não. O certo é:'),
+    card&&card.en&&h('p',{class:'en'},card.en),card&&card.pt&&h('p',{class:'pt'},card.pt),
+    why&&ok!==1&&h('p',{class:'why'},why),card&&card.en&&audioBtns(card.en));
+  var b=btn('Continuar',next);box.appendChild(fb);box.appendChild(b);
+  if(card&&card.en)say(card.en);
+  try{b.scrollIntoView({block:'nearest'});}catch(e){}
+}
+function selfRate(box,cb){
+  box.appendChild(h('p',{class:'ins'},'Como foi?'));
+  box.appendChild(h('div',{class:'row'},btn('Errei',function(){cb(0);},'sec'),btn('Quase',function(){cb(0.5);},'sec'),btn('Acertei',function(){cb(1);})));
+}
+function distract(spec,n,field){var pool=ALLCARDS.filter(function(c){return c[field]!==spec[field]&&(!spec.week||c.week===spec.week||c.week===0);});
+  if(pool.length<n)pool=ALLCARDS.filter(function(c){return c[field]!==spec[field];});
+  var out=[];shuffle(pool).forEach(function(c){if(out.length<n&&out.indexOf(c[field])<0)out.push(c[field]);});return out;}
+function exercise(spec,done){
+  var box=h('div',{class:'ex'}),card={en:spec.en,pt:spec.pt},locked=false;
+  function fin(ok){record(ok);feedback(box,ok,card,spec.why,function(){done(ok);});}
+  function rate(){selfRate(box,function(ok){record(ok);done(ok);});}
+  var t=spec.type;
+  if(t==='mc'){
+    box.appendChild(h('p',{class:'ins'},'Ouça. O que significa?'));box.appendChild(audioBtns(spec.en,{big:true}));
+    if(!TTS.ok)box.appendChild(h('p',{class:'en'},spec.en));
+    shuffle([spec.pt].concat(distract(spec,2,'pt'))).forEach(function(o){
+      var b=h('button',{class:'opt',type:'button',onclick:function(){if(locked)return;locked=true;b.classList.add(o===spec.pt?'right':'wrong');fin(o===spec.pt?1:0);}},o);box.appendChild(b);});
+    setTimeout(function(){say(spec.en);},250);
+  }
+  else if(t==='recall'){
+    box.appendChild(h('p',{class:'ins'},'Ouça e diga em voz alta o que significa. Depois confira.'));box.appendChild(audioBtns(spec.en,{big:true}));
+    if(!TTS.ok)box.appendChild(h('p',{class:'en'},spec.en));
+    var rb=btn('Ver a resposta',function(){rb.remove();box.appendChild(h('div',{class:'card soft'},h('p',{class:'en'},spec.en),h('p',{class:'pt'},spec.pt)));rate();},'sec');
+    box.appendChild(rb);setTimeout(function(){say(spec.en);},250);
+  }
+  else if(t==='build'){
+    if(spec.ins){box.appendChild(h('p',{class:'ins'},spec.ins));box.appendChild(h('p',{class:'prompt'},spec.src));}
+    else{box.appendChild(h('p',{class:'ins'},'Monte a frase em inglês:'));box.appendChild(h('p',{class:'prompt'},spec.pt));}
+    var alts=spec.alts||[spec.en],ws=alts[0].split(/\s+/).map(clean).filter(Boolean),low=ws.map(function(w){return w.toLowerCase();});
+    var extra=shuffle(FILL.filter(function(w){return low.indexOf(w)<0;})).slice(0,2);
+    var aEl=h('div',{class:'tiles answer','aria-label':'Sua resposta'}),bEl=h('div',{class:'tiles bank'});
+    var chk=btn('Conferir',function(){if(locked)return;locked=true;var s=[].map.call(aEl.children,function(c){return c.textContent;}).join(' ');chk.remove();
+      fin(alts.some(function(a){return norm(a)===norm(s);})?1:0);});chk.disabled=true;
+    shuffle(ws.concat(extra)).forEach(function(w){var tl=h('button',{class:'tile',type:'button'},w);
+      tl.onclick=function(){if(locked)return;(tl.parentNode===bEl?aEl:bEl).appendChild(tl);chk.disabled=!aEl.children.length;};bEl.appendChild(tl);});
+    box.appendChild(aEl);box.appendChild(bEl);box.appendChild(chk);
+  }
+  else if(t==='gap'){
+    box.appendChild(h('p',{class:'ins'},'Complete a frase:'));box.appendChild(h('p',{class:'prompt'},spec.tpl));
+    if(spec.pt)box.appendChild(h('p',{class:'pt'},spec.pt));
+    if(spec.ds){shuffle([spec.ans].concat(spec.ds)).forEach(function(o){
+      var b=h('button',{class:'opt',type:'button',onclick:function(){if(locked)return;locked=true;b.classList.add(o===spec.ans?'right':'wrong');fin(o===spec.ans?1:0);}},o);box.appendChild(b);});}
+    else typed('Escreva a palavra que falta',function(v){return checkTyped(v,[spec.ans]);});
+  }
+  else if(t==='dict'){
+    box.appendChild(h('p',{class:'ins'},'Ouça e escreva o que ouviu:'));box.appendChild(audioBtns(spec.en,{big:true}));
+    if(!TTS.ok){box.appendChild(h('p',{class:'pt'},spec.pt));}
+    typed('Escreva em inglês',function(v){return checkTyped(v,[spec.en]);});setTimeout(function(){say(spec.en);},250);
+  }
+  else if(t==='type'){
+    box.appendChild(h('p',{class:'ins'},'Escreva em inglês:'));box.appendChild(h('p',{class:'prompt'},spec.pt));
+    typed('Escreva em inglês',function(v){return checkTyped(v,spec.alts||[spec.en]);});
+    box.appendChild(link('Prefiro montar com palavras prontas',function(){var n=exercise({type:'build',pt:spec.pt,en:spec.en,alts:spec.alts,why:spec.why},done);box.parentNode.replaceChild(n,box);}));
+  }
+  else if(t==='say'){
+    if(spec.model){box.appendChild(h('div',{class:'card soft'},h('p',{class:'small muted'},'Modelo'),h('p',{class:'en'},spec.model.en),h('p',{class:'pt'},spec.model.pt),audioBtns(spec.model.en)));
+      box.appendChild(h('p',{class:'ins'},'Agora troque uma parte e diga em inglês:'));}
+    else box.appendChild(h('p',{class:'ins'},'Diga em inglês, em voz alta:'));
+    box.appendChild(h('p',{class:'prompt'},spec.pt));
+    var shown=false,rv=btn('Ver a resposta',reveal,'sec');
+    function reveal(){if(shown)return;shown=true;rv.remove();
+      box.appendChild(h('div',{class:'card soft'},h('p',{class:'en'},spec.en),audioBtns(spec.en)));say(spec.en);rate();}
+    box.appendChild(speakBox(spec.en,{onResult:function(){setTimeout(reveal,600);}}));box.appendChild(rv);
+  }
+  else{ /* speak: ouvir e repetir com o texto à vista */
+    box.appendChild(h('p',{class:'ins'},'Ouça e repita em voz alta, imitando o ritmo:'));
+    box.appendChild(h('p',{class:'en'},spec.en));box.appendChild(h('p',{class:'pt'},spec.pt));box.appendChild(audioBtns(spec.en));
+    box.appendChild(speakBox(spec.en));box.appendChild(btn('Continuar',function(){dayRec()[2]++;if(micMode()==='self')addSpeak(3);done(1);}));
+    setTimeout(function(){say(spec.en);},250);
+  }
+  function typed(ph,check){
+    var inp=h('input',{class:'inp',id:'resposta',type:'text',placeholder:ph,autocomplete:'off',autocapitalize:'off',autocorrect:'off',spellcheck:'false','aria-label':ph});
+    function go(){if(locked||!inp.value.trim())return;locked=true;inp.disabled=true;row.remove();fin(check(inp.value));}
+    var row=h('div',{class:'row'},btn('Não sei',function(){if(locked)return;locked=true;inp.disabled=true;row.remove();fin(0);},'sec'),btn('Conferir',go));
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+    box.appendChild(inp);box.appendChild(row);
+  }
+  return box;
+}
+function quizQ(spec,done){ /* pergunta de múltipla escolha; a 1ª opção é a certa */
+  var box=h('div',{class:'ex'}),locked=false,right=spec.opts[0];
+  if(spec.say){box.appendChild(audioBtns(spec.say,{big:true}));setTimeout(function(){say(spec.say);},250);}
+  if(spec.text)box.appendChild(h('p',{class:'en'},spec.text));
+  box.appendChild(h('p',{class:'prompt'},spec.q));
+  var os=shuffle(spec.opts);if(spec.dunno)os.push('Não sei');
+  os.forEach(function(o){var b=h('button',{class:'opt',type:'button',onclick:function(){if(locked)return;locked=true;var ok=o===right?1:0;
+    b.classList.add(ok?'right':'wrong');
+    if(spec.quick){setTimeout(function(){done(ok);},650);return;}
+    record(ok);
+    box.appendChild(h('div',{class:'fb '+(ok?'good':'bad')},h('strong',null,ok?'Isso!':'Ainda não.'),!ok&&h('p',null,'Resposta: '+right),spec.after&&h('p',{class:'small'},spec.after)));
+    box.appendChild(btn('Continuar',function(){done(ok);}));}},o);box.appendChild(b);});
+  return box;
+}
+function cardSpec(id,lvl){
+  var c=CARDS[id],types=lvl<=1?['mc','build','gap']:lvl<=3?['build','gap','say','recall','mc']:['gapT','dict','say','recall','build'];
+  var t=pick(types),s={type:t,en:c.en,pt:c.pt,week:c.week};
+  if(t==='gap'||t==='gapT'){
+    var ws=c.en.split(' '),cand=[];ws.forEach(function(w,i){if(clean(w).length>=3&&!/\d/.test(w))cand.push(i);});
+    if(!cand.length){s.type='build';return s;}
+    var i=pick(cand),ans=clean(ws[i]);s.ans=ans;s.tpl=ws.map(function(w,j){return j===i?w.replace(ans,'___'):w;}).join(' ');
+    if(t==='gap'){var pool=[];ALLCARDS.forEach(function(x){x.en.split(' ').forEach(function(w){w=clean(w);if(w.length>=2&&w.toLowerCase()!==ans.toLowerCase()&&pool.indexOf(w.toLowerCase())<0)pool.push(w.toLowerCase());});});
+      s.ds=shuffle(pool).slice(0,2);if(/^[A-Z]/.test(ans)&&i===0)s.ds=s.ds.map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);});}
+    s.type='gap';
+  }
+  return s;
+}
+function runList(el,items,render,next,o){
+  o=o||{};var q=items.slice(),n=0,total=items.length,redo=[];
+  (function go(){
+    if(!q.length)return next();
+    var it=q.shift();n++;el.textContent='';
+    el.appendChild(h('p',{class:'count'},(o.title?o.title+' · ':'')+(n<=total?n+' de '+total:'de novo, para fixar')));
+    el.appendChild(render(it,function(ok){if(o.requeue&&ok===0&&redo.indexOf(it)<0){redo.push(it);q.push(it);}if(o.onResult)o.onResult(it,ok);go();}));
+    window.scrollTo(0,0);
+  })();
+}
+
+/* ---------- fluxo em etapas ---------- */
+var $top=document.getElementById('top'),$main=document.getElementById('main'),$nav=document.getElementById('nav');
+var tab='hoje',sub=null;
+function go(t,s){tab=t;sub=s||null;render();}
+function flow(steps,onEnd,exitFn){
+  var i=0;document.body.classList.add('flow');
+  function end(){document.body.classList.remove('flow');stopAudio();}
+  function step(){
+    stopAudio();
+    if(i>=steps.length){end();return onEnd();}
+    var s=steps[i];i++;
+    $top.textContent='';
+    $top.appendChild(h('div',{class:'fhead'},
+      h('button',{class:'exit',type:'button',onclick:function(){end();save();(exitFn||render)();}},'✕ Sair'),
+      h('div',{class:'ft'},h('b',null,s.label),h('small',null,'Etapa '+i+' de '+steps.length)),
+      h('div',{class:'bar'},h('i',{style:'width:'+Math.round((i-1)/steps.length*100)+'%'}))));
+    $main.textContent='';var el=h('section',{class:'step'});$main.appendChild(el);window.scrollTo(0,0);
+    s.run(el,step);
+  }
+  step();
+}
+function showDone(title,lines,label,fn){
+  $main.textContent='';chrome();
+  $main.appendChild(h('div',{class:'card'},h('p',{class:'eyebrow'},'Concluído'),h('h1',null,title),lines.map(function(l){return h('p',null,l);})));
+  $main.appendChild(btn(label||'Continuar',fn||render));window.scrollTo(0,0);
+}
+
+/* ---------- etapas reutilizáveis ---------- */
+function dialogEl(lines){
+  var wrap=h('div',{class:'stack'}),els=[];
+  lines.forEach(function(l){
+    var pt=h('p',{class:'l-pt hid'},l.pt);
+    var e=h('div',{class:'line',role:'button',tabindex:'0',onclick:function(){say(l.en,{voice:l.v});}},
+      h('span',{class:'who'},l.s),h('p',{class:'l-en'},l.en),pt,
+      h('button',{class:'linkbtn',type:'button',onclick:function(ev){ev.stopPropagation();pt.classList.toggle('hid');}},'Ver ou esconder a tradução'));
+    els.push(e);wrap.appendChild(e);});
+  wrap.play=function(){var tok=++playTok,i=0;(function nx(){els.forEach(function(e){e.classList.remove('on');});
+    if(tok!==playTok||i>=lines.length)return;els[i].classList.add('on');try{els[i].scrollIntoView({block:'center',behavior:'smooth'});}catch(e){}
+    say(lines[i].en,{voice:lines[i].v}).then(function(){i++;setTimeout(nx,350);});})();};
+  return wrap;
+}
+function sDialog(L,o){o=o||{};return{label:o.label||'Entrada nova',run:function(el,next){
+  var d=dialogEl(L.dialog);
+  el.appendChild(h('p',{class:'eyebrow'},L.sit||'Diálogo'));el.appendChild(h('h2',null,L.title));
+  el.appendChild(h('p',{class:'muted'},o.again?'Ouça de novo, sem pressa. Quanto você entende sem olhar a tradução?':'Ouça primeiro sem olhar a tradução. Toque em uma frase para ouvir de novo. A tradução aparece quando você pedir.'));
+  if(TTS.ok)el.appendChild(h('div',{class:'row'},btn('▶ Ouvir tudo',function(){d.play();}),btn('Esconder o inglês',function(ev){ev.target.textContent=d.classList.toggle('hideen')?'Mostrar o inglês':'Esconder o inglês';},'sec')));
+  else el.appendChild(h('p',{class:'note'},'Este navegador não tem voz em inglês. Leia o diálogo em voz alta.'));
+  el.appendChild(d);
+  if(L.why)el.appendChild(h('details',null,h('summary',null,'Quer saber por quê?'),h('p',null,L.why)));
+  el.appendChild(btn(o.again||!L.k.length?'Continuar':'Entendi. Vamos às perguntas',function(){stopAudio();
+    if(o.again||!L.k.length)return next();
+    runList(el,L.k,function(k,cb){return quizQ({q:k.q,opts:k.opts},cb);},next,{title:'Compreensão'});}));
+}};}
+function sExplain(L){return{label:'Entrada nova',run:function(el,next){
+  el.appendChild(h('p',{class:'eyebrow'},'Gramática'));el.appendChild(h('h2',null,L.title));
+  el.appendChild(h('div',{class:'card'},h('p',{html:L.explain})));
+  el.appendChild(h('div',{class:'card soft'},h('h3',null,'Erros comuns de brasileiros'),h('ul',{class:'plain'},L.err.map(function(e){return h('li',{html:e});}))));
+  el.appendChild(h('h3',null,'Exemplos'));
+  L.cards.forEach(function(c){el.appendChild(h('div',{class:'line',onclick:function(){say(c.en);}},h('p',{class:'l-en'},c.en),h('p',{class:'l-pt'},c.pt)));});
+  if(L.dialog.length){el.appendChild(h('h3',null,'Na conversa'));var d=dialogEl(L.dialog);if(TTS.ok)el.appendChild(btn('▶ Ouvir a conversa',function(){d.play();},'sec'));el.appendChild(d);}
+  el.appendChild(btn('Entendi. Vamos praticar',function(){next();}));
+}};}
+function sPractice(L){return{label:'Prática de lembrar',run:function(el,next){
+  var items;
+  if(L.track==='grammar')items=L.x.slice();
+  else{
+    var ty=shuffle(['mc','build','gap','mc','build','gap','build','mc']);
+    items=L.cards.map(function(c,i){var s=cardSpec(c.id,0);if(s.type!==ty[i%ty.length]&&ty[i%ty.length]!=='gap'){s={type:ty[i%ty.length],en:c.en,pt:c.pt,week:c.week};}return s;});
+    items=shuffle(items);
+    L.subs.forEach(function(f){var m={en:f.en.replace('___',f.opts[0].en),pt:f.pt.replace('___',f.opts[0].pt)};
+      shuffle(f.opts.slice(1)).slice(0,2).forEach(function(o){items.push({type:'say',model:m,en:f.en.replace('___',o.en),pt:f.pt.replace('___',o.pt)});});});
+  }
+  runList(el,items,exercise,next,{requeue:true});
+}};}
+function pickSound(){var p=P(),best=C.sounds[0],bn=1e9;C.sounds.forEach(function(s){var n=(p.pron[s.id]||[0,0])[1];if(n<bn){bn=n;best=s;}});return best;}
+function pairDrill(el,snd,n,next){
+  var tr=[],i,ok=0,labs;
+  if(snd.type==='cat'){labs=Object.keys(snd.cats);for(i=0;i<n;i++){var l=pick(labs);tr.push({say:pick(snd.cats[l]),opts:labs,ans:l,show:true});}}
+  else for(i=0;i<n;i++){var pr=pick(snd.pairs);tr.push({say:pick(pr),opts:pr,ans:null});}
+  tr.forEach(function(t){if(!t.ans)t.ans=t.say;});
+  if(!TTS.ok){el.appendChild(h('p',{class:'note'},'Este treino precisa da voz do navegador, que não está disponível aqui.'));el.appendChild(btn('Continuar',next));return;}
+  runList(el,tr,function(t,cb){
+    var box=h('div',{class:'ex'}),locked=false,rate=0.78+Math.random()*0.22,vo=TTS.voices.length?rnd(TTS.voices.length):0;
+    function play(){say(t.say,{voice:vo,rate:rate});}
+    box.appendChild(h('p',{class:'eyebrow'},snd.name));
+    box.appendChild(h('p',{class:'prompt'},t.show?snd.q:'Qual palavra você ouviu?'));
+    if(t.show)box.appendChild(h('p',{class:'en'},t.say));
+    box.appendChild(h('button',{class:'abtn big',type:'button',onclick:play},'▶ Ouvir de novo'));
+    var grid=h('div',{class:t.opts.length===2?'pairrow':'stack'});
+    t.opts.forEach(function(o){var b=h('button',{class:'opt center',type:'button',onclick:function(){if(locked)return;locked=true;var good=o===t.ans;if(good)ok++;
+      b.classList.add(good?'right':'wrong');dayRec()[2]++;
+      box.appendChild(h('div',{class:'fb '+(good?'good':'bad')},h('strong',null,good?'Isso!':'Era “'+t.ans+'”.'),
+        !t.show&&h('p',{class:'small'},'Ouça a diferença:'),
+        !t.show&&h('div',{class:'audio'},t.opts.map(function(w){return h('button',{class:'abtn',type:'button',onclick:function(){say(w,{voice:vo,rate:0.8});}},'▶ '+w);}))));
+      box.appendChild(btn('Próxima',function(){cb(good?1:0);}));}},o);grid.appendChild(b);});
+    box.appendChild(grid);setTimeout(play,300);return box;
+  },function(){var p=P(),r=p.pron[snd.id]||[0,0];r[0]+=ok;r[1]+=n;p.pron[snd.id]=r;save();
+    el.textContent='';el.appendChild(h('div',{class:'card'},h('h2',null,'Você acertou '+ok+' de '+n),h('p',{class:'muted'},ok>=n-1?'Seu ouvido já separa bem esses sons.':'É normal errar: esses sons não existem em português. O ouvido aprende com repetição.')));
+    el.appendChild(btn('Continuar',next));},{title:'Treino de ouvido'});
+}
+function shadow(el,sents,next){
+  runList(el,sents,function(c,cb){return exercise({type:'speak',en:c.en,pt:c.pt},cb);},next,{title:'Ouvir e repetir'});
+}
+function sSpeak(L){return{label:'Fala e ouvido',run:function(el,next){
+  var snd=pickSound(),src=L.cards.length?L.cards:L.dialog;
+  var sents=shuffle(src).slice(0,4);
+  pairDrill(el,snd,6,function(){shadow(el,sents,next);});
+}};}
+function produceEl(q,cb){
+  var box=h('div',{class:'ex'});
+  if(q.ask){box.appendChild(h('p',{class:'ins'},'Responda em voz alta, sobre você:'));box.appendChild(h('p',{class:'en'},q.ask));box.appendChild(h('p',{class:'pt'},q.pt));box.appendChild(audioBtns(q.ask));setTimeout(function(){say(q.ask);},250);}
+  else{box.appendChild(h('p',{class:'ins'},'Diga em inglês, sobre a sua vida:'));box.appendChild(h('p',{class:'prompt'},q.pt));}
+  box.appendChild(h('details',null,h('summary',null,'Preciso de uma ajuda para começar'),h('p',{class:'en'},q.starter)));
+  box.appendChild(speakBox(null,{}));
+  box.appendChild(btn('Falei. Continuar',function(){dayRec()[2]++;if(micMode()==='self')addSpeak(4);save();cb(1);}));
+  return box;
+}
+function sProduce(qs,label){return{label:label||'Desafio final',run:function(el,next){
+  runList(el,qs,produceEl,next,{title:'Sua vez de falar'});
+}};}
+function backTrans(el,L,next){
+  var lines=L.dialog.slice(0,6);
+  el.textContent='';
+  el.appendChild(h('div',{class:'card'},h('p',{class:'eyebrow'},'Tradução de volta'),h('h2',null,L.title),
+    h('p',null,'Você ouviu este diálogo há alguns dias. Agora veja cada frase em português e diga em inglês antes de conferir.')));
+  el.appendChild(btn('Começar',function(){
+    runList(el,lines,function(l,cb){return exercise({type:'say',en:l.en,pt:l.pt},cb);},next,{title:'Tradução de volta'});}));
+}
+function reviewRun(el,ids,next,nograde){
+  var a=adj();
+  runList(el,ids,function(id,cb){return exercise(cardSpec(id,P().cards[id][0]+a),cb);},next,
+    {title:'Revisão',requeue:true,onResult:function(id,ok){if(!nograde)grade(id,ok);}});
+}
+function speedRound(el,next){
+  var p=P(),ids=shuffle(Object.keys(p.cards).filter(function(id){return CARDS[id];}));
+  el.textContent='';
+  if(ids.length<4){el.appendChild(h('p',{class:'note'},'A rodada rápida aparece quando você tiver algumas frases aprendidas.'));el.appendChild(btn('Continuar',next));return;}
+  el.appendChild(h('div',{class:'card'},h('p',{class:'eyebrow'},'Rapidez'),h('h2',null,'Rodada rápida'),
+    h('p',null,'Você tem 75 segundos. Veja a frase em português, diga em inglês o mais rápido que puder e confira. Aqui vale velocidade com o que você já sabe.'),
+    p.best?h('p',{class:'muted'},'Seu recorde: '+p.best+' frases.'):null));
+  el.appendChild(btn('Começar',function(){
+    var left=75,n=0,i=0,timer=h('p',{class:'timer'},'75 s'),body=h('div',{class:'ex'});
+    el.textContent='';el.appendChild(timer);el.appendChild(body);
+    function show(){var c=CARDS[ids[i%ids.length]];i++;body.textContent='';
+      body.appendChild(h('p',{class:'prompt'},c.pt));
+      body.appendChild(btn('Falei',function(){body.textContent='';body.appendChild(h('p',{class:'en'},c.en));
+        body.appendChild(h('div',{class:'row'},btn('Não lembrei',show,'sec'),btn('Acertei',function(){n++;show();})));},'huge'));}
+    function end(){clearInterval(liveTimer);liveTimer=null;addSpeak(30);dayRec()[2]+=n;var rec=n>p.best;if(rec)p.best=n;save();
+      el.textContent='';el.appendChild(h('div',{class:'card'},h('h2',null,n+' frases em 75 segundos'),h('p',{class:'muted'},rec?'Novo recorde!':'Seu recorde é '+p.best+'.')));el.appendChild(btn('Continuar',next));}
+    liveTimer=setInterval(function(){left--;timer.textContent=left+' s';if(left<=0)end();},1000);show();
+  }));
+}
+function matchOpt(text,opts){var t=' '+norm(text)+' ',best=null,bs=0;
+  opts.forEach(function(o){var s=matchWords(o.en,text).score;o.kw.forEach(function(k){if(k&&t.indexOf(' '+norm(k)+' ')>=0)s+=2;});if(s>bs){bs=s;best=o;}});
+  return bs>=0.6?best:null;}
+function conversation(el,sc,next){
+  var p=P(),chat=h('div',{class:'chat'}),area=h('div',{class:'stack'});
+  el.textContent='';el.appendChild(h('p',{class:'eyebrow'},'Conversa'));el.appendChild(h('h2',null,sc.title));el.appendChild(h('p',{class:'muted'},sc.intro));
+  el.appendChild(chat);el.appendChild(area);
+  function node(id){
+    area.textContent='';
+    if(id==='end'||!sc.nodes[id]){p.conv[sc.id]=(p.conv[sc.id]||0)+1;save();
+      area.appendChild(h('div',{class:'fb good'},h('strong',null,'Conversa concluída!'),h('p',null,'Você foi até o fim em inglês. Faça de novo escolhendo outras respostas.')));
+      area.appendChild(btn('Continuar',next));return;}
+    var nd=sc.nodes[id],a=sp(nd[0]),pt=h('p',{class:'l-pt hid'},a[1]);
+    chat.appendChild(h('div',{class:'bubble'},h('p',{class:'l-en'},a[0]),pt,
+      h('div',{class:'audio'},h('button',{class:'abtn',type:'button',onclick:function(){say(a[0],{voice:1});}},'▶ Ouvir'),
+        h('button',{class:'abtn slow',type:'button',onclick:function(){pt.classList.toggle('hid');}},'Tradução'))));
+    say(a[0],{voice:1});
+    var opts=nd[1].map(function(s){var x=sp(s);return{en:x[0],pt:x[1],kw:x[2].split(','),next:x[3]};});
+    var msg=h('p',{class:'small muted'}),list=h('div',{class:'stack'});
+    function choose(o){stopAudio();chat.appendChild(h('div',{class:'bubble me'},h('p',{class:'l-en'},o.en)));dayRec()[2]++;node(o.next);try{area.scrollIntoView({block:'end',behavior:'smooth'});}catch(e){}}
+    var sr=micMode()==='sr';
+    area.appendChild(h('p',{class:'ins'},sr?'Responda em voz alta. Se preferir, toque em uma resposta.':'Responda em voz alta e depois toque na frase que você disse.'));
+    area.appendChild(speakBox(null,{onResult:function(sc2,text){if(!text)return;var m=matchOpt(text,opts);if(m)setTimeout(function(){choose(m);},700);else msg.textContent='Não reconheci uma das respostas. Tente de novo ou toque em uma delas.';}}));
+    area.appendChild(msg);
+    function drawList(){list.textContent='';
+      if(!p.hide)opts.forEach(function(o){list.appendChild(h('button',{class:'opt',type:'button',onclick:function(){choose(o);}},h('span',{class:'l-en'},o.en),h('br'),h('span',{class:'pt small'},o.pt)));});
+      list.appendChild(link(p.hide?'Mostrar respostas possíveis':'Esconder as respostas (mais difícil)',function(){p.hide=!p.hide;save();drawList();}));}
+    drawList();area.appendChild(list);
+  }
+  node(sc.start);
+}
+function rhythmQuiz(el,r,next){
+  runList(el,shuffle(r.quiz),function(q,cb){return quizQ({say:q[0],q:q[1],opts:q.slice(2)},cb);},function(){P().rhy[r.id]=1;save();next();},{title:r.title});
+}
+
+/* ---------- montar lições e a sessão do dia ---------- */
+function lessonSteps(L){
+  return [L.track==='grammar'?sExplain(L):sDialog(L),sPractice(L),sSpeak(L),sProduce(L.q)];
+}
+function completeLesson(L){
+  var p=P(),t=today(),first=!p.done[L.id];
+  p.done[L.id]=t;learnCards(L.cards);
+  if(first&&L.dialog.length>=4)p.bt.push([L.id,t+3]);
+  var pos=p.pos[L.track],wk=LESS[L.track][pos.w];
+  while(wk&&pos.d<wk.length&&p.done[wk[pos.d].id])pos.d++;
+  dayRec()[3]++;save();
+}
+function plan(){
+  var p=P(),tr=p.track,pos=p.pos[tr],wk=LESS[tr][pos.w];
+  if(!wk||!wk.length)return{kind:'none',w:pos.w};
+  if(pos.d<wk.length)return{kind:'lesson',lesson:wk[pos.d],w:pos.w,d:pos.d};
+  if(pos.d===wk.length)return{kind:'fluency',w:pos.w,d:pos.d,wk:wk};
+  return{kind:'talk',w:pos.w,d:pos.d,wk:wk};
+}
+function btDue(){var p=P(),t=today();for(var i=0;i<p.bt.length;i++)if(p.bt[i][1]<=t&&BYID[p.bt[i][0]])return p.bt[i];return null;}
+function sessionSteps(pl){
+  var p=P(),st=[],due=dueCards().slice(0,12),bt=btDue();
+  if(due.length||bt)st.push({label:'Revisão',run:function(el,next){
+    var after=function(){if(!bt)return next();backTrans(el,BYID[bt[0]],function(){p.bt.splice(p.bt.indexOf(bt),1);save();next();});};
+    if(due.length)reviewRun(el,due,after);else after();}});
+  if(pl.kind==='lesson')return st.concat(lessonSteps(pl.lesson));
+  var sc=C.scenarios[(pl.w-1)%C.scenarios.length],rh=C.rhythm[(pl.w-1)%C.rhythm.length];
+  if(pl.kind==='fluency'){
+    var a=pick(pl.wk),b=pick(pl.wk.filter(function(x){return x!==a;}))||a;
+    st.push(sDialog(a,{again:true,label:'Escuta'}));
+    st.push({label:'Tradução de volta',run:function(el,next){backTrans(el,b,next);}});
+    st.push({label:'Fala e ouvido',run:function(el,next){pairDrill(el,pickSound(),8,function(){shadow(el,a.dialog.slice(0,4),next);});}});
+    st.push({label:'Rapidez',run:speedRound});
+    return st;
+  }
+  if(pl.kind==='talk'){
+    var qs=[];pl.wk.forEach(function(L){if(L.q.length)qs.push(pick(L.q));});
+    st.push({label:'Ritmo e melodia',run:function(el,next){
+      el.appendChild(h('div',{class:'card'},h('p',{class:'eyebrow'},'Ritmo e melodia'),h('h2',null,rh.title),h('p',null,rh.text)));
+      rh.items.forEach(function(it){el.appendChild(h('div',{class:'line',onclick:function(){say(it[0]);}},h('p',{class:'l-en'},it[0]),h('p',{class:'l-pt'},it[1])));});
+      el.appendChild(btn('Treinar',function(){rhythmQuiz(el,rh,next);}));}});
+    st.push({label:'Conversa',run:function(el,next){conversation(el,sc,next);}});
+    st.push(sProduce(shuffle(qs).slice(0,4)));
+    st.push({label:'Rapidez',run:speedRound});
+    return st;
+  }
+  /* sem conteúdo novo: manutenção */
+  st.push({label:'Conversa',run:function(el,next){conversation(el,pick(C.scenarios),next);}});
+  st.push({label:'Fala e ouvido',run:function(el,next){pairDrill(el,pickSound(),10,next);}});
+  st.push({label:'Rapidez',run:speedRound});
+  return st;
+}
+function startSession(){
+  var pl=plan(),p=P();
+  flow(sessionSteps(pl),function(){
+    var lines=['O que você estudou hoje se fixa enquanto você dorme. Volte amanhã para a próxima sessão.'],title='Sessão de hoje concluída';
+    if(pl.kind==='lesson'){completeLesson(pl.lesson);if(pl.lesson.can)lines.unshift('Agora você consegue '+pl.lesson.can+'.');}
+    else if(pl.kind==='fluency'){p.pos[p.track].d++;dayRec()[3]++;}
+    else if(pl.kind==='talk'){p.pos[p.track].w++;p.pos[p.track].d=0;dayRec()[3]++;title='Semana '+pl.w+' concluída';lines.unshift('Você já consegue '+C.plan[pl.w-1][2]+'.');}
+    else dayRec()[3]++;
+    p.last=today();save();showDone(title,lines,'Ver meu progresso',function(){go('progresso');});
+  },function(){go('hoje');});
+}
+function openLesson(L,backTab){
+  flow(lessonSteps(L),function(){completeLesson(L);
+    showDone('Lição concluída',[L.can?'Agora você consegue '+L.can+'.':'As frases desta lição entraram na sua revisão.','Elas voltam amanhã, depois em 3 dias, depois em 7, e assim por diante.'],'Voltar',function(){go(backTab);});},
+    function(){go(backTab);});
+}
+
+/* ---------- moldura: topo e abas ---------- */
+var TABS=[['hoje','Hoje','<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/>'],
+['natural','Natural','<path d="M4 5h16v11H10l-5 4v-4H4z"/>'],
+['gramatica','Gramática','<rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><path d="M13 16.5h7M16.5 13v7"/>'],
+['falar','Falar','<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'],
+['revisao','Revisão','<path d="M20 11a8 8 0 0 0-14.5-4M4 4v4h4M4 13a8 8 0 0 0 14.5 4M20 20v-4h-4"/>'],
+['progresso','Progresso','<path d="M5 20V10M12 20V4M19 20v-7"/>']];
+function chrome(){
+  var p=P(),bare=!p||!p.placed||!p.track;
+  document.body.classList.toggle('bare',bare);document.body.classList.remove('flow');
+  $top.textContent='';
+  var bar=h('div',{class:'topin'},h('span',{class:'brand'},'Inglês da Família'));
+  if(p&&!bare){
+    bar.appendChild(h('button',{class:'chip'+(p.slow?' on':''),type:'button','aria-pressed':p.slow?'true':'false',onclick:function(){p.slow=!p.slow;save();chrome();}},p.slow?'Voz lenta':'Voz normal'));
+    bar.appendChild(h('button',{class:'chip',type:'button',onclick:function(){go('progresso','perfil');}},p.name));
+  }
+  $top.appendChild(bar);
+  $nav.textContent='';
+  var nin=h('div',{class:'navin'});
+  TABS.forEach(function(t){nin.appendChild(h('button',{type:'button',class:tab===t[0]?'on':'','aria-current':tab===t[0]?'page':null,onclick:function(){go(t[0]);},
+    html:'<svg viewBox="0 0 24 24" aria-hidden="true">'+t[2]+'</svg><span>'+t[1]+'</span>'}));});
+  $nav.appendChild(nin);
+}
+function page(title,backFn,kids){
+  if(backFn)$main.appendChild(link('← Voltar',backFn));
+  $main.appendChild(h('h1',null,title));
+  add($main,[].slice.call(arguments,2));
+}
+function render(){
+  stopAudio();applyTheme();$main.textContent='';chrome();window.scrollTo(0,0);
+  var p=P();
+  if(!p)return vProfiles();
+  if(!p.placed)return vWelcome();
+  if(!p.track)return vTrack();
+  VIEWS[tab]();
+}
+
+/* ---------- entrada: perfis, nivelamento, trilha ---------- */
+function vProfiles(){
+  var ids=Object.keys(DB.profiles);
+  $main.appendChild(h('div',{class:'stack'},h('p',{class:'eyebrow'},'Bem-vindo'),h('h1',null,'Quem vai estudar agora?'),
+    h('p',{class:'muted'},'Cada pessoa tem o seu progresso guardado neste aparelho. Não precisa de senha.')));
+  ids.forEach(function(id){var q=DB.profiles[id];$main.appendChild(h('button',{class:'listbtn',type:'button',onclick:function(){DB.cur=id;save();tab='hoje';sub=null;render();}},
+    h('span',{class:'grow'},h('b',null,q.name),h('br'),h('span',{class:'small muted'},q.track?'Semana '+q.pos[q.track].w+' · '+Object.keys(q.cards).length+' frases':'Ainda não começou')),h('span',{class:'tag next'},'Entrar')));});
+  var inp=h('input',{class:'inp',id:'nome-novo',type:'text',placeholder:'Seu nome',maxlength:'20',autocomplete:'off','aria-label':'Seu nome'});
+  function create(){var n=inp.value.trim();if(!n)return inp.focus();var q=newProfile(n);DB.profiles[q.id]=q;DB.cur=q.id;save();tab='hoje';render();}
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')create();});
+  $main.appendChild(h('div',{class:'card'},h('h2',null,ids.length?'Criar outro perfil':'Criar meu perfil'),inp,btn('Criar perfil',create)));
+  $main.appendChild(h('details',null,h('summary',null,'Já estudei em outro aparelho'),importBox()));
+  if(!storageOK)$main.appendChild(h('p',{class:'note'},'Este navegador não está guardando dados. O site funciona, mas o progresso some ao fechar. Use “Levar meu progresso” ao terminar.'));
+}
+function vWelcome(){
+  var p=P();
+  $main.appendChild(h('div',{class:'stack'},h('p',{class:'eyebrow'},'Olá, '+p.name),h('h1',null,'Vamos achar o seu ponto de partida'),
+    h('p',null,'O teste leva de 5 a 8 minutos. Você ouve frases e escolhe respostas. Ele para sozinho quando ficar difícil, então não se preocupe em errar.')));
+  $main.appendChild(btn('Fazer o teste',startPlacement,'huge'));
+  $main.appendChild(btn('Nunca estudei inglês: começar do zero',function(){placeAt(0);},'sec'));
+  $main.appendChild(link('Trocar de pessoa',function(){DB.cur=null;save();render();}));
+}
+function placeAt(passed){
+  var p=P(),start=[1,3,5,9,13][passed],w=Math.max(WEEKS[0]||1,Math.min(start,MAXW));
+  p.level=start;p.placed=true;p.pos={natural:{w:w,d:0},grammar:{w:w,d:0}};save();
+  $main.textContent='';chrome();
+  var lines=[start===1?'Você começa do começo, pelos sons e pelas primeiras frases. É o melhor lugar para construir uma base firme.':'Pelo teste, você já conhece o conteúdo das primeiras semanas.'];
+  if(start>MAXW)lines.push('Seu nível indica a semana '+start+'. Por enquanto o site tem as semanas 1 a '+MAXW+', então você começa na semana '+w+'. Use bastante a aba Falar: a pronúncia e as conversas servem para qualquer nível.');
+  $main.appendChild(h('div',{class:'card'},h('p',{class:'eyebrow'},'Resultado'),h('h1',null,'Você começa na semana '+w),lines.map(function(l){return h('p',null,l);})));
+  $main.appendChild(btn('Continuar',render));
+}
+function startPlacement(){
+  var items=C.placement,right={1:0,2:0,3:0,4:0};
+  function passed(){var n=0;for(var t=1;t<=4;t++){if(right[t]>=3)n=t;else break;}return n;}
+  flow([{label:'Teste de nível',run:function(el){
+    var i=0;
+    (function nx(){
+      if(i>=items.length||(i>0&&items[i].t!==items[i-1].t&&right[items[i-1].t]<3)){document.body.classList.remove('flow');return placeAt(passed());}
+      var it=items[i];i++;el.textContent='';
+      el.appendChild(h('p',{class:'count'},'Pergunta '+i+' de até '+items.length));
+      el.appendChild(quizQ({say:it.k==='l'?it.en:null,text:it.k==='l'&&TTS.ok?null:it.en,q:it.q,opts:it.o,dunno:true,quick:true},function(ok){right[it.t]+=ok;nx();}));
+      window.scrollTo(0,0);
+    })();
+  }}],function(){},function(){render();});
+}
+function vTrack(){
+  var p=P();
+  $main.appendChild(h('div',{class:'stack'},h('p',{class:'eyebrow'},'Escolha'),h('h1',null,'Como você prefere aprender?'),
+    h('p',{class:'muted'},'Você pode trocar quando quiser. As frases que você já aprendeu continuam com você.')));
+  function card(tr,t,d,who){return h('div',{class:'card'},h('h2',null,t),h('p',null,d),h('p',{class:'muted small'},who),btn('Quero esta trilha',function(){p.track=tr;save();tab='hoje';render();}));}
+  $main.appendChild(card('natural','Trilha Natural','Histórias curtas, diálogos do dia a dia e frases prontas. Sem nomes de gramática. É o caminho mais rápido para começar a se comunicar.','Boa para quem quer falar logo e não gosta de regras.'));
+  $main.appendChild(card('grammar','Trilha Gramática','Cada lição explica uma regra em português, compara com o nosso idioma, mostra os erros comuns de brasileiros e depois faz você usar.','Boa para quem gosta de entender o porquê das coisas.'));
+}
+
+/* ---------- aba Hoje ---------- */
+function vToday(){
+  var p=P(),pl=plan(),s=stats(),doneToday=p.last===today();
+  var what=pl.kind==='lesson'?pl.lesson.title:pl.kind==='fluency'?'Dia de escuta e rapidez':pl.kind==='talk'?'Dia de conversa':'Manutenção: revisão e conversa';
+  $main.appendChild(h('div',{class:'stack'},h('p',{class:'eyebrow'},pl.kind==='none'?'Conteúdo disponível concluído':'Semana '+pl.w+' · dia '+(pl.d+1)+' de 7'),
+    h('h1',null,doneToday?'Muito bem, '+p.name+'!':'Olá, '+p.name+'!')));
+  if(doneToday){
+    $main.appendChild(h('div',{class:'card soft'},h('h2',null,'A sessão de hoje está feita'),h('p',null,'Agora é com o seu sono: é dormindo que o cérebro fixa o que você estudou. Volte amanhã.')));
+    $main.appendChild(btn('Quero estudar mais um pouco',startSession,'sec'));
+  }else{
+    $main.appendChild(btn('Começar a sessão de hoje',startSession,'huge'));
+    $main.appendChild(h('div',{class:'card'},h('p',{class:'muted small'},'Hoje · de 20 a 30 minutos'),h('h2',null,what),
+      h('ol',{class:'stages'},[['Revisão','lembrar o que está para ser esquecido'],['Entrada nova','ouvir e entender algo novo'],['Prática de lembrar','responder antes de ver a resposta'],['Fala e ouvido','treinar um som e repetir frases'],['Desafio final','falar sobre a sua vida']].map(function(x,i){
+        return h('li',null,h('span',{class:'n'},i+1),h('span',null,h('b',null,x[0]),h('br'),h('span',{class:'muted small'},x[1])));}))));
+  }
+  if(pl.kind==='none')$main.appendChild(h('p',{class:'note'},'Você terminou as lições que o site tem até agora (semanas 1 a '+MAXW+'). A sessão diária continua com revisão, conversa e rapidez até as próximas semanas chegarem.'));
+  $main.appendChild(h('div',{class:'stats'},
+    h('div',{class:'stat'},h('b',null,s.streak),h('span',null,s.streak===1?'dia seguido':'dias seguidos')),
+    h('div',{class:'stat'},h('b',null,s.due),h('span',null,'frases para revisar hoje'))));
+  $main.appendChild(h('p',{class:'note'},'Vinte minutos todo dia ensinam mais do que duas horas no sábado. Se faltar um dia, nada se perde: é só continuar.'));
+}
+
+/* ---------- abas das trilhas ---------- */
+function vTrackTab(tr){
+  var p=P(),nat=tr==='natural',pos=p.pos[tr];
+  page(nat?'Trilha Natural':'Trilha Gramática',null,
+    h('p',{class:'muted'},nat?'Você aprende por histórias, diálogos e frases prontas, das mais usadas para as menos usadas. Nenhum nome de gramática.':'Cada regra é explicada em português, comparada com o nosso idioma e praticada até virar fala.'));
+  if(p.track!==tr)$main.appendChild(h('div',{class:'card soft'},h('p',null,'Sua sessão diária usa a outra trilha. Você pode fazer lições daqui à vontade, ou trocar.'),
+    btn('Usar esta trilha na sessão diária',function(){p.track=tr;save();render();},'sec')));
+  C.plan.forEach(function(w,i){
+    var n=i+1,ls=LESS[tr][n];
+    if(!ls||!ls.length){ if(n===MAXW+1)$main.appendChild(h('p',{class:'note'},'As semanas '+n+' a 24 ainda serão acrescentadas. O plano completo está na aba Progresso.'));return;}
+    $main.appendChild(h('h2',null,'Semana '+n+' · '+(nat?w[0]:w[1])));
+    ls.forEach(function(L){var isNext=pos.w===n&&pos.d===L.idx;
+      $main.appendChild(h('button',{class:'listbtn',type:'button',onclick:function(){openLesson(L,tab);}},
+        h('span',{class:'grow'},h('b',null,L.title),nat&&h('br'),nat&&h('span',{class:'small muted'},L.sit)),
+        p.done[L.id]?h('span',{class:'tag done'},'Feita'):isNext?h('span',{class:'tag next'},'Próxima'):null));});
+  });
+}
+
+/* ---------- aba Falar ---------- */
+function vSpeak(){
+  var p=P();
+  if(sub==='sons')return vSounds();
+  if(sub&&sub.indexOf('som:')===0)return vSound(sub.slice(4));
+  if(sub==='ritmo')return vRhythm();
+  if(sub==='shadow')return vShadow();
+  if(sub==='conv')return vConv();
+  if(sub==='sobre')return vSurvive();
+  page('Conversação e pronúncia',null,h('p',{class:'muted'},'Treine o ouvido, a boca e a coragem. Tudo aqui serve para qualquer nível.'));
+  [['sons','Sons difíceis para brasileiros','Ouvir pares de palavras e escolher qual foi dita'],['ritmo','Ritmo e melodia','Sílaba forte, palavras fracas, perguntas e ligações'],
+   ['shadow','Ouvir e repetir','Diálogos em velocidade lenta e normal'],['conv','Simulador de conversas','Restaurante, aeroporto, entrevista, bate-papo, telefone'],
+   ['sobre','Frases de sobrevivência','Pedir para repetir, ganhar tempo, dizer que não entendeu']].forEach(function(x){
+    $main.appendChild(h('button',{class:'listbtn',type:'button',onclick:function(){go('falar',x[0]);}},h('span',{class:'grow'},h('b',null,x[1]),h('br'),h('span',{class:'small muted'},x[2]))));});
+  var m=micMode();
+  $main.appendChild(h('p',{class:'note'},m==='sr'?'Neste aparelho o site tenta ouvir o que você diz e mostra as palavras que entendeu.':m==='rec'?'Neste aparelho você pode gravar a sua voz e comparar com o modelo.':'Neste aparelho o microfone não está disponível. Você fala em voz alta e avalia você mesmo.'));
+}
+function vSounds(){
+  var p=P();
+  page('Sons difíceis',function(){go('falar');},h('p',{class:'muted'},'Estes sons não existem em português, por isso o ouvido não os separa no começo. O treino usa muitas palavras, vozes e velocidades, com correção na hora.'));
+  C.sounds.forEach(function(s){var r=p.pron[s.id];
+    $main.appendChild(h('button',{class:'listbtn',type:'button',onclick:function(){go('falar','som:'+s.id);}},h('span',{class:'grow'},h('b',null,s.name)),
+      r?h('span',{class:'tag'+(r[0]/r[1]>=0.85?' done':'')},Math.round(r[0]/r[1]*100)+'% de acerto'):h('span',{class:'tag'},'Novo')));});
+}
+function vSound(id){
+  var s=C.sounds.filter(function(x){return x.id===id;})[0];if(!s)return go('falar','sons');
+  page(s.name,function(){go('falar','sons');});
+  $main.appendChild(h('div',{class:'card'},h('h3',null,'Como fazer'),h('p',null,s.how),h('p',{class:'muted'},s.approx),
+    h('details',null,h('summary',null,'Símbolo fonético (opcional)'),h('p',null,s.ipa))));
+  $main.appendChild(btn('Treinar o ouvido (12 palavras)',function(){
+    flow([{label:s.name,run:function(el,next){pairDrill(el,s,12,next);}}],function(){go('falar','som:'+id);},function(){go('falar','som:'+id);});},'huge'));
+  $main.appendChild(h('h3',null,'Ouça e repita'));
+  if(s.type==='cat')Object.keys(s.cats).forEach(function(l){$main.appendChild(h('div',{class:'card'},h('b',null,l),h('div',{class:'audio'},s.cats[l].map(function(w){return h('button',{class:'abtn slow',type:'button',onclick:function(){say(w,{rate:0.8});}},w);}))));});
+  else s.pairs.forEach(function(pr){$main.appendChild(h('div',{class:'pairrow'},pr.map(function(w){return h('button',{class:'abtn',type:'button',onclick:function(){say(w,{rate:0.8});}},'▶ '+w);})));});
+}
+function vRhythm(){
+  page('Ritmo e melodia',function(){go('falar');});
+  C.rhythm.forEach(function(r){
+    var c=h('div',{class:'card'},h('h2',null,r.title),h('p',null,r.text));
+    r.items.forEach(function(it){c.appendChild(h('div',{class:'line',onclick:function(){say(it[0]);}},h('p',{class:'l-en'},'▶ '+it[0]),h('p',{class:'l-pt'},it[1])));});
+    c.appendChild(btn(P().rhy[r.id]?'Treinar de novo':'Treinar',function(){flow([{label:r.title,run:function(el,next){rhythmQuiz(el,r,next);}}],function(){go('falar','ritmo');},function(){go('falar','ritmo');});}));
+    $main.appendChild(c);});
+}
+function vShadow(){
+  var p=P(),any=false;
+  page('Ouvir e repetir',function(){go('falar');},h('p',{class:'muted'},'Escolha um diálogo. Ouça cada frase devagar, repita junto, depois em velocidade normal. Com o microfone, compare a sua voz com o modelo.'));
+  WEEKS.forEach(function(w){['natural','grammar'].forEach(function(tr){LESS[tr][w].forEach(function(L){
+    if(!L.dialog.length||!(p.done[L.id]||w<=p.pos[tr].w))return;any=true;
+    $main.appendChild(h('button',{class:'listbtn',type:'button',onclick:function(){
+      flow([{label:'Ouvir e repetir',run:function(el,next){shadow(el,L.dialog,next);}}],function(){go('falar','shadow');},function(){go('falar','shadow');});}},
+      h('span',{class:'grow'},h('b',null,L.title),h('br'),h('span',{class:'small muted'},'Semana '+w+' · '+L.dialog.length+' frases'))));});});});
+  if(!any)$main.appendChild(h('p',{class:'note'},'Os diálogos aparecem aqui conforme você avança.'));
+}
+function vConv(){
+  var p=P();
+  page('Simulador de conversas',function(){go('falar');},h('p',{class:'muted'},'O site fala, você responde em voz alta. Cada conversa muda conforme a sua resposta. As respostas possíveis ficam à vista; esconda quando quiser mais desafio.'));
+  C.scenarios.forEach(function(sc){$main.appendChild(h('button',{class:'listbtn',type:'button',onclick:function(){
+    flow([{label:sc.title,run:function(el,next){conversation(el,sc,next);}}],function(){go('falar','conv');},function(){go('falar','conv');});}},
+    h('span',{class:'grow'},h('b',null,sc.title),h('br'),h('span',{class:'small muted'},sc.intro)),p.conv[sc.id]?h('span',{class:'tag done'},p.conv[sc.id]+'×'):null));});
+}
+function vSurvive(){
+  var p=P(),cards=C.survival.map(function(s,i){return CARDS['sv.'+i];}),has=cards.every(function(c){return p.cards[c.id];});
+  page('Frases de sobrevivência',function(){go('falar');},h('p',{class:'muted'},'Com estas frases você nunca fica travado: pede para repetir, ganha tempo e mantém a conversa.'));
+  $main.appendChild(has?h('p',{class:'note'},'Estas frases já estão na sua revisão.'):btn('Colocar estas frases na minha revisão',function(){learnCards(cards);save();render();}));
+  $main.appendChild(btn('Treinar falando',function(){flow([{label:'Sobrevivência',run:function(el,next){shadow(el,cards,next);}}],function(){go('falar','sobre');},function(){go('falar','sobre');});},'sec'));
+  cards.forEach(function(c){$main.appendChild(h('div',{class:'line',onclick:function(){say(c.en);}},h('p',{class:'l-en'},'▶ '+c.en),h('p',{class:'l-pt'},c.pt)));});
+}
+
+/* ---------- aba Revisão ---------- */
+function vReview(){
+  var p=P(),due=dueCards(),s=stats(),ids=Object.keys(p.cards).filter(function(id){return CARDS[id];});
+  page('Revisão',null,h('p',{class:'muted'},'Cada frase volta pouco antes de você esquecer. Acertou, ela demora mais para voltar. Errou, volta logo. Sempre frases inteiras, nunca palavras soltas.'));
+  if(due.length){
+    $main.appendChild(btn('Revisar agora: '+Math.min(20,due.length)+' frases',function(){
+      flow([{label:'Revisão',run:function(el,next){reviewRun(el,due.slice(0,20),next);}}],function(){showDone('Revisão feita',['As frases que você acertou voltam daqui a mais tempo.'],'Voltar',function(){go('revisao');});},function(){go('revisao');});},'huge'));
+    if(due.length>20)$main.appendChild(h('p',{class:'muted small'},'Há '+due.length+' frases esperando. Vinte por vez é o bastante.'));
+  }else $main.appendChild(h('div',{class:'card soft'},h('h2',null,'Nada para revisar agora'),h('p',null,ids.length?'Suas frases estão em dia. As próximas voltam amanhã ou depois.':'As frases entram aqui quando você termina uma lição.')));
+  if(ids.length>=4){
+    $main.appendChild(btn('Rodada rápida (75 segundos)',function(){flow([{label:'Rapidez',run:speedRound}],function(){go('revisao');},function(){go('revisao');});},'sec'));
+    if(!due.length)$main.appendChild(btn('Praticar mesmo assim',function(){
+      flow([{label:'Prática livre',run:function(el,next){reviewRun(el,shuffle(ids).slice(0,10),next,true);}}],function(){go('revisao');},function(){go('revisao');});},'sec'));
+  }
+  var c=[0,0,0];ids.forEach(function(id){var b=p.cards[id][0];c[b<=1?0:b<=3?1:2]++;});
+  $main.appendChild(h('div',{class:'stats'},h('div',{class:'stat'},h('b',null,c[0]),h('span',null,'frases novas')),h('div',{class:'stat'},h('b',null,c[1]),h('span',null,'em aprendizado')),
+    h('div',{class:'stat'},h('b',null,c[2]),h('span',null,'dominadas')),h('div',{class:'stat'},h('b',null,s.words),h('span',null,'palavras diferentes nessas frases'))));
+  $main.appendChild(h('details',null,h('summary',null,'Como a revisão escolhe o exercício'),
+    h('p',null,'Frase nova: você ouve e escolhe o significado, ou monta com palavras prontas. Frase em aprendizado: completa a lacuna, ou vê em português e diz em inglês. Frase quase dominada: ouve e escreve, ou diz sem nenhuma ajuda.'),
+    h('p',null,'Os tipos vêm misturados de propósito, e o site sobe ou desce a dificuldade conforme os seus acertos.')));
+}
+
+/* ---------- aba Progresso ---------- */
+function importBox(){
+  var ta=h('textarea',{class:'inp',id:'codigo-importar',placeholder:'Cole aqui o código','aria-label':'Código de progresso'}),msg=h('p',{class:'small'});
+  return h('div',{class:'stack'},h('p',{class:'small muted'},'No outro aparelho, abra Progresso, depois Perfil, e copie o código. Cole aqui.'),ta,
+    btn('Trazer meu progresso',function(){
+      try{var raw=ta.value.trim().replace(/^IF1:/,'');var q=JSON.parse(decodeURIComponent(escape(atob(raw))));
+        if(!q||!q.id||!q.name||!q.cards)throw 0;
+        var base=newProfile(q.name);for(var k in base)if(q[k]===undefined)q[k]=base[k];
+        DB.profiles[q.id]=q;DB.cur=q.id;save();tab='hoje';sub=null;render();
+      }catch(e){msg.textContent='Este código não funcionou. Confira se copiou tudo, do começo ao fim.';}},'sec'),msg);
+}
+function vProgress(){
+  if(sub==='metodo')return vMethod();
+  if(sub==='fora')return vOutside();
+  if(sub==='perfil')return vProfile();
+  var p=P(),s=stats(),tr=p.track,cur=p.pos[tr].w;
+  page('Progresso e plano');
+  $main.appendChild(h('div',{class:'stats'},
+    h('div',{class:'stat'},h('b',null,s.streak),h('span',null,'dias seguidos')),h('div',{class:'stat'},h('b',null,s.days),h('span',null,'dias de estudo no total')),
+    h('div',{class:'stat'},h('b',null,s.min),h('span',null,'minutos estudados')),h('div',{class:'stat'},h('b',null,s.speak),h('span',null,'minutos falando')),
+    h('div',{class:'stat'},h('b',null,s.mastered),h('span',null,'frases dominadas')),h('div',{class:'stat'},h('b',null,s.cards),h('span',null,'frases em estudo'))));
+  if(s.streak===0&&s.days>0)$main.appendChild(h('p',{class:'note'},'A sequência recomeça hoje. Nada do que você aprendeu foi perdido.'));
+  var cans=[];WEEKS.forEach(function(w){LESS.natural[w].concat(LESS.grammar[w]).forEach(function(L){if(p.done[L.id])cans.push(L.can||('usar: '+L.title));});});
+  $main.appendChild(h('div',{class:'card'},h('h2',null,'O que você já consegue fazer'),
+    cans.length?h('ul',{class:'plain'},cans.map(function(c){return h('li',null,c.charAt(0).toUpperCase()+c.slice(1));})):h('p',{class:'muted'},'Depois da primeira lição, suas conquistas aparecem aqui.')));
+  var hrs=s.hours,pc=function(x){return Math.min(100,x/400*100)+'%';};
+  $main.appendChild(h('div',{class:'card'},h('h2',null,'Onde isso leva, sem promessa falsa'),
+    h('div',{class:'scale'},h('i',{style:'width:'+pc(hrs)}),h('em',{style:'left:'+pc(90)},'90 h'),h('em',{style:'left:'+pc(190)},'A2'),h('em',{style:'left:'+pc(375)},'B1'),h('em',{class:'b',style:'left:'+pc(Math.max(12,hrs))},'você: '+(hrs<10?hrs.toFixed(1).replace('.',','):Math.round(hrs))+' h')),
+    h('p',null,'A referência de Cambridge é de cerca de 180 a 200 horas de estudo guiado para o nível A2 (básico sólido) e de 350 a 400 horas para o B1 (intermediário), partindo do zero.'),
+    h('p',null,'Com 30 minutos por dia durante 6 meses você soma perto de 90 horas. A meta realista é comunicação básica firme: se apresentar, pedir, perguntar, resolver o dia a dia.'),
+    h('p',null,'Com 1 hora por dia e mais prática fora do site, dá para chegar a conversas simples do cotidiano com confiança. Fluência completa leva mais tempo, e o caminho é este mesmo.')));
+  $main.appendChild(h('div',{class:'stack'},
+    btn('Por que este método funciona',function(){go('progresso','metodo');},'sec'),btn('Prática grátis fora do site',function(){go('progresso','fora');},'sec'),btn('Perfil, trilha e aparelho',function(){go('progresso','perfil');},'sec')));
+  $main.appendChild(h('h2',null,'Plano de 24 semanas'));
+  C.phases.forEach(function(ph){
+    $main.appendChild(h('p',{class:'eyebrow'},'Semanas '+ph[0]+' a '+ph[1]+' · '+ph[2]));
+    for(var n=ph[0];n<=ph[1];n++){var w=C.plan[n-1];
+      $main.appendChild(h('div',{class:'week'+(n===cur?' cur':'')+(n>MAXW?' off':'')},h('span',{class:'n'},n),
+        h('span',null,h('b',null,w[0]),n===cur?h('span',{class:'tag next',style:'margin-left:8px;font-size:.75rem;padding:2px 8px;border-radius:99px;background:var(--accent);color:#fff'},'você está aqui'):null,h('br'),
+          h('span',{class:'small muted'},'Gramática: '+w[1]),h('br'),h('span',{class:'small'},'Para '+w[2]+'.'),n>MAXW?h('span',{class:'small muted'},' Ainda não disponível.'):null)));}
+  });
+}
+function vMethod(){
+  page('Por que este método funciona',function(){go('progresso');},h('p',{class:'muted'},'Cada parte do site existe por causa de um resultado de pesquisa sobre memória e aprendizado de línguas.'));
+  C.method.forEach(function(m,i){$main.appendChild(h('div',{class:'card'},h('h2',null,(i+1)+'. '+m[0]),h('p',null,m[2]),h('p',null,h('b',null,'No site: '),m[3]),h('p',{class:'small muted'},m[1])));});
+  $main.appendChild(h('div',{class:'card soft'},h('h2',null,'O que o site não faz'),h('ul',{class:'plain'},
+    h('li',null,'Não adapta o ensino a “estilos de aprendizagem” (visual, auditivo e outros). As revisões de pesquisa não encontraram benefício nisso (Pashler e colegas, 2008).'),
+    h('li',null,'Não usa listas de palavras soltas. Toda palavra vem dentro de uma frase.'),
+    h('li',null,'Não promete fluência em poucas semanas.'))));
+  $main.appendChild(h('h2',null,'Técnicas de poliglotas'));
+  $main.appendChild(h('p',{class:'note'},'As ideias abaixo vêm da experiência prática de pessoas que aprenderam muitas línguas, não de estudos controlados. Entraram no site porque combinam com os princípios acima.'));
+  C.polyglots.forEach(function(g){$main.appendChild(h('div',{class:'card'},h('h3',null,g[1]),h('p',{class:'small muted'},g[0]),h('p',null,g[2])));});
+}
+function vOutside(){
+  page('Prática grátis fora do site',function(){go('progresso');},h('p',{class:'muted'},'O site cuida do estudo guiado. O que mais acelera o resultado é somar horas de contato com o inglês em coisas de que você gosta.'));
+  C.outside.forEach(function(o){$main.appendChild(h('div',{class:'card'},h('h2',null,o[0]),h('p',null,o[1])));});
+}
+function vProfile(){
+  var p=P();
+  page('Perfil, trilha e aparelho',function(){go('progresso');});
+  $main.appendChild(h('div',{class:'card'},h('h2',null,p.name),h('p',{class:'muted'},'Trilha da sessão diária: '+(p.track==='natural'?'Natural':'Gramática')+' · semana '+p.pos[p.track].w),
+    btn('Trocar para a trilha '+(p.track==='natural'?'Gramática':'Natural'),function(){p.track=p.track==='natural'?'grammar':'natural';save();render();},'sec'),
+    btn('Trocar de pessoa',function(){DB.cur=null;save();render();},'sec'),
+    btn('Refazer o teste de nível',function(){p.placed=false;save();render();},'quiet')));
+  $main.appendChild(h('div',{class:'card'},h('h2',null,'Aparência'),h('div',{class:'row'},[['auto','Automática'],['light','Clara'],['dark','Escura']].map(function(t){
+    return btn(t[1],function(){DB.theme=t[0];save();render();},DB.theme===t[0]?'':'sec');}))));
+  var code='IF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(p)))),msg=h('p',{class:'small'});
+  var ta=h('textarea',{class:'inp',id:'codigo-exportar',readonly:true,'aria-label':'Seu código de progresso'},code);
+  $main.appendChild(h('div',{class:'card'},h('h2',null,'Levar meu progresso para outro aparelho'),
+    h('p',{class:'muted small'},'Copie este código e envie para você mesmo, por mensagem ou e-mail. No outro aparelho, abra o site e escolha “Já estudei em outro aparelho”. Guarde uma cópia de vez em quando, por segurança.'),ta,
+    btn('Copiar o código',function(){ta.focus();ta.select();
+      try{navigator.clipboard.writeText(code).then(function(){msg.textContent='Código copiado.';},function(){msg.textContent='Segure o dedo sobre o código e escolha Copiar.';});}
+      catch(e){msg.textContent='Segure o dedo sobre o código e escolha Copiar.';}}),msg));
+  $main.appendChild(h('details',null,h('summary',null,'Trazer progresso de outro aparelho'),importBox()));
+  if(!storageOK)$main.appendChild(h('p',{class:'note'},'Este navegador não está guardando dados. Copie o código acima ao terminar cada sessão.'));
+  var del=btn('Apagar este perfil',function(){
+    if(del.dataset.sure){delete DB.profiles[p.id];DB.cur=null;save();render();}
+    else{del.dataset.sure='1';del.textContent='Toque de novo para apagar tudo de '+p.name;}},'danger');
+  $main.appendChild(del);
+}
+
+var VIEWS={hoje:vToday,natural:function(){vTrackTab('natural');},gramatica:function(){vTrackTab('grammar');},falar:vSpeak,revisao:vReview,progresso:vProgress};
+window.__app={go:go,P:P,DB:function(){return DB;},save:save,render:render,today:today};
+render();
+})();
+
+</script>
+</body>
+</html>
